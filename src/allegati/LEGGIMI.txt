@@ -1,0 +1,3 @@
+Metti qui i file delle lezioni (slides in PDF, schede, esercizi).
+Poi, nell'editor del libro, aggiungi un materiale con l'indirizzo:  allegati/nome-del-file.pdf
+Evita spazi e lettere accentate nei nomi dei file.
