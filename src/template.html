@@ -31,6 +31,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--font-body);padding-inline:16px}
 #app{max-width:1200px;margin:0 auto;padding-block:22px 72px}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
@@ -216,6 +217,39 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
 .matrow{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1.6fr) auto;gap:8px;align-items:center}
 @media (max-width:760px){.matrow{grid-template-columns:minmax(0,1fr)}.matrow .tb{justify-self:start}}
 .hint{margin:0;font-size:14px;color:var(--ink-2)}
+.wg-h2{margin-top:22px}
+.gt-line{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:10px 0}
+.gt-line .bit{width:64px}
+.gt-arrow{font-size:22px;color:var(--ink-2)}
+.gt-name{padding:8px 14px;border:1.5px solid var(--ink);border-radius:6px;background:var(--surface);font:700 18px var(--font-mono)}
+.gt-out{width:54px;height:54px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font:700 22px var(--font-mono);background:var(--surface)}
+.gt-out.on{background:var(--ink-btn);color:var(--on-ink)}
+.gt-tt{min-width:240px}
+.gt-tt tr.on td{background:color-mix(in srgb,var(--c-l2) 22%,var(--surface));font-weight:700}
+.py-lab{display:block;margin:10px 0 4px;font-weight:600}
+.py-code{display:block;width:100%;box-sizing:border-box;font:14px/1.5 var(--font-mono);padding:10px 12px;border:1.5px solid var(--ink-2);border-radius:6px;background:var(--code-bg);color:var(--ink);tab-size:4;resize:vertical;white-space:pre;overflow:auto}
+.py-code:focus{outline:3px solid var(--focus);outline-offset:1px}
+.py-btns{margin-top:12px}
+.py-st{font-size:14px;color:var(--ink-2)}
+.py-out{margin:0;min-height:70px;max-height:360px;overflow:auto;padding:10px 12px;border:1.5px solid var(--ink);border-radius:6px;background:var(--surface);font:14px/1.5 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.py-errbox{margin-top:10px;padding:10px 12px;border:1.5px solid var(--danger);border-radius:6px;background:color-mix(in srgb,var(--danger) 8%,var(--surface))}
+.py-err{margin:0;font:13.5px/1.5 var(--font-mono);color:var(--danger);white-space:pre-wrap;overflow-wrap:anywhere}
+.py-hint{margin:8px 0 10px;font-size:15px}
+
+.bw-wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-start}
+.bw-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:0;width:min(100%,288px);border:2px solid var(--ink)}
+.px{aspect-ratio:1;border:1px solid #8a93a3;background:#fff;padding:0;cursor:pointer}
+.px[aria-pressed="true"]{background:#000}
+.px:focus-visible{outline:3px solid var(--focus);outline-offset:-3px;position:relative;z-index:1}
+.bw-wrap .tbl{margin:0;min-width:0}
+.gy-wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-start}
+.gy-pic{position:relative;width:min(100%,256px);line-height:0}
+.gy-pic canvas{width:100%;height:auto;aspect-ratio:1;image-rendering:pixelated;border:2px solid var(--ink);display:block;cursor:crosshair}
+.gy-sel{position:absolute;border:2px solid #e11d48;box-shadow:0 0 0 1px #fff;pointer-events:none;box-sizing:border-box}
+.gy-tbl{margin:0}
+.gy-tbl table{min-width:0;font:600 12px var(--font-mono)}
+.gy-tbl td{padding:3px 5px;text-align:center;border:1px solid var(--rule);min-width:34px}
+.gy-sw{display:inline-block;width:34px;height:22px;border:1.5px solid var(--ink-2);border-radius:3px;vertical-align:middle}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:50;max-width:calc(100vw - 32px);padding:10px 18px;background:var(--ink-btn);color:var(--on-ink);font-weight:600;border-radius:6px}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -257,6 +291,9 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
 
 <script type="text/plain" id="content">
 __CONTENT__
+</script>
+<script type="text/plain" id="pyrun">
+__PYRUN__
 </script>
 
 <script>
@@ -377,7 +414,7 @@ function renderBody(src){
         ans.push(L[i].slice(3));i++;
         while(i<L.length&&L[i].trim()&&!/^(\?\?|!!) /.test(L[i]))ans.push(L[i++]);
       }
-      out.push('<details class="ex"><summary>'+inline(q)+'</summary><div class="ans">'+(ans.length?ans.map(a=>'<p>'+inline(a)+'</p>').join(''):'<p><em>Risposta non indicata.</em></p>')+'</div></details>');
+      out.push('<details class="ex"><summary>'+inline(q)+'</summary><div class="ans">'+(ans.length?renderBody(ans.join('\n')):'<p><em>Risposta non indicata.</em></p>')+'</div></details>');
       continue;
     }
     const p=[];
@@ -479,7 +516,10 @@ function converterWidget(root){
   root.innerHTML='<div class="wg-h">Convertitore a 8 bit</div>'+
     '<div class="wg-row"><label for="'+id+'-n">Numero decimale (0–255)</label><input id="'+id+'-n" type="number" min="0" max="255" step="1" value="65"></div>'+
     '<div class="bits" role="group" aria-label="Gli 8 bit del byte"></div>'+
-    '<dl class="wg-out"><div><dt>Binario</dt><dd data-o="bin"></dd></div><div><dt>Ottale</dt><dd data-o="oct"></dd></div><div><dt>Esadecimale</dt><dd data-o="hex"></dd></div><div><dt>Con segno (compl. a due)</dt><dd data-o="sgn"></dd></div><div><dt>Carattere ASCII</dt><dd data-o="chr"></dd></div></dl>';
+    '<dl class="wg-out"><div><dt>Binario</dt><dd data-o="bin"></dd></div><div><dt>Ottale</dt><dd data-o="oct"></dd></div><div><dt>Esadecimale</dt><dd data-o="hex"></dd></div><div><dt>Con segno (compl. a due)</dt><dd data-o="sgn"></dd></div><div><dt>Carattere ASCII</dt><dd data-o="chr"></dd></div></dl>'+
+    '<div class="wg-h wg-h2">Tabella delle divisioni successive</div>'+
+    '<div class="wg-row"><label for="'+id+'-dv">Valore decimale</label><input id="'+id+'-dv" type="number" min="0" max="1000000" step="1" value="156"><label for="'+id+'-db">Base</label><select id="'+id+'-db"><option value="2">2 (binario)</option><option value="8">8 (ottale)</option><option value="16">16 (esadecimale)</option></select></div>'+
+    '<div class="tbl"><table><thead><tr><th>Valore</th><th>Divisore</th><th>Quoziente</th><th>Resto</th></tr></thead><tbody class="dvb"></tbody></table></div><p class="wg-sum dvs" role="status"></p>';
   const bits=$('.bits',root),inp=$('input',root);
   for(let i=7;i>=0;i--){
     const b=document.createElement('button');b.type='button';b.className='bit';b.dataset.i=i;
@@ -497,6 +537,17 @@ function converterWidget(root){
     o('sgn').textContent=String(v>127?v-256:v);
     o('chr').textContent=v>=32&&v<=126?'"'+String.fromCharCode(v)+'"':v<32||v===127?'(controllo)':'(oltre ASCII)';
   }
+  const dvIn=$('#'+id+'-dv',root),dbSel=$('#'+id+'-db',root),dvBody=$('.dvb',root),dvSum=$('.dvs',root);
+  function divTable(){
+    const val=parseInt(dvIn.value,10),base=parseInt(dbSel.value,10);
+    if(!isFinite(val)||val<0||val>1000000){dvBody.innerHTML='';dvSum.textContent='Inserisci un numero intero tra 0 e 1 000 000.';return;}
+    const D='0123456789ABCDEF';let rows='',x=val,digits='';
+    if(val===0){rows='<tr><td>0</td><td>'+base+'</td><td>0</td><td>0</td></tr>';digits='0';}
+    while(x>0){const q=Math.floor(x/base),r=x%base;rows+='<tr><td>'+x+'</td><td>'+base+'</td><td>'+q+'</td><td>'+r+(r>9?' ('+D[r]+')':'')+'</td></tr>';digits=D[r]+digits;x=q;}
+    dvBody.innerHTML=rows;
+    dvSum.textContent='Resti letti dal basso verso l\'alto: '+digits.split('').join(' ')+'. Quindi '+val+' in base '+base+' si scrive '+digits+'.';
+  }
+  dvIn.addEventListener('input',divTable);dbSel.addEventListener('change',divTable);divTable();
   bits.addEventListener('click',e=>{const b=e.target.closest('.bit');if(!b)return;v^=(1<<+b.dataset.i);upd(false);});
   inp.addEventListener('input',()=>{const n=parseInt(inp.value,10);if(isFinite(n)&&n>=0&&n<=255){v=n;upd(true);}});
   upd(false);
@@ -628,12 +679,267 @@ function flowWidget(root){
   }
   inp.addEventListener('input',upd);upd();
 }
+
+function gatesWidget(root){
+  const id='gt'+(++UID);
+  const G={AND:(a,b)=>a&b,OR:(a,b)=>a|b,NOT:a=>a?0:1,XOR:(a,b)=>a^b,NAND:(a,b)=>(a&b)?0:1,NOR:(a,b)=>(a|b)?0:1};
+  let gate='AND',A=0,B=0;
+  root.innerHTML='<div class="wg-h">Provare una porta logica</div>'+
+    '<div class="wg-row"><label for="'+id+'-g">Porta</label><select id="'+id+'-g">'+Object.keys(G).map(k=>'<option>'+k+'</option>').join('')+'</select></div>'+
+    '<div class="gt-line"><button type="button" class="bit" data-i="A" aria-pressed="false" aria-label="Ingresso A"><span class="bv">0</span><span class="bw">A</span></button>'+
+    '<button type="button" class="bit" data-i="B" aria-pressed="false" aria-label="Ingresso B"><span class="bv">0</span><span class="bw">B</span></button>'+
+    '<span class="gt-arrow" aria-hidden="true">→</span><span class="gt-name"></span><span class="gt-arrow" aria-hidden="true">→</span><div class="gt-out" role="status"></div></div>'+
+    '<div class="tbl"><table class="gt-tt"><thead><tr><th>A</th><th class="gt-bc">B</th><th>Uscita</th></tr></thead><tbody></tbody></table></div>'+
+    '<p class="wg-sum"></p>';
+  const sel=$('select',root),bA=$('[data-i=A]',root),bB=$('[data-i=B]',root),out=$('.gt-out',root),name=$('.gt-name',root),body=$('tbody',root),sum=$('.wg-sum',root);
+  const DESC={AND:'vale 1 solo se A e B valgono 1',OR:'vale 1 se almeno uno tra A e B vale 1',NOT:'inverte l\'ingresso',XOR:'vale 1 se A e B sono diversi',NAND:'è il contrario di AND: vale 0 solo se A e B valgono 1',NOR:'è il contrario di OR: vale 1 solo se A e B valgono 0'};
+  function upd(){
+    const one=gate==='NOT';
+    bB.hidden=one;$$('.gt-bc',root).forEach(e=>{e.hidden=one;});
+    const f=G[gate],res=f(A,B);
+    [[bA,A],[bB,B]].forEach(x=>{x[0].setAttribute('aria-pressed',x[1]?'true':'false');$('.bv',x[0]).textContent=x[1];});
+    name.textContent=gate;out.textContent=res;out.classList.toggle('on',!!res);
+    out.setAttribute('aria-label','Uscita '+res);
+    const rows=one?[[0,0],[1,0]]:[[0,0],[0,1],[1,0],[1,1]];
+    body.innerHTML=rows.map(r=>'<tr class="'+((r[0]===A&&(one||r[1]===B))?'on':'')+'"><td>'+r[0]+'</td>'+(one?'':'<td>'+r[1]+'</td>')+'<td>'+f(r[0],r[1])+'</td></tr>').join('');
+    sum.textContent=(one?'A = '+A:'A = '+A+', B = '+B)+': uscita '+res+'. La porta '+gate+' '+DESC[gate]+'.';
+  }
+  sel.addEventListener('change',()=>{gate=sel.value;upd();});
+  bA.addEventListener('click',()=>{A^=1;upd();});
+  bB.addEventListener('click',()=>{B^=1;upd();});
+  upd();
+}
+function bwWidget(root){
+  const id='bw'+(++UID),N=8;
+  const PRE={
+    'Faccina':['..####..','.#....#.','#.#..#.#','#......#','#.#..#.#','#..##..#','.#....#.','..####..'],
+    'Freccia':['...##...','..####..','.######.','...##...','...##...','...##...','...##...','...##...'],
+    'Lettera T':['########','...##...','...##...','...##...','...##...','...##...','...##...','...##...'],
+    'Cornice':['########','#......#','#......#','#......#','#......#','#......#','#......#','########'],
+    'Scacchiera':['#.#.#.#.','.#.#.#.#','#.#.#.#.','.#.#.#.#','#.#.#.#.','.#.#.#.#','#.#.#.#.','.#.#.#.#']
+  };
+  let px=[];
+  const load=k=>{px=PRE[k].map(r=>r.split('').map(c=>c==='#'));};
+  load('Faccina');
+  root.innerHTML='<div class="wg-h">Disegna un\'immagine in bianco e nero 8 × 8</div>'+
+    '<p class="wg-note">Clicca i quadretti per renderli neri o bianchi. Nero = bit 0, bianco = bit 1. Ogni riga di 8 pixel forma un byte.</p>'+
+    '<div class="wg-row"><label for="'+id+'-p">Esempio</label><select id="'+id+'-p">'+Object.keys(PRE).map(k=>'<option>'+k+'</option>').join('')+'</select><button type="button" class="tb" data-a="white">Tutto bianco</button><button type="button" class="tb" data-a="inv">Inverti</button></div>'+
+    '<div class="bw-wrap"><div class="bw-grid" role="group" aria-label="Immagine 8 per 8 pixel"></div><div class="tbl"><table><thead><tr><th>Riga</th><th>Bit</th><th>Esadecimale</th></tr></thead><tbody></tbody></table></div></div>'+
+    '<p class="wg-sum" role="status"></p>';
+  const grid=$('.bw-grid',root),body=$('tbody',root),sum=$('.wg-sum',root),sel=$('select',root);
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+    const b=document.createElement('button');b.type='button';b.className='px';b.dataset.r=r;b.dataset.c=c;
+    b.setAttribute('aria-label','Riga '+(r+1)+', colonna '+(c+1));grid.appendChild(b);
+  }
+  function upd(){
+    $$('.px',grid).forEach(b=>{const black=px[+b.dataset.r][+b.dataset.c];b.setAttribute('aria-pressed',black?'true':'false');});
+    let rows='';
+    for(let r=0;r<N;r++){
+      const bits=px[r].map(x=>x?'0':'1').join('');
+      rows+='<tr><td>'+(r+1)+'</td><td><code>'+bits+'</code></td><td><code>'+parseInt(bits,2).toString(16).toUpperCase().padStart(2,'0')+'</code></td></tr>';
+    }
+    body.innerHTML=rows;
+    const nBlack=px.reduce((s,r)=>s+r.filter(Boolean).length,0);
+    sum.textContent='8 righe da 8 pixel: 64 pixel × 1 bit = 64 bit = 8 byte. Pixel neri: '+nBlack+', bianchi: '+(64-nBlack)+'.';
+  }
+  grid.addEventListener('click',e=>{const b=e.target.closest('.px');if(!b)return;const r=+b.dataset.r,c=+b.dataset.c;px[r][c]=!px[r][c];upd();});
+  sel.addEventListener('change',()=>{load(sel.value);upd();});
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-a]');if(!b)return;
+    if(b.dataset.a==='white')px=px.map(r=>r.map(()=>false));
+    else px=px.map(r=>r.map(x=>!x));
+    upd();
+  });
+  upd();
+}
+function grayWidget(root){
+  const id='gy'+(++UID),W=32,H=32,B=8;
+  const base=new Array(W*H);
+  const L=[-0.5,-0.6,0.62],ln=Math.hypot(L[0],L[1],L[2]);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    let g=205-95*(y/(H-1));
+    const sx=(x+0.5-19)/11,sy=(y+0.5-27)/3;
+    if(sx*sx+sy*sy<=1)g*=0.45;
+    const dx=x+0.5-16,dy=y+0.5-14,r=10,d2=dx*dx+dy*dy;
+    if(d2<=r*r){const nz=Math.sqrt(r*r-d2)/r,lam=Math.max(0,(dx/r*L[0]+dy/r*L[1]+nz*L[2])/ln);g=30+225*Math.pow(lam,0.9);}
+    base[y*W+x]=Math.max(0,Math.min(255,Math.round(g)));
+  }
+  let bits=8,bx=12,by=12;
+  root.innerHTML='<div class="wg-h">Dai grigi al bianco e nero</div>'+
+    '<p class="wg-note">Questa immagine è fatta di 32 × 32 pixel. Riduci i bit per pixel e guarda cosa succede. Clicca sull\'immagine, o usa le frecce quando è selezionata, per scegliere un blocco 8 × 8 e leggerne i numeri.</p>'+
+    '<div class="wg-row"><label for="'+id+'-b">Bit per pixel</label><input id="'+id+'-b" type="range" min="1" max="8" step="1" value="8"><output for="'+id+'-b" class="gy-bo"></output></div>'+
+    '<div class="gy-wrap"><div class="gy-pic"><canvas width="'+W+'" height="'+H+'" tabindex="0" role="img" aria-label="Immagine in scala di grigio, 32 per 32 pixel"></canvas><div class="gy-sel"></div></div><div class="tbl gy-tbl"><table><tbody></tbody></table></div></div>'+
+    '<p class="wg-sum" role="status"></p>'+
+    '<div class="wg-h wg-h2">Da colore a grigio</div>'+
+    '<div class="wg-row"><label for="'+id+'-r">Rosso</label><input id="'+id+'-r" type="number" min="0" max="255" value="255"><label for="'+id+'-g">Verde</label><input id="'+id+'-g" type="number" min="0" max="255" value="128"><label for="'+id+'-bl">Blu</label><input id="'+id+'-bl" type="number" min="0" max="255" value="0"></div>'+
+    '<dl class="wg-out"><div><dt>Colore</dt><dd><span class="gy-sw" data-s="c"></span></dd></div><div><dt>Grigio (media)</dt><dd><span class="gy-sw" data-s="m"></span> <span data-o="m"></span></dd></div><div><dt>Grigio (pesato)</dt><dd><span class="gy-sw" data-s="p"></span> <span data-o="p"></span></dd></div></dl>';
+  const cv=$('canvas',root),ctx2=cv.getContext('2d'),slider=$('input[type=range]',root),bo=$('.gy-bo',root),sum=$('.wg-sum',root),selBox=$('.gy-sel',root),tb=$('.gy-tbl tbody',root);
+  const q=v=>{const lev=1<<bits,step=256/lev;return Math.round(Math.floor(v/step)*(255/(lev-1)));};
+  function draw(){
+    const img=ctx2.createImageData(W,H);
+    for(let i=0;i<W*H;i++){const v=q(base[i]);img.data[i*4]=v;img.data[i*4+1]=v;img.data[i*4+2]=v;img.data[i*4+3]=255;}
+    ctx2.putImageData(img,0,0);
+    selBox.style.left=(bx/W*100)+'%';selBox.style.top=(by/H*100)+'%';selBox.style.width=(8/W*100)+'%';selBox.style.height=(8/H*100)+'%';
+    let rows='';
+    for(let r=0;r<8;r++){rows+='<tr>';for(let c=0;c<8;c++){const v=q(base[(by+r)*W+bx+c]);rows+='<td style="background:rgb('+v+','+v+','+v+');color:'+(v<128?'#fff':'#000')+'">'+v+'</td>';}rows+='</tr>';}
+    tb.innerHTML=rows;
+    const lev=1<<bits;
+    bo.textContent=bits+' bit, '+lev+' livelli';
+    const fmt=n=>n.toLocaleString('it-IT');
+    sum.textContent='Immagine 32 × 32: '+fmt(W*H)+' pixel × '+bits+' bit = '+fmt(W*H*bits/8)+' byte. Con la stessa profondità una foto Full HD (1920 × 1080) occuperebbe '+fmt(1920*1080*bits/8)+' byte. '+(bits===1?'Con 1 bit l\'immagine è in bianco e nero: ogni pixel sopra la soglia 128 diventa bianco.':'');
+  }
+  slider.addEventListener('input',()=>{bits=+slider.value;draw();});
+  const pick=(cx,cy)=>{bx=Math.max(0,Math.min(W-8,cx-4));by=Math.max(0,Math.min(H-8,cy-4));draw();};
+  cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect();pick(Math.floor((e.clientX-r.left)/r.width*W),Math.floor((e.clientY-r.top)/r.height*H));});
+  cv.addEventListener('keydown',e=>{
+    const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+    if(!m)return;e.preventDefault();bx=Math.max(0,Math.min(W-8,bx+m[0]));by=Math.max(0,Math.min(H-8,by+m[1]));draw();
+  });
+  const ins=['r','g','bl'].map(s=>$('#'+id+'-'+s,root));
+  function conv(){
+    const v=ins.map(i=>Math.max(0,Math.min(255,parseInt(i.value,10)||0)));
+    const m=Math.round((v[0]+v[1]+v[2])/3),p=Math.round(0.299*v[0]+0.587*v[1]+0.114*v[2]);
+    $('[data-s=c]',root).style.background='rgb('+v.join(',')+')';
+    $('[data-s=m]',root).style.background='rgb('+m+','+m+','+m+')';
+    $('[data-s=p]',root).style.background='rgb('+p+','+p+','+p+')';
+    $('[data-o=m]',root).textContent=m;$('[data-o=p]',root).textContent=p;
+  }
+  ins.forEach(i=>i.addEventListener('input',conv));
+  draw();conv();
+}
+/* ---------- editor Python ---------- */
+const PY_PRESETS=[
+  {id:'ciao',t:'Ciao, mondo',code:'print("Ciao, mondo!")\nnome = "Ada"\nprint("Mi chiamo", nome, "e ho", 2 + 15, "anni")\n'},
+  {id:'cicli',t:'Cicli: la tabellina',code:'n = 7\nfor i in range(1, 11):\n    print(n, "x", i, "=", n * i)\n\n# somma dei numeri da 1 a 100\ntotale = 0\nfor k in range(1, 101):\n    totale += k\nprint("Somma:", totale)\n'},
+  {id:'if',t:'Decisioni: il pH',code:'ph = 4.5\nif ph < 7:\n    print("acida")\nelif ph == 7:\n    print("neutra")\nelse:\n    print("basica")\n'},
+  {id:'input',t:'Input: media dei voti',code:'# scrivi i valori nel riquadro "Valori per input()", uno per riga\nn = int(input("Quanti voti? "))\nsomma = 0\nfor i in range(n):\n    voto = float(input("Voto " + str(i + 1) + ": "))\n    somma += voto\nprint("Media:", round(somma / n, 2))\n',inp:'3\n7\n6.5\n9'},
+  {id:'funz',t:'Funzioni: velocità media',code:'def velocita(spazio, tempo):\n    """Restituisce la velocità media in m/s."""\n    return spazio / tempo\n\nprint(velocita(100, 12.5))\nprint(velocita(spazio=42195, tempo=7200))\n\ndef cel_to_kel(c):\n    return c + 273.15\n\nfor c in [-10, 0, 25, 100]:\n    print(c, "°C =", cel_to_kel(c), "K")\n'},
+  {id:'liste',t:'Liste e dizionari',code:'temperature = [18.5, 21.0, 19.8, 23.4, 22.1]\nprint("Massima:", max(temperature))\nprint("Media:", sum(temperature) / len(temperature))\ntemperature.sort()\nprint(temperature)\n\nrubrica = {"Ada": 3401, "Alan": 3402}\nrubrica["Grace"] = 3403\nfor nome, num in rubrica.items():\n    print(nome, "->", num)\n\nquadrati = [x ** 2 for x in range(1, 8)]\nprint(quadrati)\n'},
+  {id:'stat',t:'Statistica: media e deviazione',code:'import statistics\n\nperiodo = [2.01, 2.04, 1.98, 2.03, 2.02, 2.05, 1.99, 2.04]\nm = statistics.mean(periodo)\ns = statistics.stdev(periodo)\nprint("media =", round(m, 3))\nprint("dev. standard =", round(s, 3))\nprint("errore standard =", round(s / len(periodo) ** 0.5, 4))\nprint("mediana =", statistics.median(periodo))\n'},
+  {id:'reg',t:'Regressione lineare',code:'import statistics\n\nmassa = [100, 200, 300, 400, 500]\nlunghezza = [14.3, 18.1, 21.8, 25.6, 29.4]\n\nris = statistics.linear_regression(massa, lunghezza)\na, b = ris.intercept, ris.slope\nr = statistics.correlation(massa, lunghezza)\nprint("L = %.3f + %.5f * m" % (a, b))\nprint("r =", round(r, 4), " R2 =", round(r * r, 4))\n\n# previsione\nprint("m = 275 g  ->  L =", round(a + b * 275, 2), "cm")\n'},
+  {id:'classi',t:'Classi (4ª)',code:'class Animale:\n    def __init__(self, nome):\n        self.nome = nome\n\n    def verso(self):\n        return "..."\n\n    def __str__(self):\n        return self.nome + " dice " + self.verso()\n\nclass Cane(Animale):\n    def verso(self):\n        return "Bau!"\n\nclass Gatto(Animale):\n    def verso(self):\n        return "Miao!"\n\nfor a in [Cane("Rex"), Gatto("Tom"), Animale("Boh")]:\n    print(a)\n'},
+  {id:'err',t:'Errori ed eccezioni',code:'def dividi(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print("Non si divide per zero!")\n        return None\n\nprint(dividi(10, 4))\nprint(dividi(1, 0))\n\n# togli il commento per vedere un errore vero:\n# print(10 / 0)\n'},
+];
+function pyHint(r){
+  const t=r.text||'';
+  if(r.excType==='EOFError')return 'Il programma ha chiamato input() ma non ci sono più righe pronte. Scrivi i valori nel riquadro «Valori per input()», uno per riga.';
+  if(r.excType==='ModuleNotFoundError'){const m=/'([\w.]+)'/.exec(t);const n=m?m[1]:'';
+    if(/^(numpy|scipy|matplotlib|pandas|sklearn|seaborn)/.test(n))return 'La libreria «'+n+'» non è inclusa in questo editor. Qui trovi math, random, statistics, time, json e copy; per '+n+' usa Python sul computer o Google Colab.';
+    return 'In questo editor sono disponibili solo i moduli math, random, statistics, time, json e copy.';}
+  if(r.kind==='syntax'&&/non è supportat/.test(t))return 'Quella parte di Python non è disponibile in questo editor (vedi «Cosa non funziona» sotto).';
+  if(r.kind==='syntax')return 'Errore di scrittura: controlla i due punti, le parentesi, le virgolette e i rientri della riga indicata.';
+  if(r.kind==='steps'||r.kind==='time')return 'Probabile ciclo infinito: controlla la condizione del while e che la variabile cambi a ogni giro.';
+  if(r.excType==='NameError')return 'Hai usato un nome che non esiste: controlla di averlo creato prima e di averlo scritto uguale (maiuscole comprese).';
+  if(r.excType==='IndentationError')return 'Controlla i rientri: ogni blocco deve avere gli stessi spazi.';
+  return '';
+}
+function pyrunWidget(root){
+  const id='py'+(++UID),KEY='informatica-in-classe:python:v1';
+  let saved=null;try{saved=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){}
+  const start=saved&&typeof saved.code==='string'?saved:{code:PY_PRESETS[1].code,inp:''};
+  root.innerHTML='<div class="wg-h">Editor Python</div>'+
+    '<p class="wg-note">Scrivi il programma, premi «Esegui» (o Ctrl + Invio). Funziona direttamente nella pagina, senza installare nulla. Il codice resta salvato nel tuo browser.</p>'+
+    '<div class="wg-row"><label for="'+id+'-p">Esempi</label><select id="'+id+'-p"><option value="">Scegli un esempio…</option>'+PY_PRESETS.map(p=>'<option value="'+p.id+'">'+esc(p.t)+'</option>').join('')+'</select></div>'+
+    '<label class="py-lab" for="'+id+'-c">Programma</label>'+
+    '<textarea id="'+id+'-c" class="py-code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" rows="12" wrap="off"></textarea>'+
+    '<label class="py-lab" for="'+id+'-i">Valori per input() (uno per riga)</label>'+
+    '<textarea id="'+id+'-i" class="py-code py-inp" spellcheck="false" rows="2" wrap="off"></textarea>'+
+    '<div class="wg-row py-btns"><button type="button" class="btn primary" data-a="run">▶ Esegui</button><button type="button" class="btn" data-a="stop" disabled>■ Ferma</button><button type="button" class="btn" data-a="clear">Pulisci output</button><button type="button" class="btn" data-a="reset">Ripristina esempio</button><span class="py-st" role="status"></span></div>'+
+    '<div class="wg-h wg-h2">Output</div>'+
+    '<pre class="py-out" aria-live="polite" tabindex="0"></pre>'+
+    '<div class="py-errbox" hidden><pre class="py-err"></pre><p class="py-hint"></p><button type="button" class="btn" data-a="goto">Seleziona la riga con l\'errore</button></div>';
+  const code=$('.py-code',root),inp=$('.py-inp',root),out=$('.py-out',root),errb=$('.py-errbox',root),err=$('.py-err',root),hint=$('.py-hint',root),st=$('.py-st',root),sel=$('select',root);
+  const bRun=$('[data-a=run]',root),bStop=$('[data-a=stop]',root);
+  code.value=start.code;inp.value=start.inp||'';
+  let current=null,lastLine=0,worker=null,workerBad=false,src=null,preset=null;
+  const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({code:code.value,inp:inp.value}));}catch(e){}};
+  code.addEventListener('input',persist);inp.addEventListener('input',persist);
+  code.addEventListener('keydown',e=>{
+    if(e.key==='Tab'&&!e.shiftKey){e.preventDefault();const a=code.selectionStart,b=code.selectionEnd;code.setRangeText('    ',a,b,'end');persist();}
+    else if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}
+    else if(e.key==='Enter'&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey){
+      const a=code.selectionStart,v=code.value,ls=v.lastIndexOf('\n',a-1)+1,line=v.slice(ls,a),ind=/^ */.exec(line)[0],extra=/:\s*$/.test(line)?'    ':'';
+      e.preventDefault();code.setRangeText('\n'+ind+extra,a,code.selectionEnd,'end');persist();
+    }
+  });
+  sel.addEventListener('change',()=>{
+    const p=PY_PRESETS.find(x=>x.id===sel.value);if(!p)return;
+    preset=p;code.value=p.code;inp.value=p.inp||'';persist();clearAll();
+  });
+  $('[data-a=reset]',root).addEventListener('click',()=>{const p=preset||PY_PRESETS[1];code.value=p.code;inp.value=p.inp||'';persist();clearAll();});
+  function clearAll(){out.textContent='';errb.hidden=true;st.textContent='';}
+  $('[data-a=clear]',root).addEventListener('click',clearAll);
+  $('[data-a=goto]',root).addEventListener('click',()=>{
+    if(!lastLine)return;const L=code.value.split('\n');let pos=0;for(let i=0;i<lastLine-1&&i<L.length;i++)pos+=L[i].length+1;
+    code.focus();code.setSelectionRange(pos,pos+(L[lastLine-1]||'').length);
+  });
+  function getSrc(){const el=document.getElementById('pyrun');return el?el.textContent:'';}
+  function mkWorker(){
+    if(worker||workerBad)return worker;
+    try{
+      const glue='\n;self.onmessage=function(e){var d=e.data,buf="";var fl=function(){if(buf){self.postMessage({t:"out",s:buf});buf="";}};'+
+        'var r=self.PyInterp.run(d.code,{inputs:d.inputs,echoInput:true,maxMs:d.maxMs,write:function(s){buf+=s;if(buf.length>4000)fl();}});fl();self.postMessage({t:"done",r:r});};self.postMessage({t:"ready"});';
+      const url=URL.createObjectURL(new Blob([getSrc()+glue],{type:'text/javascript'}));
+      worker=new Worker(url);
+      worker.addEventListener('error',()=>{if(!current||!current.started){workerBad=true;worker=null;if(current){const c=current;current=null;runMain(c.code,c.inputs);}}});
+    }catch(e){workerBad=true;worker=null;}
+    return worker;
+  }
+  function setBusy(b){bRun.disabled=b;bStop.disabled=!b||!worker;st.textContent=b?'In esecuzione…':'';}
+  function finish(r){
+    current=null;setBusy(false);
+    if(r.ok){st.textContent='Fatto.';errb.hidden=true;if(!out.textContent)out.textContent='(il programma non ha stampato nulla)';return;}
+    lastLine=r.line||0;
+    err.textContent=r.text;hint.textContent=pyHint(r);hint.hidden=!hint.textContent;errb.hidden=false;
+    $('[data-a=goto]',root).hidden=!lastLine;
+    st.textContent='Terminato con un errore.';
+  }
+  function runMain(c,inputs){
+    if(!src){src=getSrc();if(!window.PyInterp){try{(0,eval)(src);}catch(e){out.textContent='L\'interprete non si è caricato.';setBusy(false);return;}}}
+    setBusy(true);st.textContent='In esecuzione (modalità semplice, il pulsante Ferma non è disponibile)…';
+    setTimeout(()=>{
+      let buf='';
+      const r=window.PyInterp.run(c,{inputs:inputs,echoInput:true,maxMs:6000,write:s=>{buf+=s;}});
+      out.textContent+=buf;finish(r);
+    },30);
+  }
+  function run(){
+    if(current)return;
+    clearAll();
+    const inputs=inp.value.length?inp.value.split('\n'):[];
+    current={code:code.value,inputs:inputs,started:false};
+    const w=mkWorker();
+    if(!w){const c=current;current=null;runMain(c.code,c.inputs);return;}
+    setBusy(true);
+    const my=current;
+    let timer=setTimeout(()=>{if(current===my&&!my.started){/* il worker non risponde: passa alla modalità semplice */workerBad=true;try{w.terminate();}catch(e){}worker=null;current=null;runMain(my.code,my.inputs);}},2500);
+    w.onmessage=ev=>{
+      const d=ev.data;
+      if(d.t==='ready'||d.t==='out'||d.t==='done'){my.started=true;clearTimeout(timer);}
+      if(current!==my)return;
+      if(d.t==='out')out.textContent+=d.s;
+      else if(d.t==='done'){finish(d.r);}
+    };
+    w.postMessage({code:my.code,inputs:my.inputs,maxMs:20000});
+  }
+  bRun.addEventListener('click',run);
+  bStop.addEventListener('click',()=>{
+    if(!current||!worker)return;
+    try{worker.terminate();}catch(e){}worker=null;current=null;setBusy(false);
+    errb.hidden=true;st.textContent='Programma fermato.';out.textContent+='\n[fermato]';
+  });
+}
+
 const WIDGETS={
   converter:{label:'Convertitore binario, decimale, esadecimale',fn:converterWidget},
   textbin:{label:'Da testo a byte (ASCII e UTF-8)',fn:textbinWidget},
   rgb:{label:'Mixer di colori RGB',fn:rgbWidget},
   cpu:{label:'Simulatore della macchina di Von Neumann',fn:cpuWidget},
-  flow:{label:'Diagramma di flusso con percorso (pH)',fn:flowWidget}
+  flow:{label:'Diagramma di flusso con percorso (pH)',fn:flowWidget},
+  gates:{label:'Porte logiche con tabella di verità',fn:gatesWidget},
+  bw:{label:'Immagine in bianco e nero 8 × 8',fn:bwWidget},
+  gray:{label:'Scala di grigio e profondità in bit',fn:grayWidget},
+  pyrun:{label:'Editor Python eseguibile',fn:pyrunWidget}
 };
 
 /* ---------- disegno della pagina ---------- */

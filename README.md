@@ -7,7 +7,8 @@ Libro di informatica interattivo, diviso in sezioni contrassegnate da colore e s
 
 - `src/content.txt`: tutti i contenuti (capitoli e sezioni).
 - `src/template.html`: grafica e funzioni della pagina.
-- `build.py`: unisce i due file e crea `dist/index.html`.
+- `src/pyrun.js`: l'interprete Python usato dall'editor della sezione «Laboratorio» (nessuna libreria esterna).
+- `build.py`: unisce i file e crea `dist/index.html`.
 - `allegati/`: i file delle lezioni (slides in PDF, schede, esercizi).
 - `dist/index.html`: il sito pronto da pubblicare.
 - `netlify.toml`: impostazioni per Netlify.
@@ -67,3 +68,15 @@ Dopo `@@section`: identificativo, classi (P1, T1, Q1, L2, L3, L4), strumento int
 Nel testo: `## Sottotitolo`, `**grassetto**`, `` `codice` ``, elenchi con `- `, tabelle con `|`,
 box con `> [Fisica] testo`, domande con `?? domanda` e `!! risposta`,
 codice tra righe ``` ```python ```, risultati tra righe ``` ```output ```.
+
+## L'editor Python nel libro
+
+La sezione «Laboratorio: prova il codice Python qui» (3ª e 4ª liceo) contiene un editor che esegue il codice nel browser,
+senza server e senza installare nulla. Il codice è in `src/pyrun.js`: è un interprete scritto per questo libro, non il Python ufficiale.
+
+- Moduli disponibili: `math`, `random`, `statistics`, `time`, `json`, `copy`.
+- Non disponibili: `numpy`, `scipy`, `matplotlib`, `pandas`, file, `sqlite3`, `with`, generatori.
+- `random` non produce gli stessi numeri di Python sul computer; la ricorsione arriva a circa 350 livelli.
+- Per aggiungere l'editor a un'altra sezione: nell'editor della sezione scegli lo strumento «Editor Python eseguibile»,
+  oppure in `content.txt` scrivi `pyrun` al posto del trattino nell'intestazione `@@section`. Una sezione ha un solo strumento.
+- Gli esempi del menu si modificano nell'array `PY_PRESETS` di `src/template.html`.

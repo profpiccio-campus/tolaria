@@ -62,7 +62,46 @@ Scrivere molti bit è scomodo. Il sistema **esadecimale** usa 16 cifre: 0-9 e po
 
 Esempio: `1010 1111` in binario diventa `AF` in esadecimale, cioè 175 in decimale. Nel sistema **ottale** si raggruppano invece 3 bit alla volta e si usano le cifre da 0 a 7.
 
-Prova il convertitore qui sotto: accendi e spegni i bit e osserva come cambiano gli altri valori.
+## Esercizio riepilogativo: le divisioni successive
+Per convertire un numero decimale in un'altra base si usa una tabella con quattro colonne: **Valore**, **Divisore**, **Quoziente** e **Resto**.
+
+## Come si risolve
+1. Scrivi il numero da convertire nella colonna Valore e la base nella colonna Divisore (2 per il binario, 16 per l'esadecimale).
+2. Dividi il valore per il divisore. Scrivi il quoziente intero e il resto.
+3. Il quoziente diventa il Valore della riga successiva.
+4. Ripeti finché il quoziente vale 0.
+5. Leggi i resti **dal basso verso l'alto**: è il numero nella nuova base. In esadecimale i resti da 10 a 15 si scrivono A, B, C, D, E, F.
+
+## Esempio: 156 in binario
+| Valore | Divisore | Quoziente | Resto |
+|---|---|---|---|
+| 156 | 2 | 78 | 0 |
+| 78 | 2 | 39 | 0 |
+| 39 | 2 | 19 | 1 |
+| 19 | 2 | 9 | 1 |
+| 9 | 2 | 4 | 1 |
+| 4 | 2 | 2 | 0 |
+| 2 | 2 | 1 | 0 |
+| 1 | 2 | 0 | 1 |
+
+Resti letti dal basso verso l'alto: 1 0 0 1 1 1 0 0. Quindi 156 = `10011100` in binario.
+
+## Esempio: 156 in esadecimale
+| Valore | Divisore | Quoziente | Resto |
+|---|---|---|---|
+| 156 | 16 | 9 | 12 (C) |
+| 9 | 16 | 0 | 9 |
+
+Resti letti dal basso verso l'alto: 9 e C. Quindi 156 = `9C` in esadecimale.
+
+## Come controllare il risultato
+- Dal binario: 128 + 16 + 8 + 4 = 156.
+- Dall'esadecimale: 9 · 16 + 12 = 156.
+- Raggruppando i bit a quattro a quattro, `1001 1100` diventa 9 e C: le due conversioni coincidono.
+
+Lo strumento in fondo alla sezione compila queste tabelle per qualsiasi numero e per le basi 2, 8 e 16.
+
+Prova il convertitore qui sotto: accendi e spegni i bit e osserva come cambiano gli altri valori. In fondo trovi anche il generatore della tabella delle divisioni.
 
 ?? Quanto vale 1010 in decimale?
 !! 8 + 2 = 10.
@@ -70,6 +109,29 @@ Prova il convertitore qui sotto: accendi e spegni i bit e osserva come cambiano 
 !! 11001, perché 16 + 8 + 1 = 25.
 ?? Come si scrive FF in decimale?
 !! 15·16 + 15 = 255, il valore massimo di un byte.
+
+?? Esercizio riepilogativo: completa le due tabelle per convertire 203 in binario e in esadecimale.
+!! Binario: i resti dal basso verso l'alto sono 1 1 0 0 1 0 1 1, quindi 203 = `11001011`.
+| Valore | Divisore | Quoziente | Resto |
+|---|---|---|---|
+| 203 | 2 | 101 | 1 |
+| 101 | 2 | 50 | 1 |
+| 50 | 2 | 25 | 0 |
+| 25 | 2 | 12 | 1 |
+| 12 | 2 | 6 | 0 |
+| 6 | 2 | 3 | 0 |
+| 3 | 2 | 1 | 1 |
+| 1 | 2 | 0 | 1 |
+Esadecimale: i resti dal basso verso l'alto sono 12 (C) e 11 (B), quindi 203 = `CB`.
+| Valore | Divisore | Quoziente | Resto |
+|---|---|---|---|
+| 203 | 16 | 12 | 11 (B) |
+| 12 | 16 | 0 | 12 (C) |
+Controllo: 11001011 raggruppato è `1100 1011` = C B. Inoltre 12 · 16 + 11 = 203.
+?? Converti 100 in esadecimale con la tabella.
+!! 100 : 16 = 6 con resto 4, poi 6 : 16 = 0 con resto 6. Letti dal basso: `64`. Controllo: 6 · 16 + 4 = 100.
+?? Perché i resti vanno letti dal basso verso l'alto?
+!! Il primo resto che si ottiene è la cifra meno significativa (quella di peso 1). L'ultimo resto è la cifra più significativa, quindi va scritta per prima.
 
 @@section s1-4 | Q1 | - | Numeri negativi: il complemento a due
 Con 8 bit si possono scrivere 256 valori. Per rappresentare anche i numeri negativi si usa il **complemento a due**: il bit più a sinistra ha peso negativo, pari a -128.
@@ -157,6 +219,92 @@ Il colore `#FF8000` si legge: rosso 255, verde 128, blu 0, cioè un arancione. M
 !! 100 × 100 ÷ 8 = 1250 byte.
 ?? Quanti byte occupa un'immagine a colori 800 × 600 a 24 bit?
 !! 800 × 600 × 3 = 1 440 000 byte, circa 1,37 MiB.
+
+@@section s1-7a | P1 T1 Q1 | bw | Immagini in bianco e nero
+Un'immagine in **bianco e nero** ha soltanto due colori. Per ogni pixel basta quindi **1 bit**.
+
+Convenzione di questo libro: **0 = nero, 1 = bianco**. È la stessa della scala di grigio, dove 0 è il nero più scuro.
+
+## Dal disegno ai byte
+Un'immagine di 8 × 8 pixel ha 8 pixel per riga: ogni riga è un byte. Indichiamo con N un pixel nero e con B un pixel bianco.
+
+| Riga di pixel | Bit | Esadecimale |
+|---|---|---|
+| B B N N N N B B | 1 1 0 0 0 0 1 1 | C3 |
+| N B B B B B B N | 0 1 1 1 1 1 1 0 | 7E |
+| N N N N N N N N | 0 0 0 0 0 0 0 0 | 00 |
+| B B B B B B B B | 1 1 1 1 1 1 1 1 | FF |
+
+L'immagine intera è l'elenco dei suoi byte, riga dopo riga. L'8 × 8 dello strumento qui sotto occupa 8 byte.
+
+## Quanto spazio occupa
+`byte = larghezza × altezza ÷ 8`
+
+| Immagine | Pixel | Byte |
+|---|---|---|
+| 8 × 8 | 64 | 8 |
+| 64 × 64 | 4 096 | 512 |
+| 1024 × 768 | 786 432 | 98 304 (96 KiB) |
+
+Sono immagini in bianco e nero i codici QR, i timbri, i vecchi fax e molti display a basso consumo.
+
+## Il limite
+Con due soli colori si perdono le sfumature. Una fotografia in bianco e nero puro diventa una macchia di punti. Per avere le sfumature servono più bit per pixel: è la scala di grigio, nella sezione seguente.
+
+Disegna con lo strumento: scegli un esempio oppure modifica i quadretti, e osserva come cambiano i byte.
+
+?? Quanti byte occupa un'immagine in bianco e nero di 64 × 64 pixel?
+!! 64 · 64 = 4 096 pixel = 4 096 bit = 512 byte.
+?? Un'immagine in bianco e nero occupa 1 000 byte. Quanti pixel ha?
+!! 1 000 · 8 = 8 000 pixel.
+?? Scrivi la riga B B B N N B B B come byte, in binario e in esadecimale.
+!! Con 0 = nero e 1 = bianco la riga diventa 1 1 1 0 0 1 1 1 = `11100111`, cioè E7 in esadecimale.
+?? Disegna con lo strumento una lettera T. Quali byte ottieni?
+!! La barra in alto è una riga tutta nera, quindi `00`. Le altre righe hanno i due pixel centrali neri: `11100111`, cioè E7.
+
+@@section s1-7b | P1 T1 Q1 | gray | La scala di grigio
+Nella **scala di grigio** ogni pixel ha un livello di luminosità. Con **8 bit** i livelli sono 2^8 = 256: da 0 (nero) a 255 (bianco). 128 è un grigio medio.
+
+## Confronto tra i tre tipi di immagine
+| Tipo | Bit per pixel | Livelli o colori | Full HD (1920 × 1080) non compressa |
+|---|---|---|---|
+| Bianco e nero | 1 | 2 | 259 200 byte (253,1 KiB) |
+| Scala di grigio | 8 | 256 | 2 073 600 byte (1,98 MiB) |
+| Colore RGB | 24 | 16 777 216 | 6 220 800 byte (5,93 MiB) |
+
+Un pixel grigio ha un solo numero. Un pixel a colori ne ha tre (rosso, verde, blu). Per questo una foto in grigio pesa un terzo della stessa foto a colori.
+
+## Da colore a grigio
+Per trasformare un pixel RGB in grigio ci sono due formule.
+
+- **Media**: `(R + G + B) ÷ 3`.
+- **Media pesata**: `0,299 · R + 0,587 · G + 0,114 · B`. L'occhio umano è più sensibile al verde, quindi il verde conta di più.
+
+Esempio con l'arancione `#FF8000`, cioè R = 255, G = 128, B = 0:
+- media: (255 + 128 + 0) ÷ 3 = 127,7, che si arrotonda a 128;
+- media pesata: 0,299 · 255 + 0,587 · 128 = 76,2 + 75,1 = 151,4, che si arrotonda a 151.
+
+## Da grigio a bianco e nero
+Si sceglie una **soglia**, per esempio 128. I pixel con valore da 128 in su diventano bianchi (1), gli altri neri (0). Con la soglia si ottiene la versione in bianco e nero di una foto in grigio.
+
+## Meno bit, meno livelli
+| Bit per pixel | Livelli | Aspetto |
+|---|---|---|
+| 8 | 256 | sfumature morbide |
+| 4 | 16 | si iniziano a vedere le bande |
+| 2 | 4 | quattro grigi |
+| 1 | 2 | bianco e nero |
+
+Nello strumento trascina il cursore dei bit: l'immagine passa da 256 grigi a 2. Clicca sull'immagine per leggere i numeri di un blocco di 8 × 8 pixel.
+
+?? Quanti byte occupa un'immagine in scala di grigio a 8 bit di 800 × 600 pixel?
+!! 800 · 600 · 1 byte = 480 000 byte, circa 0,46 MiB.
+?? Quanti livelli di grigio ci sono con 3 bit per pixel?
+!! 2^3 = 8 livelli.
+?? Converti in grigio il pixel R = 200, G = 100, B = 50 con la media e con la media pesata.
+!! Media: (200 + 100 + 50) ÷ 3 = 116,7, cioè 117. Media pesata: 0,299 · 200 + 0,587 · 100 + 0,114 · 50 = 59,8 + 58,7 + 5,7 = 124,2, cioè 124.
+?? Un pixel grigio vale 90 e la soglia è 128. Di che colore diventa nel bianco e nero?
+!! Nero, perché 90 è minore della soglia 128: il suo bit diventa 0.
 
 @@section s1-8 | P1 T1 Q1 | - | Codifica dei suoni
 Il suono è un'onda continua. Per digitalizzarlo si misura l'altezza dell'onda a intervalli regolari. Ogni misura si chiama **campione**.
@@ -446,6 +594,134 @@ else:
 ?? Che cosa stampa se ph vale 13,2?
 !! "basica", perché nessuna delle due condizioni è vera e si va nel ramo finale.
 
+@@section s3-3a | L2 | gates | Porte logiche e condizioni composte
+Una **porta logica** riceve uno o due valori logici (1 = vero, 0 = falso) e produce un solo valore logico. Con le porte logiche si costruiscono i circuiti dei computer. Le stesse operazioni servono negli algoritmi per scrivere **condizioni composte**.
+
+| Porta | Si legge | Python | Vale 1 quando |
+|---|---|---|---|
+| AND | "e" | `a and b` | A e B valgono entrambi 1 |
+| OR | "o" | `a or b` | almeno uno tra A e B vale 1 |
+| NOT | "non" | `not a` | A vale 0 |
+| XOR | "o esclusivo" | `a != b` | A e B sono diversi |
+| NAND | "non e" | `not (a and b)` | A e B non valgono entrambi 1 |
+| NOR | "non o" | `not (a or b)` | A e B valgono entrambi 0 |
+
+## Tabelle di verità
+| A | B | AND | OR | XOR | NAND | NOR |
+|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+| 0 | 1 | 0 | 1 | 1 | 1 | 0 |
+| 1 | 0 | 0 | 1 | 1 | 1 | 0 |
+| 1 | 1 | 1 | 1 | 0 | 0 | 0 |
+
+La porta NOT ha un solo ingresso: NOT 0 = 1 e NOT 1 = 0. Con n ingressi le righe della tabella sono 2^n.
+
+## Dalle porte logiche agli algoritmi
+Nel diagramma di flusso il rombo dell'If contiene una condizione. Con AND, OR e NOT si possono mettere più condizioni nello stesso rombo, senza annidare più If.
+
+> [Chimica] Un esperimento riesce solo se la temperatura è compresa tra 20 e 30 °C e il pH è minore di 7. Le due condizioni devono essere vere insieme: serve un AND.
+
+```python
+temperatura = 25
+ph = 6.5
+if temperatura >= 20 and temperatura <= 30 and ph < 7:
+    print("Condizioni ideali")
+else:
+    print("Esperimento da ripetere")
+```
+
+```output
+Condizioni ideali
+```
+
+> [Scienze naturali] Un animale si classifica come mammifero se ha il pelo e allatta i piccoli. Una pianta è commestibile per l'uomo se non è velenosa e non è spinosa: serve un NOT combinato con AND.
+
+> [Fisica] Una lampadina in una scala con due interruttori si accende quando i due interruttori sono in posizione diversa: è un XOR.
+
+## Un AND equivale a due If annidati
+```python
+a = True
+b = True
+if a and b:
+    print("A e B veri")
+if a:
+    if b:
+        print("A e B veri (annidati)")
+print("fine")
+```
+
+```output
+A e B veri
+A e B veri (annidati)
+fine
+```
+
+Un OR invece equivale a due percorsi che portano allo stesso blocco. Con AND e OR si scrive meno codice e il diagramma resta più leggibile.
+
+## Precedenza degli operatori
+Senza parentesi si valuta prima NOT, poi AND, poi OR. Quando la condizione è lunga conviene usare le parentesi, anche se non servono.
+
+```python
+print(True or False and False)
+print((True or False) and False)
+```
+
+```output
+True
+False
+```
+
+## Leggi di De Morgan
+Negare una condizione composta significa cambiare AND in OR (e viceversa) e negare i singoli pezzi:
+
+- NOT (A AND B) = (NOT A) OR (NOT B)
+- NOT (A OR B) = (NOT A) AND (NOT B)
+
+> [Matematica] Nella teoria degli insiemi vale la stessa regola: il complementare dell'intersezione è l'unione dei complementari.
+
+Il programma controlla le leggi su tutte le combinazioni:
+
+```python
+for a in (False, True):
+    for b in (False, True):
+        print(a, b, not (a and b), (not a) or (not b))
+```
+
+```output
+False False True True
+False True True True
+True False True True
+True True False False
+```
+
+Le ultime due colonne sono sempre uguali: le due espressioni sono equivalenti.
+
+## Valutazione a corto circuito
+Python smette di valutare una condizione appena il risultato è noto. Con AND, se il primo pezzo è falso il secondo non viene calcolato. Questo permette di evitare errori:
+
+```python
+b = 0
+if b != 0 and 10 / b > 2:
+    print("rapporto grande")
+else:
+    print("controllo evitato: nessuna divisione per zero")
+```
+
+```output
+controllo evitato: nessuna divisione per zero
+```
+
+Provare a invertire i due pezzi, `10 / b > 2 and b != 0`, produce un errore di divisione per zero.
+
+?? Completa: A = 1 e B = 0. Quanto valgono A AND B, A OR B, A XOR B, A NAND B?
+!! A AND B = 0, A OR B = 1, A XOR B = 1, A NAND B = 1.
+?? Scrivi la condizione "il voto è sufficiente (almeno 6) e le assenze sono meno di 20" in Python.
+!! `voto >= 6 and assenze < 20`
+?? Con quale porta logica si descrive "il campione è acido oppure basico, cioè non neutro"?
+!! Con NOT applicato alla condizione "pH uguale a 7": `not (ph == 7)`, oppure `ph < 7 or ph > 7`. Le due scritture sono equivalenti.
+?? Quante righe ha la tabella di verità di una condizione con tre ingressi?
+!! 2^3 = 8 righe.
+
 @@section s3-4 | L2 | - | Iterazione: i cicli While e For
 Un'**iterazione** ripete un blocco di istruzioni. In Flowgorithm ci sono due casi.
 
@@ -647,6 +923,131 @@ In questo anno si lavora senza classi e oggetti, che arrivano in quarta. I dati 
 !! Sequenza, selezione e iterazione.
 ?? Perché è utile scomporre un programma in funzioni?
 !! Ogni funzione si può scrivere, provare e correggere da sola, e si può riusare in altri punti.
+
+@@section s4-1a | L3 L4 | pyrun | Laboratorio: prova il codice Python qui
+Qui sotto c'è un **editor Python** che funziona direttamente nella pagina: scrivi il programma, premi «Esegui» e il risultato compare subito, senza installare nulla. Serve per provare gli esempi del libro e per svolgere gli esercizi.
+
+## Come si usa
+1. Scegli un esempio dal menu, oppure cancella tutto e scrivi il tuo programma.
+2. Premi **Esegui** (da tastiera: Ctrl + Invio).
+3. Se il programma usa `input()`, scrivi i valori nel riquadro «Valori per input()», **uno per riga**, nell'ordine in cui il programma li chiede.
+4. Se compare un errore, leggi il messaggio: indica il numero della riga e il tipo di errore. Il pulsante «Seleziona la riga con l'errore» ti porta sul punto giusto.
+5. Se il programma non si ferma, premi **Ferma**.
+
+Il tasto Tab inserisce quattro spazi, e dopo una riga che termina con i due punti il rientro successivo viene aggiunto da solo. Il programma resta salvato nel tuo browser anche se chiudi la pagina.
+
+> [Attenzione] L'editor non usa il Python installato sul computer: è un interprete scritto per questo libro, che gira nel browser. Capisce quasi tutto il Python che si usa in terza e in quarta, ma non tutto. Se un programma funziona qui ma dà risultati diversi sul computer (o viceversa), conta quello del computer.
+
+## Che cosa funziona e che cosa no
+| Funziona | Non è disponibile |
+|---|---|
+| variabili, numeri, testo, liste, tuple, dizionari, insiemi | `numpy`, `scipy`, `matplotlib`, `pandas` |
+| `if`, `while`, `for`, funzioni, `lambda`, ricorsione | `with`, `yield` e i generatori, `async` |
+| classi, ereditarietà, `super()`, `@property` | lettura e scrittura di file, `sqlite3` |
+| `try`, `except`, `finally`, `raise` | `open()`, `import` di moduli propri |
+| moduli `math`, `random`, `statistics`, `time`, `json`, `copy` | |
+
+Altri limiti da conoscere:
+- il modulo `random` funziona, ma con lo stesso seme dà numeri diversi da quelli di Python sul computer;
+- la ricorsione può arrivare a circa 350 chiamate annidate (Python ne permette 1000);
+- un programma che dura più di 20 secondi viene fermato, e l'output è limitato a 200 000 caratteri;
+- l'ordine di stampa di un insieme di testi (`set`) può essere diverso da quello di Python sul computer, perché gli insiemi non hanno un ordine garantito.
+
+## Prova tu
+> [Fisica] Un oggetto lasciato cadere da fermo percorre h = ½ · g · t² metri in t secondi, con g = 9,81 m/s². Stampa l'altezza di caduta per t da 0 a 5 secondi.
+
+> [Chimica] Il cloruro di sodio (sale da cucina) ha massa molare 58,44 g/mol. Leggi da tastiera i grammi di sale e stampa le moli.
+
+> [Scienze naturali] Una stazione meteo registra le temperature 12,5 – 14,0 – 17,8 – 21,3 – 19,6 – 15,2 (°C). Calcola minima, massima, escursione termica e media.
+
+> [Matematica] Stampa tutti i numeri primi minori di 50.
+
+Questo programma ha due errori. Incollalo nell'editor, leggi i messaggi e correggilo.
+
+```python
+voti = [7, 8, 6, 9]
+somma = 0
+for v in voti
+    somma += v
+print("Media:", somma / len(voto))
+```
+
+?? Fisica: come si scrive il programma della caduta libera?
+!! Un ciclo for con range(0, 6) e la formula applicata a ogni valore di t:
+```python
+g = 9.81
+for t in range(0, 6):
+    h = 0.5 * g * t ** 2
+    print("t =", t, "s  ->  h =", round(h, 2), "m")
+```
+```output
+t = 0 s  ->  h = 0.0 m
+t = 1 s  ->  h = 4.91 m
+t = 2 s  ->  h = 19.62 m
+t = 3 s  ->  h = 44.15 m
+t = 4 s  ->  h = 78.48 m
+t = 5 s  ->  h = 122.62 m
+```
+Il valore a t = 5 s è 122,62 m: cresce con il quadrato del tempo, quindi raddoppiando t l'altezza quadruplica.
+?? Chimica: come si scrive il programma delle moli?
+!! Si legge il valore con input(), lo si converte con float() e si divide per la massa molare. Scrivendo 10 nel riquadro dei valori:
+```python
+massa = float(input("Massa di NaCl (g): "))
+massa_molare = 58.44
+moli = massa / massa_molare
+print("Moli:", round(moli, 3), "mol")
+```
+```output
+Massa di NaCl (g): 10
+Moli: 0.171 mol
+```
+?? Scienze naturali: come si calcolano minima, massima, escursione e media?
+!! Con le funzioni min(), max() e sum() applicate alla lista:
+```python
+temperature = [12.5, 14.0, 17.8, 21.3, 19.6, 15.2]
+print("Minima:", min(temperature))
+print("Massima:", max(temperature))
+print("Escursione:", round(max(temperature) - min(temperature), 1))
+print("Media:", round(sum(temperature) / len(temperature), 2))
+```
+```output
+Minima: 12.5
+Massima: 21.3
+Escursione: 8.8
+Media: 16.73
+```
+?? Matematica: come si trovano i primi minori di 50?
+!! Un numero n è primo se nessun divisore d tra 2 e n - 1 lo divide senza resto. Appena se ne trova uno si esce dal ciclo interno con break:
+```python
+primi = []
+for n in range(2, 50):
+    primo = True
+    for d in range(2, n):
+        if n % d == 0:
+            primo = False
+            break
+    if primo:
+        primi.append(n)
+print(primi)
+```
+```output
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+```
+?? Quali sono i due errori del programma da correggere?
+!! Il primo è alla riga 3: manca il due punti dopo `for v in voti` (SyntaxError: expected ':'). Il secondo è alla riga 5: la lista si chiama `voti`, non `voto` (NameError: name 'voto' is not defined). Corretto:
+```python
+voti = [7, 8, 6, 9]
+somma = 0
+for v in voti:
+    somma += v
+print("Media:", somma / len(voti))
+```
+```output
+Media: 7.5
+```
+Python segnala un errore di sintassi prima di eseguire qualsiasi riga; un errore di nome compare invece solo quando la riga viene eseguita.
+?? Perché con l'esempio «Input: media dei voti» devi scrivere i numeri nel riquadro sotto il programma?
+!! Perché l'editor non ha una tastiera interattiva: ogni chiamata a input() prende la riga successiva del riquadro. Se le righe sono meno delle chiamate, compare EOFError.
 
 @@section s4-2 | L3 | - | Le funzioni
 Una funzione ha un nome, dei **parametri** in ingresso e può restituire un valore con `return`.
@@ -984,7 +1385,594 @@ Con v0 = 20 m/s e α = 45° l'ultima riga stampata è `Gittata teorica: 40.8 m`.
 ?? A che serve il ciclo while True con break nel programma?
 !! A ripetere il calcolo senza conoscere in anticipo quanti passi servono: il ciclo si ferma quando il proiettile tocca terra (y negativa).
 
-@@chapter c5 | 5 | Programmazione a oggetti | Classi, oggetti, ereditarietà e polimorfismo applicati a modelli scientifici.
+@@chapter cs | 5 | Statistica con Python | Dai dati alle decisioni: statistica di base, test di normalità, t-test, ANOVA e regressione lineare.
+
+@@section st-1 | L2 L3 | - | Statistica descrittiva
+La **statistica descrittiva** riassume un insieme di dati con pochi numeri. Un **campione** è un gruppo di n misure x₁, x₂, …, xₙ.
+
+| Indicatore | Che cosa dice | Formula |
+|---|---|---|
+| Media | il valore centrale in senso aritmetico | `somma dei valori ÷ n` |
+| Mediana | il valore che sta a metà dei dati ordinati | valore centrale (o media dei due centrali) |
+| Moda | il valore più frequente | |
+| Varianza campionaria s² | quanto i dati si disperdono | `Σ(x − media)² ÷ (n − 1)` |
+| Deviazione standard s | la dispersione, nella stessa unità dei dati | `√s²` |
+| Errore standard | l'incertezza sulla media | `s ÷ √n` |
+
+Per la varianza di un campione si divide per n − 1 e non per n, perché il campione stima la popolazione e la media usata nel calcolo è già stata ricavata dagli stessi dati.
+
+> [Fisica] Dieci misure del periodo di oscillazione di un pendolo, in secondi. Ogni misura è un po' diversa dalle altre: la statistica dice qual è il valore migliore e con quale incertezza.
+
+```python
+periodo = [2.01, 2.04, 1.98, 2.05, 2.02, 2.00, 2.03, 1.99, 2.04, 2.04]
+
+def media(dati):
+    return sum(dati) / len(dati)
+
+def mediana(dati):
+    d = sorted(dati)
+    n = len(d)
+    m = n // 2
+    if n % 2 == 1:
+        return d[m]
+    return (d[m - 1] + d[m]) / 2
+
+def moda(dati):
+    conteggi = {}
+    for x in dati:
+        conteggi[x] = conteggi.get(x, 0) + 1
+    massimo = max(conteggi.values())
+    return sorted(x for x in conteggi if conteggi[x] == massimo)
+
+def varianza(dati):
+    m = media(dati)
+    return sum((x - m) ** 2 for x in dati) / (len(dati) - 1)
+
+def dev_std(dati):
+    return varianza(dati) ** 0.5
+
+def errore_standard(dati):
+    return dev_std(dati) / len(dati) ** 0.5
+
+print("n =", len(periodo))
+print("media =", round(media(periodo), 4), "s")
+print("mediana =", round(mediana(periodo), 4), "s")
+print("moda =", moda(periodo))
+print("deviazione standard =", round(dev_std(periodo), 4), "s")
+print("errore standard =", round(errore_standard(periodo), 4), "s")
+print("minimo e massimo:", min(periodo), max(periodo))
+```
+
+```output
+n = 10
+media = 2.02 s
+mediana = 2.025 s
+moda = [2.04]
+deviazione standard = 0.024 s
+errore standard = 0.0076 s
+minimo e massimo: 1.98 2.05
+```
+
+Il periodo si scrive allora 2,020 ± 0,008 s (media ± errore standard). Python ha già queste funzioni nel modulo `statistics`; le abbiamo scritte per capire come funzionano.
+
+```python
+import statistics
+print(round(statistics.mean(periodo), 4), round(statistics.stdev(periodo), 4))
+```
+
+```output
+2.02 0.024
+```
+
+> [Attenzione] La libreria numpy calcola `np.std(dati)` dividendo per n. Per un campione serve `np.std(dati, ddof=1)`, che divide per n − 1 come `statistics.stdev`.
+
+?? Perché la media da sola non basta per descrivere due gruppi di misure?
+!! Due gruppi possono avere la stessa media ma dispersioni molto diverse. La deviazione standard dice quanto i dati si allontanano dalla media.
+?? Quanto vale la mediana di 3, 7, 8, 12?
+!! Con quattro dati ordinati la mediana è la media dei due centrali: (7 + 8) ÷ 2 = 7,5.
+?? Se si raddoppia il numero di misure, che cosa succede all'errore standard?
+!! Diminuisce, perché si divide per √n. Con il doppio dei dati l'errore si riduce di un fattore √2, circa 1,41.
+
+@@section st-2 | L2 L3 | - | Ipotesi, p-value e decisione
+Un **test di ipotesi** serve a decidere se una differenza osservata nei dati è reale o dovuta al caso.
+
+1. Si formula l'**ipotesi nulla H0**: "non c'è nessun effetto" (per esempio, le due medie sono uguali).
+2. Si formula l'**ipotesi alternativa H1**: "c'è un effetto".
+3. Si sceglie il **livello di significatività α**, di solito 0,05.
+4. Si calcola il **p-value**: la probabilità di ottenere dati almeno così estremi se H0 fosse vera.
+5. Si decide: se `p < α` si **rifiuta H0**, altrimenti **non si rifiuta H0**.
+
+| Esito | Significato |
+|---|---|
+| p piccolo (per esempio 0,01) | dati poco compatibili con H0: la differenza è probabilmente reale |
+| p grande (per esempio 0,40) | dati compatibili con H0: non c'è prova di una differenza |
+
+## Attenzione agli errori
+- **Errore di I tipo**: rifiutare H0 quando è vera (falso allarme). La sua probabilità è α.
+- **Errore di II tipo**: non rifiutare H0 quando è falsa (differenza non vista). Succede più facilmente con pochi dati.
+- "Non rifiuto H0" non significa "H0 è vera": significa che i dati non bastano per escluderla.
+- Il p-value non è la probabilità che H0 sia vera.
+
+```python
+def decisione(p, alfa=0.05):
+    if p < alfa:
+        return "p < alfa: rifiuto H0 (differenza significativa)"
+    return "p >= alfa: non rifiuto H0 (nessuna prova di differenza)"
+
+print(decisione(0.012))
+print(decisione(0.37))
+```
+
+```output
+p < alfa: rifiuto H0 (differenza significativa)
+p >= alfa: non rifiuto H0 (nessuna prova di differenza)
+```
+
+> [Scienze naturali] Un concime fa crescere di più le piante? H0: la crescita media è uguale con e senza concime. Se p < 0,05 si conclude che il concime ha un effetto.
+
+?? Un test dà p = 0,03 con α = 0,05. Che cosa si decide?
+!! Si rifiuta H0, perché 0,03 è minore di 0,05: la differenza è statisticamente significativa.
+?? Un test dà p = 0,20. Si può dire che le due medie sono uguali?
+!! No. Si può solo dire che i dati non forniscono prove sufficienti di una differenza. Con più dati il risultato potrebbe cambiare.
+?? Che cosa succede agli errori di I tipo se si sceglie α = 0,01 invece di 0,05?
+!! Diventano meno frequenti (1% invece di 5%), ma aumenta il rischio dell'errore di II tipo.
+
+@@section st-3 | L2 L3 | - | Il test di normalità
+Il t-test e l'ANOVA funzionano bene quando i dati seguono, almeno in modo approssimato, una **distribuzione normale** (la curva a campana). Prima di usarli conviene controllare.
+
+- **Asimmetria**: vale 0 per una distribuzione simmetrica. È positiva se la coda lunga è a destra.
+- **Curtosi**: vale 3 per la distribuzione normale.
+- **Test di Jarque-Bera**: usa asimmetria e curtosi. `JB = n ÷ 6 · (asimmetria² + (curtosi − 3)² ÷ 4)`. Il p-value è `exp(−JB ÷ 2)`.
+- **Test di Shapiro-Wilk**: è più adatto ai campioni piccoli, ma richiede la libreria scipy.
+
+Ipotesi del test: H0 = "i dati provengono da una distribuzione normale". Se p < 0,05 la normalità si rifiuta.
+
+> [Scienze naturali] Lunghezza in millimetri di 40 foglie dello stesso albero.
+
+> [Biologia e Fisica] Tempo di reazione in millisecondi di 40 persone a uno stimolo. I tempi di reazione hanno una coda lunga a destra: pochi valori molto grandi.
+
+```python
+foglie = [48.8, 53.0, 44.4, 57.6, 54.6, 50.8, 50.8, 53.2, 50.9, 51.1, 54.9, 54.1, 51.7, 51.7, 52.6, 49.5, 50.4, 54.2, 51.5, 46.5, 50.1, 54.6, 51.1, 51.4, 54.6, 59.3, 49.1, 57.4, 47.1, 52.7, 47.3, 57.4, 55.3, 56.6, 48.5, 54.7, 49.9, 50.2, 54.0, 55.5]
+tempi = [262, 232, 227, 343, 282, 289, 425, 227, 481, 597, 359, 296, 231, 307, 238, 253, 243, 266, 330, 234, 223, 222, 223, 214, 225, 330, 233, 265, 218, 261, 208, 230, 435, 233, 316, 275, 248, 231, 330, 247]
+
+def istogramma(dati, classi=6):
+    lo, hi = min(dati), max(dati)
+    larghezza = (hi - lo) / classi
+    limiti = [lo + i * larghezza for i in range(classi + 1)]
+    conteggi = [0] * classi
+    for x in dati:
+        i = int((x - lo) / larghezza)
+        if i == classi:
+            i = classi - 1
+        conteggi[i] += 1
+    for i in range(classi):
+        print(round(limiti[i], 1), "-", round(limiti[i + 1], 1), "|", "#" * conteggi[i], conteggi[i])
+
+print("foglie (mm)")
+istogramma(foglie)
+print("tempi di reazione (ms)")
+istogramma(tempi)
+```
+
+```output
+foglie (mm)
+44.4 - 46.9 | ## 2
+46.9 - 49.4 | ##### 5
+49.4 - 51.8 | ############## 14
+51.8 - 54.3 | ####### 7
+54.3 - 56.8 | ######## 8
+56.8 - 59.3 | #### 4
+tempi di reazione (ms)
+208.0 - 272.8 | ######################### 25
+272.8 - 337.7 | ######### 9
+337.7 - 402.5 | ## 2
+402.5 - 467.3 | ## 2
+467.3 - 532.2 | # 1
+532.2 - 597.0 | # 1
+```
+
+La prima distribuzione è a campana. La seconda ha la coda lunga a destra. Il test lo conferma con un numero.
+
+```python
+import math
+
+def jarque_bera(dati):
+    n = len(dati)
+    m = media(dati)
+    m2 = sum((x - m) ** 2 for x in dati) / n
+    m3 = sum((x - m) ** 3 for x in dati) / n
+    m4 = sum((x - m) ** 4 for x in dati) / n
+    asimmetria = m3 / m2 ** 1.5
+    curtosi = m4 / m2 ** 2
+    jb = n / 6 * (asimmetria ** 2 + (curtosi - 3) ** 2 / 4)
+    return asimmetria, curtosi, jb, math.exp(-jb / 2)
+
+for nome, dati in [("foglie", foglie), ("tempi", tempi)]:
+    s, k, jb, p = jarque_bera(dati)
+    print(nome, "asimmetria", round(s, 3), "curtosi", round(k, 3), "JB", round(jb, 3), "p", round(p, 4))
+```
+
+```output
+foglie asimmetria -0.06 curtosi 2.658 JB 0.22 p 0.8959
+tempi asimmetria 2.052 curtosi 7.399 JB 60.332 p 0.0
+```
+
+Per le foglie p è circa 0,90, molto maggiore di 0,05: non si rifiuta la normalità. Per i tempi di reazione p è praticamente 0: la normalità si rifiuta. In quel caso si usano test non parametrici oppure si trasformano i dati (per esempio con il logaritmo).
+
+Con Python completo e la libreria scipy lo stesso controllo si fa in due righe (da eseguire sul computer o su Google Colab, non nell'editor di questa pagina):
+
+```python
+from scipy import stats
+for nome, dati in [("foglie", foglie), ("tempi", tempi)]:
+    sh = stats.shapiro(dati)
+    jb = stats.jarque_bera(dati)
+    print(nome, "Shapiro p =", round(float(sh.pvalue), 4), "| Jarque-Bera p =", round(float(jb.pvalue), 4))
+```
+
+```output
+foglie Shapiro p = 0.9665 | Jarque-Bera p = 0.8959
+tempi Shapiro p = 0.0 | Jarque-Bera p = 0.0
+```
+
+?? Un test di normalità dà p = 0,60. Che cosa si conclude?
+!! Non si rifiuta H0: i dati sono compatibili con una distribuzione normale e si può procedere con il t-test o l'ANOVA.
+?? Perché con pochissimi dati un test di normalità è poco affidabile?
+!! Con pochi dati il test ha poca potenza: anche dati non normali possono dare un p-value alto. Conviene guardare anche l'istogramma.
+
+@@section st-4 | L2 L3 | - | Il t-test
+Il **t-test** confronta medie.
+
+- **Un campione**: la media del campione è diversa da un valore di riferimento μ0? Statistica: `t = (media − μ0) ÷ errore standard`, con n − 1 gradi di libertà.
+- **Due campioni indipendenti** (test di Welch): le medie di due gruppi sono diverse? Statistica: `t = (media A − media B) ÷ √(s²A/nA + s²B/nB)`.
+
+Condizioni: dati approssimativamente normali (sezione precedente) e misure indipendenti.
+
+## Il p-value
+Per ottenere il p-value da t serve la distribuzione di Student. Qui sotto trovi le funzioni di supporto: usale come una scatola nera, senza doverle capire nei dettagli. Con scipy non servono (`stats.ttest_ind` fa tutto).
+
+```python
+import math
+
+def lgamma(x):
+    coef = [676.5203681218851, -1259.1392167224028, 771.32342877765313,
+            -176.61502916214059, 12.507343278686905, -0.13857109526572012,
+            9.9843695780195716e-6, 1.5056327351493116e-7]
+    if x < 0.5:
+        return math.log(math.pi / abs(math.sin(math.pi * x))) - lgamma(1 - x)
+    x -= 1
+    a = 0.99999999999980993
+    t = x + 7.5
+    for i in range(8):
+        a += coef[i] / (x + i + 1)
+    return 0.5 * math.log(2 * math.pi) + (x + 0.5) * math.log(t) - t + math.log(a)
+
+def beta_cf(a, b, x):
+    tiny = 1e-30
+    qab, qap, qam = a + b, a + 1, a - 1
+    c = 1.0
+    d = 1 - qab * x / qap
+    if abs(d) < tiny:
+        d = tiny
+    d = 1 / d
+    h = d
+    for m in range(1, 300):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1 + aa * d
+        if abs(d) < tiny:
+            d = tiny
+        c = 1 + aa / c
+        if abs(c) < tiny:
+            c = tiny
+        d = 1 / d
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1 + aa * d
+        if abs(d) < tiny:
+            d = tiny
+        c = 1 + aa / c
+        if abs(c) < tiny:
+            c = tiny
+        d = 1 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1) < 1e-14:
+            break
+    return h
+
+def beta_inc(a, b, x):
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    bt = math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * math.log(x) + b * math.log(1 - x))
+    if x < (a + 1) / (a + b + 2):
+        return bt * beta_cf(a, b, x) / a
+    return 1 - bt * beta_cf(b, a, 1 - x) / b
+
+def p_t(t, gl):
+    return beta_inc(gl / 2, 0.5, gl / (gl + t * t))
+
+def p_f(f, g1, g2):
+    return beta_inc(g2 / 2, g1 / 2, g2 / (g2 + g1 * f))
+
+print(round(p_t(2.0, 10), 5), round(p_f(3.0, 2, 20), 5))
+```
+
+```output
+0.07339 0.07254
+```
+
+## Un campione
+> [Chimica] pH di 8 campioni di acqua di un pozzo. L'acqua è neutra (pH 7) oppure no? H0: la media vale 7.
+
+```python
+def t_un_campione(dati, mu0):
+    t = (media(dati) - mu0) / errore_standard(dati)
+    gl = len(dati) - 1
+    return t, gl, p_t(t, gl)
+
+ph = [7.3, 6.96, 7.11, 7.5, 7.31, 7.45, 7.03, 6.81]
+t, gl, p = t_un_campione(ph, 7.0)
+print("media pH =", round(media(ph), 3))
+print("t =", round(t, 3), " gl =", gl, " p =", round(p, 4))
+print(decisione(p))
+```
+
+```output
+media pH = 7.184
+t = 2.124  gl = 7  p = 0.0713
+p >= alfa: non rifiuto H0 (nessuna prova di differenza)
+```
+
+Il p-value è circa 0,07: poco sopra 0,05. I dati non bastano per dire che il pH medio è diverso da 7, ma il risultato è vicino alla soglia e con più campioni potrebbe cambiare.
+
+## Due campioni
+> [Scienze naturali] Crescita in centimetri di piante con due concimi, A e B (10 piante per concime). Il concime B è davvero più efficace? H0: le medie sono uguali.
+
+```python
+def t_welch(a, b):
+    va, vb = varianza(a), varianza(b)
+    na, nb = len(a), len(b)
+    errore = (va / na + vb / nb) ** 0.5
+    t = (media(a) - media(b)) / errore
+    gl = (va / na + vb / nb) ** 2 / ((va / na) ** 2 / (na - 1) + (vb / nb) ** 2 / (nb - 1))
+    return t, gl, p_t(t, gl)
+
+concime_a = [28.6, 21.8, 24.2, 25.4, 25.1, 20.3, 22.0, 23.4, 21.4, 26.0]
+concime_b = [29.9, 21.7, 22.2, 23.9, 28.4, 34.5, 26.8, 28.8, 24.6, 24.7]
+t, gl, p = t_welch(concime_a, concime_b)
+print("media A =", round(media(concime_a), 2), " media B =", round(media(concime_b), 2))
+print("t =", round(t, 3), " gl =", round(gl, 1), " p =", round(p, 4))
+print(decisione(p))
+```
+
+```output
+media A = 23.82  media B = 26.55
+t = -1.844  gl = 15.4  p = 0.0846
+p >= alfa: non rifiuto H0 (nessuna prova di differenza)
+```
+
+In questo esempio la differenza tra le medie c'è, ma con 10 piante per gruppo e una forte variabilità non è abbastanza grande per essere significativa. Con più piante il risultato potrebbe diventare significativo.
+
+Con scipy (da eseguire sul computer o su Google Colab):
+
+```python
+from scipy import stats
+r1 = stats.ttest_1samp(ph, 7.0)
+r2 = stats.ttest_ind(concime_a, concime_b, equal_var=False)
+print(round(float(r1.statistic), 3), round(float(r1.pvalue), 4))
+print(round(float(r2.statistic), 3), round(float(r2.pvalue), 4))
+```
+
+```output
+2.124 0.0713
+-1.844 0.0846
+```
+
+?? Che cosa significa `equal_var=False` in `ttest_ind`?
+!! Che non si assume che i due gruppi abbiano la stessa varianza. È il test di Welch, più prudente e consigliato di default.
+?? Due gruppi sono misurati sulle stesse persone prima e dopo un trattamento. Va bene il test per due campioni indipendenti?
+!! No: le misure sono accoppiate, non indipendenti. Si usa il t-test per campioni appaiati (`stats.ttest_rel`), che lavora sulle differenze.
+
+@@section st-5 | L2 L3 | - | L'analisi della varianza (ANOVA)
+Con **tre o più gruppi** non si fanno tanti t-test, perché ogni test ha il 5% di rischio di falso allarme e i rischi si sommano. Si usa l'**ANOVA a un fattore**.
+
+- H0: le medie di tutti i gruppi sono uguali.
+- H1: almeno un gruppo ha una media diversa.
+- Si confronta la variabilità **tra i gruppi** con la variabilità **dentro i gruppi**: `F = (SS tra ÷ gl tra) ÷ (SS dentro ÷ gl dentro)`.
+- Se F è grande e p < 0,05, si rifiuta H0.
+
+Condizioni: dati normali in ogni gruppo, varianze simili, misure indipendenti.
+
+> [Scienze naturali] Altezza in centimetri di 8 piante cresciute con luce rossa, blu e bianca. La luce influisce sulla crescita?
+
+```python
+def anova(gruppi):
+    tutti = [x for g in gruppi for x in g]
+    n, k = len(tutti), len(gruppi)
+    m_tot = media(tutti)
+    ss_tra = sum(len(g) * (media(g) - m_tot) ** 2 for g in gruppi)
+    ss_dentro = sum((x - media(g)) ** 2 for g in gruppi for x in g)
+    gl_tra, gl_dentro = k - 1, n - k
+    f = (ss_tra / gl_tra) / (ss_dentro / gl_dentro)
+    return f, gl_tra, gl_dentro, p_f(f, gl_tra, gl_dentro)
+
+rossa = [16.7, 20.9, 23.1, 20.2, 24.1, 21.4, 20.9, 22.1]
+blu = [26.6, 28.0, 23.7, 20.5, 25.8, 24.2, 25.4, 29.2]
+bianca = [20.6, 24.7, 25.1, 24.0, 25.5, 22.0, 21.5, 25.3]
+
+for nome, g in [("rossa", rossa), ("blu", blu), ("bianca", bianca)]:
+    print(nome, "media =", round(media(g), 2), " dev.std =", round(dev_std(g), 2))
+f, g1, g2, p = anova([rossa, blu, bianca])
+print("F(", g1, ",", g2, ") =", round(f, 3), " p =", round(p, 4))
+print(decisione(p))
+```
+
+```output
+rossa media = 21.18  dev.std = 2.21
+blu media = 25.43  dev.std = 2.7
+bianca media = 23.59  dev.std = 1.93
+F( 2 , 21 ) = 6.844  p = 0.0051
+p < alfa: rifiuto H0 (differenza significativa)
+```
+
+## E poi? Il confronto a coppie
+L'ANOVA dice che almeno un gruppo è diverso, non quale. Si confrontano allora i gruppi due a due con il t-test, correggendo il livello α. La correzione di Bonferroni divide α per il numero di confronti (qui 3, quindi α = 0,0167).
+
+```python
+nomi = ["rossa", "blu", "bianca"]
+gruppi = [rossa, blu, bianca]
+alfa = 0.05 / 3
+for i in range(3):
+    for j in range(i + 1, 3):
+        t, gl, p = t_welch(gruppi[i], gruppi[j])
+        giudizio = "significativo" if p < alfa else "non significativo"
+        print(nomi[i], "contro", nomi[j], " p =", round(p, 4), giudizio)
+```
+
+```output
+rossa contro blu  p = 0.0042 significativo
+rossa contro bianca  p = 0.036 non significativo
+blu contro bianca  p = 0.1423 non significativo
+```
+
+Solo luce rossa e luce blu differiscono in modo significativo. Il confronto tra rossa e bianca ha p ≈ 0,036: sarebbe significativo senza correzione, ma con tre confronti la soglia è più severa. Per questo la correzione serve a non vedere differenze che sono solo frutto del caso.
+
+Con scipy (da eseguire sul computer o su Google Colab):
+
+```python
+from scipy import stats
+r = stats.f_oneway(rossa, blu, bianca)
+print(round(float(r.statistic), 3), round(float(r.pvalue), 4))
+```
+
+```output
+6.844 0.0051
+```
+
+?? Perché non si fanno tre t-test invece dell'ANOVA?
+!! Ogni test ha una probabilità α di falso allarme. Con più test la probabilità di sbagliare almeno una volta cresce: con tre test indipendenti è circa 1 − 0,95³ ≈ 14%.
+?? L'ANOVA dà p = 0,001. Si può dire che tutte le medie sono diverse?
+!! No. Si può dire che almeno una media è diversa dalle altre. Per sapere quali serve il confronto a coppie.
+
+@@section st-6 | L2 L3 | - | Regressione lineare e previsioni
+La **regressione lineare** cerca la retta `y = a + b·x` che meglio descrive la relazione tra due variabili. Il metodo dei **minimi quadrati** sceglie la retta che rende minima la somma dei quadrati dei residui, cioè delle distanze verticali tra i punti e la retta.
+
+- Pendenza: `b = Σ(x − media x)(y − media y) ÷ Σ(x − media x)²`.
+- Intercetta: `a = media y − b · media x`.
+- Coefficiente di correlazione `r`: da −1 a +1. Vicino a ±1 indica una relazione quasi lineare.
+- `R² = r²`: la quota della variabilità di y spiegata dalla retta.
+
+> [Fisica] Legge di Hooke: una molla si allunga in modo proporzionale alla forza applicata. Si appendono masse crescenti e si misura la lunghezza della molla. L'intercetta è la lunghezza a riposo e la pendenza è l'allungamento per ogni grammo.
+
+```python
+def regressione(x, y):
+    mx, my = media(x), media(y)
+    sxx = sum((xi - mx) ** 2 for xi in x)
+    sxy = sum((xi - mx) * (yi - my) for xi, yi in zip(x, y))
+    syy = sum((yi - my) ** 2 for yi in y)
+    b = sxy / sxx
+    a = my - b * mx
+    r = sxy / (sxx * syy) ** 0.5
+    return a, b, r
+
+massa = [50, 100, 150, 200, 250, 300, 350, 400]
+lunghezza = [12.2, 14.3, 16.1, 18.4, 19.9, 21.7, 23.5, 25.7]
+a, b, r = regressione(massa, lunghezza)
+print("intercetta a =", round(a, 3), "cm")
+print("pendenza b =", round(b, 5), "cm/g")
+print("r =", round(r, 4), " R^2 =", round(r ** 2, 4))
+```
+
+```output
+intercetta a = 10.468 cm
+pendenza b = 0.03781 cm/g
+r = 0.9992  R^2 = 0.9985
+```
+
+## Fare previsioni
+Una volta trovata la retta, si può usare per stimare y per un nuovo valore di x. È il modo più semplice con cui un computer **impara dai dati** e poi fa previsioni: gli esempi servono a trovare a e b, poi la retta si usa su dati mai visti. È lo stesso principio dell'apprendimento automatico.
+
+```python
+def prevedi(x):
+    return a + b * x
+
+print("previsione per 275 g:", round(prevedi(275), 2), "cm")
+print("previsione per 900 g:", round(prevedi(900), 2), "cm")
+print("massa per una lunghezza di 20 cm:", round((20 - a) / b, 1), "g")
+
+residui = [yi - prevedi(xi) for xi, yi in zip(massa, lunghezza)]
+errore = (sum(e ** 2 for e in residui) / (len(massa) - 2)) ** 0.5
+print("errore tipico dei residui:", round(errore, 3), "cm")
+```
+
+```output
+previsione per 275 g: 20.87 cm
+previsione per 900 g: 44.5 cm
+massa per una lunghezza di 20 cm: 252.1 g
+errore tipico dei residui: 0.196 cm
+```
+
+## Come usare bene una previsione
+- **Interpolazione**: la previsione per 275 g cade tra i valori misurati (50-400 g) ed è affidabile.
+- **Estrapolazione**: quella per 900 g sta fuori dall'intervallo misurato. Una molla reale oltre un certo carico si deforma e la legge lineare non vale più. Il calcolo dà un numero, ma il numero può essere sbagliato.
+- Un R² alto non prova che x causi y: la correlazione non è causalità.
+- Guarda sempre i residui: se hanno un andamento (per esempio a curva) la retta non è il modello giusto.
+
+Con scipy (da eseguire sul computer o su Google Colab):
+
+```python
+from scipy import stats
+res = stats.linregress(massa, lunghezza)
+print(round(float(res.intercept), 3), round(float(res.slope), 5), round(float(res.rvalue), 4), float(res.pvalue) < 0.001)
+```
+
+```output
+10.468 0.03781 0.9992 True
+```
+
+?? Che cosa indica una pendenza b = 0,04 cm/g?
+!! Che ogni grammo in più allunga la molla di 0,04 cm, cioè 4 cm ogni 100 g.
+?? R² = 0,99 significa che x causa y?
+!! No. Significa che la retta spiega il 99% della variabilità dei dati. La causa va stabilita con l'esperimento, non con il calcolo.
+?? Perché la previsione per 900 g è poco affidabile?
+!! Perché 900 g è fuori dall'intervallo delle masse misurate (50-400 g): la relazione potrebbe non essere più lineare.
+
+@@section st-7 | L2 L3 | - | Quale test scegliere
+Prima di scegliere il test si risponde a tre domande: che cosa voglio confrontare? Quanti gruppi ci sono? I dati sono normali?
+
+| Situazione | Test | In Python con scipy |
+|---|---|---|
+| Dati normali? | Shapiro-Wilk, Jarque-Bera | `stats.shapiro(x)` |
+| Una media contro un valore noto | t-test per un campione | `stats.ttest_1samp(x, mu0)` |
+| Due gruppi indipendenti | t-test di Welch | `stats.ttest_ind(a, b, equal_var=False)` |
+| Due misure sugli stessi soggetti | t-test appaiato | `stats.ttest_rel(prima, dopo)` |
+| Tre o più gruppi | ANOVA a un fattore | `stats.f_oneway(a, b, c)` |
+| Due gruppi, dati non normali | Mann-Whitney | `stats.mannwhitneyu(a, b)` |
+| Relazione tra due variabili | Regressione lineare | `stats.linregress(x, y)` |
+
+## Come si scrive il risultato
+Una frase completa riporta i numeri e la decisione. Per esempio: "Il periodo medio è 2,020 s con errore standard 0,008 s (n = 10)". Per un test: "Il test t di Welch non mostra una differenza significativa tra i concimi (t = −1,84, gl = 15,4, p = 0,085)".
+
+## Schema di lavoro
+1. Descrivi i dati: media, deviazione standard, istogramma.
+2. Controlla la normalità.
+3. Scegli il test e fissa α prima di guardare il risultato.
+4. Calcola il p-value e decidi.
+5. Scrivi la conclusione in parole, indicando anche la dimensione dell'effetto (la differenza tra le medie).
+
+> [Intelligenza artificiale] Gli stessi passi servono prima di addestrare un modello: dati ben descritti, controllati e divisi in esempi per imparare e in esempi per verificare.
+
+## Per esercitarsi
+Raccogliete in classe un dato misurabile (altezza, tempo sui 50 metri, pulsazioni a riposo e dopo uno sforzo) e rispondete con Python: i dati sono normali? Le medie dei maschi e delle femmine sono diverse? C'è relazione tra due grandezze?
+
+?? Pulsazioni di 12 studenti a riposo e dopo 20 flessioni. Quale test si usa per vedere se l'esercizio le aumenta?
+!! Il t-test appaiato (`ttest_rel`), perché le due misure sono prese sugli stessi studenti.
+?? Il risultato di un test è p = 0,049 con α = 0,05. Come si interpreta?
+!! Formalmente si rifiuta H0, ma il risultato è al limite: conviene riportare il valore esatto, la dimensione dell'effetto e, se possibile, ripetere con più dati.
+
+@@chapter c5 | 6 | Programmazione a oggetti | Classi, oggetti, ereditarietà e polimorfismo applicati a modelli scientifici.
 
 @@section s5-1 | L4 | - | Dal procedurale agli oggetti
 Finora i dati (variabili, liste) e le funzioni che li usano sono stati separati. Nella programmazione a oggetti si uniscono: un **oggetto** contiene i propri dati (**attributi**) e le operazioni che li riguardano (**metodi**).
@@ -1236,7 +2224,7 @@ Nell'ereditarietà la freccia a punta vuota va dalla classe figlia alla madre.
 ?? Un'Auto e un Motore: ereditarietà o composizione?
 !! Composizione: un'auto ha un motore, non è un motore.
 
-@@chapter c6 | 6 | Basi di dati | Database relazionali con SQL e database non relazionali con documenti JSON.
+@@chapter c6 | 7 | Basi di dati | Database relazionali con SQL e database non relazionali con documenti JSON.
 
 @@section s6-1 | L4 | - | Perché servono i database
 Un file di testo va bene per pochi dati. Quando i dati crescono e li usano più persone, nascono problemi: informazioni **ripetute** in più punti, dati **incoerenti**, ricerche lente, accessi in conflitto.
