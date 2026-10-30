@@ -1,0 +1,30 @@
+@@chapter _peer | - | Peer2Peer | 
+
+@@section pp-nome-lavoro | L3 | - | Titolo del lavoro
+@@material slides | Slides del progetto | allegati/pp-nome-lavoro.pdf
+> [Peer2Peer] Questa pagina è stata preparata dai ragazzi per spiegare un argomento ai compagni.
+
+| Voce | Dettaglio |
+|---|---|
+| Realizzato da | Cognome Nome, Cognome Nome |
+| Classe | 3ª Liceo SA |
+| Argomento trattato | (titolo dell'argomento) |
+| Docente referente | Nome Cognome |
+
+## Di che cosa parla
+(Spiega l'argomento con parole tue, in poche righe.)
+
+## Spiegazione
+(Passaggi, schemi, esempi.)
+
+## Un esempio svolto
+```python
+# esempio di codice
+```
+
+## Domande per i compagni
+?? (Scrivi una domanda)
+!! (Scrivi la risposta)
+
+## Fonti
+- (da dove avete preso le informazioni)

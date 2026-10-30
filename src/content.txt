@@ -1,3 +1,10 @@
+@@class P1 | 1ª Prof. | Primo anno · Istituto professionale | orange | circle
+@@class T1 | 1ª ITIS | Primo anno · ITIS | blue | square
+@@class Q1 | 1ª ITIS Q | Primo anno · ITIS quadriennale | teal | diamond
+@@class L2 | 2ª Liceo SA · IA | Secondo anno · Liceo scienze applicate, curvatura IA | violet | triangle
+@@class L3 | 3ª Liceo SA | Terzo anno · Liceo scienze applicate | green | hexagon
+@@class L4 | 4ª Liceo SA | Quarto anno · Liceo scienze applicate | magenta | star
+
 @@chapter c1 | 1 | La codifica delle informazioni | Come un computer rappresenta numeri, testi, immagini e suoni usando solo 0 e 1.
 
 @@section s1-1 | P1 T1 Q1 | - | Dati e informazioni

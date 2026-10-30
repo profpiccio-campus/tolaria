@@ -1,0 +1,18 @@
+@@chapter _material | - | Materiale | 
+
+@@section m-nome-materiale | L3 | - | Titolo del materiale
+@@material slides | Slides del progetto | allegati/m-nome-materiale.pdf
+> [Materiale del docente] (A che cosa serve questo materiale e quando conviene usarlo.)
+
+## Di che cosa si tratta
+(Descrivi il contenuto in poche righe.)
+
+## Come usarlo
+1. (primo passo)
+2. (secondo passo)
+
+## Per approfondire
+- (libro, sito, video)
+
+## Allegati
+Slides, dispense e link si aggiungono con il blocco «Slides e allegati della lezione», in alto nella finestra di modifica.

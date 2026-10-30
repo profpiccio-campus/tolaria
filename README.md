@@ -7,6 +7,7 @@ Libro di informatica interattivo, diviso in sezioni contrassegnate da colore e s
 
 - `src/content.txt`: tutti i contenuti (capitoli e sezioni).
 - `src/template.html`: grafica e funzioni della pagina.
+- `modelli/`: modelli delle pagine di Progetti, Materiale e Peer2Peer (vedi `modelli/LEGGIMI.txt`).
 - `src/pyrun.js`: l'interprete Python usato dall'editor della sezione «Laboratorio» (nessuna libreria esterna).
 - `build.py`: unisce i file e crea `dist/index.html`.
 - `allegati/`: i file delle lezioni (slides in PDF, schede, esercizi).
@@ -80,3 +81,39 @@ senza server e senza installare nulla. Il codice è in `src/pyrun.js`: è un int
 - Per aggiungere l'editor a un'altra sezione: nell'editor della sezione scegli lo strumento «Editor Python eseguibile»,
   oppure in `content.txt` scrivi `pyrun` al posto del trattino nell'intestazione `@@section`. Una sezione ha un solo strumento.
 - Gli esempi del menu si modificano nell'array `PY_PRESETS` di `src/template.html`.
+
+## Come è organizzato il libro
+
+- La **pagina iniziale** mostra solo le classi, come una mappa mentale.
+- Dentro ogni classe ci sono quattro sezioni: **Argomenti** (il programma, diviso in capitoli), **Progetti** (i lavori svolti dalla classe),
+  **Materiale** (il materiale extra del docente) e **Peer2Peer** (il materiale preparato dai ragazzi).
+- Progetti, Materiale e Peer2Peer sono elenchi di pagine: ogni pagina ha testo, tabelle, codice, un eventuale editor Python e le slides o gli allegati.
+  Una pagina può comparire in più classi.
+
+### Aggiungere una classe
+
+Dal sito: attiva «Modifica» nella pagina iniziale, scorri fino a «Gestisci le classi» e premi «+ Aggiungi una classe».
+Scegli nome, colore e simbolo (la stessa combinazione colore + simbolo non può essere usata da due classi). Lì puoi anche rinominare, riordinare, nascondere e mostrare le classi.
+
+Dal file `src/content.txt`, in cima:
+
+```
+@@class 5S | 5ª Liceo SA | Quinto anno · Liceo scienze applicate | red | pentagon
+```
+
+Campi: sigla breve (senza spazi, unica), nome breve, nome completo, colore, simbolo. Si può aggiungere `| hidden` per nasconderla.
+Colori: orange, blue, teal, violet, green, magenta, red, gold, sky, slate, brown, lime.
+Simboli: circle, square, diamond, triangle, hexagon, star, pentagon, cross, octagon, down.
+
+### Collegare gli argomenti a una classe
+
+Dal sito: apri la classe, scheda Argomenti, attiva «Modifica» e apri «Collega gli argomenti a questa classe».
+Spunta gli argomenti che la classe svolge, oppure usa «Collega in blocco gli argomenti di…» per copiare quelli di un'altra classe (utile per una classe nuova).
+
+Dal file: nell'intestazione di ogni `@@section` il secondo campo contiene le sigle delle classi, per esempio `L3 L4`.
+
+### Aggiungere un progetto (o un materiale, o un lavoro dei ragazzi)
+
+Apri la classe, scegli la scheda, attiva «Modifica» e premi «+ Nuovo progetto»: la pagina nasce dal modello. Nell'editor si cambiano il titolo, le classi
+in cui compare, lo strumento Python (utile per far provare il programma) e si aggiungono slides o allegati.
+I modelli sono anche nella cartella `modelli/`, per chi preferisce lavorare sul file.

@@ -1,0 +1,18 @@
+MODELLI DELLE PAGINE
+====================
+
+Questi file sono i modelli delle pagine di Progetti, Materiale e Peer2Peer.
+Sono scritti nello stesso formato di src/content.txt.
+
+Dal sito (consigliato)
+- Apri la classe, scegli la scheda (per esempio Progetti), attiva "Modifica" e premi "+ Nuovo progetto".
+  La pagina nasce già con il modello compilato a metà: cambia i testi tra parentesi.
+
+Dal file
+1. Apri il file del modello (per esempio progetto.txt) e copia tutto.
+2. Incolla in fondo a src/content.txt. La riga @@chapter serve una volta sola: se nel file c'è già, non ripeterla.
+3. Cambia l'identificativo (p-nome-progetto) in uno unico, il titolo e le classi (L3, oppure "L3 L4" per più classi).
+4. Se non hai slides, cancella la riga @@material. Se le hai, metti il PDF nella cartella allegati/ con quel nome.
+5. Esegui python3 build.py, poi commit e push.
+
+Attenzione: nel titolo della riga @@section non usare il segno |, perché separa i campi. Nel testo, invece, si usa normalmente per le tabelle.

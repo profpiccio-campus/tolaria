@@ -1,0 +1,58 @@
+@@chapter _project | - | Progetti | 
+
+@@section p-nome-progetto | L3 | - | Titolo del progetto
+@@material slides | Slides del progetto | allegati/p-nome-progetto.pdf
+> [Scheda del progetto] Compila le voci, sostituisci i testi tra parentesi e cancella le parti che non servono.
+
+| Voce | Dettaglio |
+|---|---|
+| Classe | 3ª Liceo SA |
+| Anno scolastico | 2026/27 |
+| Gruppo di lavoro | Cognome Nome, Cognome Nome |
+| Docente | Nome Cognome |
+| Durata | 8 ore |
+| Discipline coinvolte | Informatica, (altre materie) |
+
+## Obiettivo
+(Quale problema risolve il progetto? Scrivi due o tre righe.)
+
+## Competenze e conoscenze
+- (che cosa hanno imparato i ragazzi)
+- (che cosa hanno saputo fare)
+
+## Strumenti e materiali
+- Python 3
+- (sensori, dataset, altri programmi)
+
+## Fasi di lavoro
+1. Analisi del problema
+2. Progettazione (diagramma di flusso o schema)
+3. Realizzazione del programma
+4. Collaudo e correzione degli errori
+5. Presentazione alla classe
+
+## Il programma
+Descrivi come funziona e incolla le parti più importanti del codice.
+
+```python
+# incolla qui il codice
+```
+
+## Risultati
+```output
+(incolla qui un esempio di risultato)
+```
+
+## Che cosa abbiamo imparato
+(difficoltà incontrate, errori frequenti, idee per migliorare)
+
+## Valutazione
+| Criterio | Peso |
+|---|---|
+| Il programma funziona | 40% |
+| Qualità del codice e dei commenti | 20% |
+| Documentazione | 20% |
+| Presentazione | 20% |
+
+## Allegati
+Slides, relazione, file di dati e codice si aggiungono con il blocco «Slides e allegati della lezione», in alto nella finestra di modifica.

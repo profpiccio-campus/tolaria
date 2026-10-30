@@ -12,6 +12,7 @@
   --bg:#edf0f5; --surface:#ffffff; --surface-2:#f5f7fb; --ink:#141c2a; --ink-2:#4b576a; --rule:#d3dae4;
   --ink-btn:#141c2a; --on-ink:#ffffff; --focus:#2b62d9; --danger:#b3261e;
   --c-p1:#c4560a; --c-t1:#1f5fc4; --c-q1:#0a7c76; --c-l2:#6b3fc4; --c-l3:#3b7d1d; --c-l4:#b3205a;
+  --k-orange:#c4560a; --k-blue:#1f5fc4; --k-teal:#0a7c76; --k-violet:#6b3fc4; --k-green:#3b7d1d; --k-magenta:#b3205a; --k-red:#c62828; --k-gold:#8f6b00; --k-sky:#0b79b0; --k-slate:#4b5d78; --k-brown:#7a4b2a; --k-lime:#5f7f00;
   --code-bg:#edf0f5; --tk-kw:#7a3ec2; --tk-str:#1a7a3a; --tk-cm:#66718a; --tk-num:#b45309;
 }
 @media (prefers-color-scheme: dark){
@@ -19,6 +20,7 @@
     --bg:#0f131a; --surface:#171d27; --surface-2:#1d2431; --ink:#e9edf3; --ink-2:#9ba7ba; --rule:#2c3646;
     --ink-btn:#e9edf3; --on-ink:#0f131a; --focus:#7aa6ff; --danger:#ff8a80;
     --c-p1:#f0a15c; --c-t1:#7aa8f0; --c-q1:#5cc9c2; --c-l2:#b89af0; --c-l3:#92cf72; --c-l4:#f08ab0;
+    --k-orange:#f0a15c; --k-blue:#7aa8f0; --k-teal:#5cc9c2; --k-violet:#b89af0; --k-green:#92cf72; --k-magenta:#f08ab0; --k-red:#ff8a80; --k-gold:#e8c25a; --k-sky:#6cc4f0; --k-slate:#a9b8d0; --k-brown:#d1a07a; --k-lime:#c4e04a;
     --code-bg:#0d1118; --tk-kw:#c4a1ff; --tk-str:#8fd694; --tk-cm:#7d8aa0; --tk-num:#f0b265;
     color-scheme:dark;
   }
@@ -27,6 +29,7 @@
   --bg:#0f131a; --surface:#171d27; --surface-2:#1d2431; --ink:#e9edf3; --ink-2:#9ba7ba; --rule:#2c3646;
   --ink-btn:#e9edf3; --on-ink:#0f131a; --focus:#7aa6ff; --danger:#ff8a80;
   --c-p1:#f0a15c; --c-t1:#7aa8f0; --c-q1:#5cc9c2; --c-l2:#b89af0; --c-l3:#92cf72; --c-l4:#f08ab0;
+  --k-orange:#f0a15c; --k-blue:#7aa8f0; --k-teal:#5cc9c2; --k-violet:#b89af0; --k-green:#92cf72; --k-magenta:#f08ab0; --k-red:#ff8a80; --k-gold:#e8c25a; --k-sky:#6cc4f0; --k-slate:#a9b8d0; --k-brown:#d1a07a; --k-lime:#c4e04a;
   --code-bg:#0d1118; --tk-kw:#c4a1ff; --tk-str:#8fd694; --tk-cm:#7d8aa0; --tk-num:#f0b265;
   color-scheme:dark;
 }
@@ -40,10 +43,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* testata */
 .mast{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:flex-end;justify-content:space-between;padding-bottom:18px}
-.mast-t{min-width:0;flex:1 1 380px}
+.mast-t{min-width:0;flex:1 1 560px}
 .kicker{margin:0 0 4px;font:600 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
 h1{margin:0;font:700 clamp(32px,6vw,52px)/1.02 var(--font-display);letter-spacing:-.02em;text-wrap:balance}
-.lead{margin:10px 0 0;max-width:62ch;color:var(--ink-2);font-size:17px}
+.lead{margin:10px 0 0;max-width:70ch;color:var(--ink-2);font-size:17px}
 .tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .sync{font:600 13px var(--font-body);color:var(--ink-2)}
 .btn{font:600 14px var(--font-body);padding:8px 15px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:6px;cursor:pointer}
@@ -51,6 +54,94 @@ h1{margin:0;font:700 clamp(32px,6vw,52px)/1.02 var(--font-display);letter-spacin
 .btn.primary,.btn[aria-pressed="true"]{background:var(--ink-btn);color:var(--on-ink)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .link{border:0;background:none;padding:4px 2px;font:600 14px var(--font-body);color:var(--ink);text-decoration:underline;cursor:pointer}
+
+/* percorso, titoli di pagina, schede */
+.mast.compact{padding-bottom:6px}
+.mast.compact h1{font-size:clamp(24px,4vw,32px)}
+.crumbs{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;padding:10px 0 4px;font:600 14.5px var(--font-body);color:var(--ink-2)}
+.crumbs a{color:var(--ink);text-decoration:underline}
+.crumbs [aria-current]{color:var(--ink)}
+.cr-sym{display:inline-flex}
+.layout.solo{grid-template-columns:minmax(0,1fr)}
+.home-lead{margin:18px 0 0;max-width:62ch;color:var(--ink-2);font-size:18px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* mappa mentale */
+.mm{position:relative;margin:6px auto 0;max-width:1000px;aspect-ratio:16/9}
+.mm-class{max-width:880px;aspect-ratio:16/8}
+.mm-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.mm-lines line{stroke:var(--cc);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.6}
+.mm-c{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;width:clamp(120px,19%,190px);aspect-ratio:1;border-radius:50%;background:var(--ink-btn);color:var(--on-ink);font:700 clamp(15px,2.2vw,22px)/1.1 var(--font-display);padding:10px}
+.mm-c span{font-weight:500;font-size:.8em}
+.mm-class .mm-c{background:var(--surface);color:var(--ink);border:3px solid var(--ink)}
+.mm-n{position:absolute;transform:translate(-50%,-50%);display:flex;gap:11px;align-items:center;width:clamp(150px,21%,220px);padding:11px 14px;background:var(--surface);color:var(--ink);text-decoration:none;border:2.5px solid var(--cc);border-radius:16px;box-shadow:0 1px 0 var(--rule)}
+.mm-n:hover{background:color-mix(in srgb,var(--cc) 12%,var(--surface))}
+.mm-n:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.mm-t{min-width:0}
+.mm-t b{display:block;font:700 16px/1.2 var(--font-display);overflow-wrap:anywhere}
+.mm-t small{display:block;margin-top:2px;font:600 13px var(--font-body);color:var(--ink-2)}
+.mm-ic{flex:none;color:var(--cc);display:flex}
+.mm-class .mm-n{width:clamp(170px,26%,250px)}
+@media (max-width:719px){
+  .mm,.mm-class{aspect-ratio:auto;display:flex;flex-direction:column;gap:10px;margin-top:14px;padding-left:26px;border-left:3px solid var(--rule);margin-left:8px}
+  .mm-lines{display:none}
+  .mm-c,.mm-n,.mm-class .mm-n{position:static;transform:none;width:auto}
+  .mm-c{flex-direction:row;gap:8px;aspect-ratio:auto;border-radius:16px;justify-content:flex-start;padding:12px 16px;margin-left:-26px;margin-bottom:4px}
+  .mm-n{position:relative;left:auto!important;top:auto!important}
+  .mm-n::before{content:"";position:absolute;left:-26px;top:50%;width:26px;border-top:3px solid var(--cc);opacity:.6}
+}
+
+/* schede della classe */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 20px}
+.tab{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--ink-2);border-radius:999px;color:var(--ink);text-decoration:none;font:600 15px var(--font-body);background:transparent}
+.tab em{font-style:normal;font-size:13px;color:var(--ink-2)}
+.tab:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.tab[aria-current=page]{background:var(--ink-btn);color:var(--on-ink);border-color:var(--ink-btn)}
+.tab[aria-current=page] em{color:inherit;opacity:.8}
+.pg-h h2{margin:0;font:700 clamp(26px,4.4vw,38px)/1.1 var(--font-display);letter-spacing:-.015em}
+.pg-h p{margin:6px 0 16px;color:var(--ink-2)}
+.cards{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:6px;height:100%;padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-top:6px solid var(--cc);border-radius:4px;color:var(--ink);text-decoration:none}
+.card:hover{border-color:var(--ink-2);border-top-color:var(--cc)}
+.card b{font:700 18px/1.25 var(--font-display);overflow-wrap:anywhere}
+.card-tags{display:flex;gap:3px}
+.card-ex{font-size:15px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card small{color:var(--ink-2);font-weight:600}
+.add0{margin:0 0 6px}
+.emptybox{padding:18px 20px;border:1.5px dashed var(--ink-2);background:var(--surface);margin-top:14px}
+.emptybox p{margin:0 0 8px}
+.tplprev summary{cursor:pointer;font-weight:600}
+.tplprev .prose{margin-top:12px;padding:12px 16px;background:var(--surface-2);border:1px solid var(--rule)}
+.backl{margin:0 0 12px;font-weight:600}
+.backl a{color:var(--ink)}
+.sec-h2{margin:0;font:700 clamp(24px,4vw,32px)/1.12 var(--font-display);letter-spacing:-.01em;text-wrap:balance}
+
+/* gestione classi e collegamenti */
+.cm{margin-top:36px;padding:18px 20px;border:1.5px dashed var(--ink-2);background:var(--surface)}
+.cm h2{margin:0 0 6px;font:700 22px var(--font-display)}
+.cm h3{margin:0 0 4px;font:700 18px var(--font-display)}
+.cm-list{list-style:none;margin:14px 0;padding:0;display:grid;gap:8px}
+.cm-list li{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule)}
+.cm-list li.off{opacity:.6}
+.cm-n{display:flex;gap:10px;align-items:center;min-width:0}
+.cm-n small{color:var(--ink-2)}
+.cm-b{display:flex;gap:6px;flex-wrap:wrap}
+.cm-form{display:grid;gap:14px;margin-top:10px;padding-top:14px;border-top:1px solid var(--rule)}
+.sws,.shps{display:flex;flex-wrap:wrap;gap:8px}
+.sw,.shp{position:relative;display:inline-flex}
+.sw input,.shp input{position:absolute;opacity:0;width:1px;height:1px}
+.sw span{display:block;width:34px;height:34px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 1.5px var(--ink-2)}
+.sw input:checked+span{box-shadow:0 0 0 3px var(--ink)}
+.sw input:focus-visible+span,.shp input:focus-visible+svg{outline:3px solid var(--focus);outline-offset:3px}
+.shp svg{padding:6px;width:42px;height:42px;border:1.5px solid var(--ink-2);border-radius:6px;color:var(--ink-2);fill:currentColor}
+.shp input:checked+svg{color:var(--on-ink);background:var(--ink-btn);border-color:var(--ink-btn)}
+.linkp{margin:0 0 24px;padding:12px 16px;border:1.5px dashed var(--ink-2);background:var(--surface)}
+.linkp summary{cursor:pointer;font-weight:700}
+.linkp h4{margin:16px 0 4px;font:700 13px var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.lk-list{list-style:none;margin:0;padding:0}
+.lk{display:flex;gap:10px;align-items:center;padding:4px 0;cursor:pointer}
+.lk input{width:18px;height:18px;flex:none}
+.lk .mini{margin-left:auto}
 
 /* barra classi: legenda e filtro insieme */
 .fbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-block:1px solid var(--rule);padding-block:10px;margin-inline:-16px;padding-inline:16px}
@@ -259,7 +350,7 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
     <div class="mast-t">
       <p class="kicker">Libro di istituto · Informatica</p>
       <h1>Informatica in Classe</h1>
-      <p class="lead">Un libro interattivo diviso in sezioni. Ogni sezione porta il simbolo e il colore delle classi a cui è destinata e può essere modificata dai docenti.</p>
+      <p class="lead">Il libro interattivo di informatica. Ogni classe ha il suo colore e il suo simbolo e raccoglie argomenti, progetti, materiale e lavori dei ragazzi.</p>
     </div>
     <div class="tools">
       <span id="sync" class="sync" role="status">Connessione in corso…</span>
@@ -269,14 +360,7 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
     </div>
   </header>
 
-  <div class="fbar">
-    <div class="fbar-in">
-      <span class="fl">Classi</span>
-      <div id="chips" class="chips"></div>
-      <button id="clearF" class="link" type="button" hidden>Mostra tutte</button>
-      <span id="count" class="count"></span>
-    </div>
-  </div>
+  <nav id="crumbs" class="crumbs" aria-label="Percorso" hidden></nav>
   <p id="editNote" class="editnote" hidden></p>
 
   <div class="layout">
@@ -303,33 +387,64 @@ const $=(s,r)=>(r||document).querySelector(s);
 const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-/* ---------- classi: colore + simbolo ---------- */
-const CLASSES=[
-  {id:'P1',short:'1ª Prof.',name:'Primo anno · Istituto professionale',v:'--c-p1',shape:'circle'},
-  {id:'T1',short:'1ª ITIS',name:'Primo anno · ITIS',v:'--c-t1',shape:'square'},
-  {id:'Q1',short:'1ª ITIS Q',name:'Primo anno · ITIS quadriennale',v:'--c-q1',shape:'diamond'},
-  {id:'L2',short:'2ª Liceo SA · IA',name:'Secondo anno · Liceo scienze applicate, curvatura IA',v:'--c-l2',shape:'triangle'},
-  {id:'L3',short:'3ª Liceo SA',name:'Terzo anno · Liceo scienze applicate',v:'--c-l3',shape:'hexagon'},
-  {id:'L4',short:'4ª Liceo SA',name:'Quarto anno · Liceo scienze applicate',v:'--c-l4',shape:'star'}
+/* ---------- classi: colore + simbolo (modificabili dal docente) ---------- */
+const PAL={orange:'Arancione',blue:'Blu',teal:'Verde acqua',violet:'Viola',green:'Verde',magenta:'Magenta',red:'Rosso',gold:'Oro',sky:'Azzurro',slate:'Grigio ardesia',brown:'Marrone',lime:'Lime'};
+const DEFAULT_CLASSES=[
+  {id:'P1',short:'1ª Prof.',name:'Primo anno · Istituto professionale',color:'orange',shape:'circle'},
+  {id:'T1',short:'1ª ITIS',name:'Primo anno · ITIS',color:'blue',shape:'square'},
+  {id:'Q1',short:'1ª ITIS Q',name:'Primo anno · ITIS quadriennale',color:'teal',shape:'diamond'},
+  {id:'L2',short:'2ª Liceo SA · IA',name:'Secondo anno · Liceo scienze applicate, curvatura IA',color:'violet',shape:'triangle'},
+  {id:'L3',short:'3ª Liceo SA',name:'Terzo anno · Liceo scienze applicate',color:'green',shape:'hexagon'},
+  {id:'L4',short:'4ª Liceo SA',name:'Quarto anno · Liceo scienze applicate',color:'magenta',shape:'star'}
 ];
-const CL={}; CLASSES.forEach(c=>{CL[c.id]=c;});
-function starPts(){const p=[];for(let i=0;i<10;i++){const a=(-90+i*36)*Math.PI/180,r=i%2?3.4:7.6;p.push((8+r*Math.cos(a)).toFixed(2)+','+(8+r*Math.sin(a)).toFixed(2));}return p.join(' ');}
+let baseClasses=[],classOv={};
+const CLASSES=[],CL={};
+function polyPts(n,r,rot,ratio){const p=[];const m=ratio?n*2:n;for(let i=0;i<m;i++){const a=(rot+i*360/m)*Math.PI/180,rr=ratio&&i%2?r*ratio:r;p.push((8+rr*Math.cos(a)).toFixed(2)+','+(8+rr*Math.sin(a)).toFixed(2));}return p.join(' ');}
 const SHAPES={
   circle:'<circle cx="8" cy="8" r="6.6"/>',
   square:'<rect x="1.6" y="1.6" width="12.8" height="12.8"/>',
   diamond:'<polygon points="8,0.8 15.2,8 8,15.2 0.8,8"/>',
   triangle:'<polygon points="8,1.4 15.2,14.2 0.8,14.2"/>',
   hexagon:'<polygon points="8,1 14.2,4.5 14.2,11.5 8,15 1.8,11.5 1.8,4.5"/>',
-  star:'<polygon points="'+starPts()+'"/>'
+  star:'<polygon points="'+polyPts(5,7.6,-90,0.447)+'"/>',
+  pentagon:'<polygon points="'+polyPts(5,7.4,-90)+'"/>',
+  cross:'<polygon points="5.6,1 10.4,1 10.4,5.6 15,5.6 15,10.4 10.4,10.4 10.4,15 5.6,15 5.6,10.4 1,10.4 1,5.6 5.6,5.6"/>',
+  octagon:'<polygon points="'+polyPts(8,7.4,-67.5)+'"/>',
+  down:'<polygon points="8,14.6 15.2,1.8 0.8,1.8"/>'
 };
-const sym=(c,n)=>'<svg class="sym" width="'+n+'" height="'+n+'" viewBox="0 0 16 16" aria-hidden="true" style="fill:var('+c.v+')">'+SHAPES[c.shape]+'</svg>';
+const SHAPE_NAMES={circle:'Cerchio',square:'Quadrato',diamond:'Rombo',triangle:'Triangolo',hexagon:'Esagono',star:'Stella',pentagon:'Pentagono',cross:'Croce',octagon:'Ottagono',down:'Triangolo capovolto'};
+const symRaw=(shape,n,fill)=>'<svg class="sym" width="'+n+'" height="'+n+'" viewBox="0 0 16 16" aria-hidden="true" style="fill:'+fill+'">'+(SHAPES[shape]||SHAPES.circle)+'</svg>';
+const sym=(c,n)=>symRaw(c.shape,n,'var('+c.v+')');
 const tag=c=>'<span class="tag" style="--cc:var('+c.v+')" title="'+esc(c.name)+'">'+sym(c,13)+'<span>'+esc(c.short)+'</span></span>';
+const activeClasses=()=>CLASSES.filter(c=>!c.deleted);
+function rebuildClasses(){
+  const map={};
+  baseClasses.forEach((c,i)=>{map[c.id]=Object.assign({order:(i+1)*10},c,{_base:true});});
+  Object.keys(classOv).forEach(id=>{
+    const o=classOv[id]||{};
+    if(map[id])map[id]=Object.assign(map[id],o,{_over:true});
+    else if(o.short)map[id]=Object.assign({order:9999,name:o.short,color:'slate',shape:'circle'},o,{_custom:true});
+  });
+  CLASSES.length=0;
+  Object.keys(CL).forEach(k=>{delete CL[k];});
+  Object.keys(map).map(k=>{
+    const c=Object.assign({},map[k],{id:k});
+    c.color=PAL[c.color]?c.color:'slate';c.shape=SHAPES[c.shape]?c.shape:'circle';
+    c.v='--k-'+c.color;c.deleted=!!c.deleted;c.short=String(c.short||k);c.name=String(c.name||c.short);
+    c.order=typeof c.order==='number'?c.order:9999;
+    return c;
+  }).sort((a,b)=>a.order-b.order||a.id.localeCompare(b.id)).forEach(c=>{CLASSES.push(c);CL[c.id]=c;});
+}
 
 /* ---------- contenuti di partenza ---------- */
 function parseContent(txt){
-  const chapters=[],list=[],cnt={};let cur=null;
+  const chapters=[],list=[],classes=[],cnt={};let cur=null;
   txt.replace(/\r/g,'').split('\n').forEach(line=>{
-    if(line.startsWith('@@chapter ')){
+    if(line.startsWith('@@class ')){
+      const p=line.slice(8).split('|').map(s=>s.trim());
+      if(p[0])classes.push({id:p[0],short:p[1]||p[0],name:p[2]||p[1]||p[0],color:p[3]||'slate',shape:p[4]||'circle',deleted:p[5]==='hidden'});
+      cur=null;
+    }else if(line.startsWith('@@chapter ')){
       const p=line.slice(10).split('|').map(s=>s.trim());
       chapters.push({id:p[0],num:p[1],title:p[2],desc:p[3]||''});cur=null;
     }else if(line.startsWith('@@section ')){
@@ -343,11 +458,22 @@ function parseContent(txt){
     }else if(cur){cur.lines.push(line);}
   });
   list.forEach(s=>{s.body=s.lines.join('\n').trim();delete s.lines;});
-  return {chapters,list};
+  return {chapters,list,classes};
 }
 const parsed=parseContent($('#content').textContent);
 const chapters=parsed.chapters,baseList=parsed.list;
+baseClasses=parsed.classes.length?parsed.classes:DEFAULT_CLASSES.map(c=>Object.assign({},c));
+/* le pagine di Progetti, Materiale e Peer2Peer vivono in capitoli "virtuali" (il loro id inizia con _) */
+const KINDS={
+  _project:{slug:'progetti',title:'Progetti',desc:'I progetti svolti dalla classe.',one:'progetto',newLabel:'+ Nuovo progetto'},
+  _material:{slug:'materiale',title:'Materiale',desc:'Il materiale extra fornito dal docente.',one:'materiale',newLabel:'+ Nuovo materiale'},
+  _peer:{slug:'peer',title:'Peer2Peer',desc:'Il materiale preparato dai ragazzi per i compagni.',one:'lavoro',newLabel:'+ Nuovo lavoro dei ragazzi'}
+};
+Object.keys(KINDS).forEach(id=>{if(!chapters.some(c=>c.id===id))chapters.push({id:id,num:'-',title:KINDS[id].title,desc:KINDS[id].desc});});
+chapters.forEach(c=>{c.virtual=c.id.charAt(0)==='_';});
+rebuildClasses();
 const chIndex=id=>chapters.findIndex(c=>c.id===id);
+const kindOf=s=>s.chapter.charAt(0)==='_'?s.chapter:'topic';
 
 /* ---------- testo: mini linguaggio per le sezioni ---------- */
 function inline(s){
@@ -426,12 +552,11 @@ function renderBody(src){
 }
 
 /* ---------- stato e salvataggio ---------- */
-const LS_OV='informatica-in-classe:modifiche:v1',LS_FILTER='informatica-in-classe:filtro:v1';
+const LS_OV='informatica-in-classe:modifiche:v1',LS_CL='informatica-in-classe:classi:v1';
 const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
 let overrides={},mode='local',dbh=null,dl=null,canWrite=true,editOn=false,confirmState=null;
 const editing=new Set(),newIds=new Set(),nodes={};
-const filter=new Set((lsGet(LS_FILTER,[])||[]).filter(x=>CL[x]));
 
 /* ---------- materiali di lezione: slides, allegati, link ---------- */
 const MKINDS={
@@ -486,7 +611,6 @@ function all(){
   });
   return Object.keys(map).map(k=>norm(map[k])).sort((a,b)=>chIndex(a.chapter)-chIndex(b.chapter)||a.order-b.order||a.id.localeCompare(b.id));
 }
-const visible=s=>!s.deleted&&s.classes.length>0&&(filter.size===0||s.classes.some(c=>filter.has(c)));
 const fields=s=>({chapter:s.chapter,order:s.order,title:s.title,body:s.body,classes:s.classes.slice(),widget:s.widget||'',materials:s.materials.map(m=>({kind:m.kind,title:m.title,url:m.url})),deleted:!!s.deleted,custom:!!s._custom});
 
 async function put(id,data){
@@ -498,6 +622,11 @@ async function del(id){
   const prev=overrides[id];delete overrides[id];
   try{if(mode==='db')await dbh.doc('sections/'+id).delete();else lsSet(LS_OV,overrides);}
   catch(e){if(prev!==undefined)overrides[id]=prev;throw e;}
+}
+async function putClass(id,data){
+  const prev=classOv[id];classOv[id]=data;rebuildClasses();
+  try{if(mode==='db')await dbh.doc('sections/cls-'+id).set(Object.assign({_class:true},data));else lsSet(LS_CL,classOv);}
+  catch(e){if(prev===undefined)delete classOv[id];else classOv[id]=prev;rebuildClasses();throw e;}
 }
 let tt;
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>{t.hidden=true;},4500);}
@@ -943,13 +1072,40 @@ const WIDGETS={
 };
 
 /* ---------- disegno della pagina ---------- */
-function buildChips(){
-  $('#chips').innerHTML=CLASSES.map(c=>'<button type="button" class="chip" style="--cc:var('+c.v+')" data-cls="'+c.id+'" aria-pressed="false" title="'+esc(c.name)+'">'+sym(c,16)+'<span>'+esc(c.short)+'</span></button>').join('');
+const TABS=[
+  {slug:'argomenti',kind:'topic',title:'Argomenti',desc:'Il programma, capitolo per capitolo',icon:'<path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M4 17a3 3 0 0 1 3-3h12"/>'},
+  {slug:'progetti',kind:'_project',title:'Progetti',desc:'I progetti svolti dalla classe',icon:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>'},
+  {slug:'materiale',kind:'_material',title:'Materiale',desc:'Il materiale extra del docente',icon:'<path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'},
+  {slug:'peer',kind:'_peer',title:'Peer2Peer',desc:'Il materiale preparato dai ragazzi',icon:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.3c3 0 6 1.6 6 5.2"/>'}
+];
+const tabBy=slug=>TABS.find(t=>t.slug===slug);
+const tabIcon=(t,n)=>'<svg width="'+n+'" height="'+n+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+t.icon+'</svg>';
+
+/* percorso: home, classe, scheda della classe, pagina singola */
+let route={v:'home'};
+function parsePath(p){
+  const a=String(p||'').split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x);}catch(e){return x;}});
+  if(a[0]==='c'&&CL[a[1]]&&!CL[a[1]].deleted){
+    const t=tabBy(a[2]);
+    return {v:'class',c:a[1],tab:t?t.slug:null,item:t&&t.slug!=='argomenti'&&a[3]?a[3]:null};
+  }
+  return {v:'home'};
 }
-function syncChips(){
-  $$('#chips .chip').forEach(b=>b.setAttribute('aria-pressed',filter.has(b.dataset.cls)?'true':'false'));
-  $('#clearF').hidden=filter.size===0;
+const routeKey=r=>r.v==='home'?'':'c/'+r.c+(r.tab?'/'+r.tab+(r.item?'/'+r.item:''):'');
+const hashPath=()=>String(location.hash||'').replace(/^#\/?/,'');
+function navTo(path){
+  route=parsePath(path);
+  try{const h='#/'+routeKey(route);if(location.hash!==h)location.hash=h;}catch(e){}
+  confirmState=null;render();
+  try{window.scrollTo(0,0);}catch(e){}
 }
+const hrefOf=p=>'#/'+p;
+const cPath=(c,tab,item)=>'c/'+encodeURIComponent(c)+(tab?'/'+tab+(item?'/'+encodeURIComponent(item):''):'');
+
+const forClass=(s,c)=>!s.deleted&&s.classes.indexOf(c)>=0;
+const itemsOf=(secs,kind,c)=>secs.filter(s=>s.chapter===kind&&forClass(s,c));
+const plural=(n,one,many)=>n+' '+(n===1?one:many);
+
 function syncUi(){
   const be=$('#btnEdit');
   be.hidden=!canWrite;be.setAttribute('aria-pressed',editOn?'true':'false');be.textContent=editOn?'Fine modifica':'Modifica';
@@ -958,40 +1114,43 @@ function syncUi(){
   const n=$('#editNote');n.hidden=!(editOn&&canWrite);
   n.textContent=mode==='db'?'Modalità modifica attiva. Ogni salvataggio è subito visibile a tutti i colleghi che hanno accesso a questa pagina.':'Modalità modifica attiva. Le modifiche restano solo in questo browser. Per condividerle con i colleghi apri la pagina con il tuo account.';
 }
-function toolsHtml(s,i,n){
+function toolsHtml(s,i,n,single){
   if(!(editOn&&canWrite))return '';
   if(confirmState&&confirmState.id===s.id){
     const del=confirmState.kind==='del';
-    return '<div class="tools-s"><span class="conf">'+(del?'Eliminare questa sezione?':'Tornare al testo originale?')+'</span><button class="tb danger" type="button" data-act="'+(del?'delyes':'restyes')+'">Sì</button><button class="tb" type="button" data-act="no">Annulla</button></div>';
+    return '<div class="tools-s"><span class="conf">'+(del?'Eliminare questa pagina? Se l\'hai creata tu, non si potrà recuperare.':'Tornare al testo originale?')+'</span><button class="tb danger" type="button" data-act="'+(del?'delyes':'restyes')+'">Sì</button><button class="tb" type="button" data-act="no">Annulla</button></div>';
   }
-  return '<div class="tools-s"><button class="tb" type="button" data-act="edit">Modifica</button><button class="tb" type="button" data-act="up" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button class="tb" type="button" data-act="down" aria-label="Sposta giù"'+(i===n-1?' disabled':'')+'>↓</button>'+(s._over&&s._base?'<button class="tb" type="button" data-act="rest">Ripristina originale</button>':'')+'<button class="tb danger" type="button" data-act="del">Elimina</button></div>';
+  return '<div class="tools-s"><button class="tb" type="button" data-act="edit">Modifica</button>'+(single?'':'<button class="tb" type="button" data-act="up" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button class="tb" type="button" data-act="down" aria-label="Sposta giù"'+(i===n-1?' disabled':'')+'>↓</button>')+(s._over&&s._base?'<button class="tb" type="button" data-act="rest">Ripristina originale</button>':'')+'<button class="tb danger" type="button" data-act="del">Elimina</button></div>';
 }
 const SYNTAX=['## Sottotitolo','Testo con **grassetto** e `codice`.','- elenco puntato','1. elenco numerato','> [Fisica] Esempio tratto da un\'altra materia','| Colonna A | Colonna B |','|---|---|','| dato | dato |','?? Domanda con risposta nascosta','!! Risposta alla domanda','','Codice colorato: una riga con ```python (oppure sql, json),','il codice, poi una riga con ```','Risultato o schema senza colori: ```output ... ```'].join('\n');
 function editorHtml(s){
-  const p='ed-'+s.id;
-  const chk=CLASSES.map(c=>'<label class="chip chk" style="--cc:var('+c.v+')"><input type="checkbox" name="cls" value="'+c.id+'" id="'+p+'-c-'+c.id+'"'+(s.classes.indexOf(c.id)>=0?' checked':'')+'>'+sym(c,16)+'<span>'+esc(c.short)+'</span></label>').join('');
+  const p='ed-'+s.id,kind=kindOf(s);
+  const chk=activeClasses().map(c=>'<label class="chip chk" style="--cc:var('+c.v+')"><input type="checkbox" name="cls" value="'+c.id+'" id="'+p+'-c-'+c.id+'"'+(s.classes.indexOf(c.id)>=0?' checked':'')+'>'+sym(c,16)+'<span>'+esc(c.short)+'</span></label>').join('');
   const opts='<option value="">Nessuno</option>'+Object.keys(WIDGETS).map(k=>'<option value="'+k+'"'+(s.widget===k?' selected':'')+'>'+esc(WIDGETS[k].label)+'</option>').join('');
+  const what=kind==='topic'?'della sezione':'della pagina';
   return '<form class="editor" data-id="'+esc(s.id)+'" novalidate>'+
-    '<div class="fld"><label for="'+p+'-t">Titolo della sezione</label><input id="'+p+'-t" name="title" type="text" value="'+esc(s.title)+'" maxlength="140"></div>'+
-    '<fieldset class="fld"><legend>Classi a cui è destinata</legend><div class="chips">'+chk+'</div></fieldset>'+
-    '<div class="fld"><label for="'+p+'-w">Strumento interattivo in fondo alla sezione</label><select id="'+p+'-w" name="widget">'+opts+'</select></div>'+matsEditor(s,p)+
+    '<div class="fld"><label for="'+p+'-t">Titolo '+what+'</label><input id="'+p+'-t" name="title" type="text" value="'+esc(s.title)+'" maxlength="140"></div>'+
+    '<fieldset class="fld"><legend>'+(kind==='topic'?'Classi a cui è destinata':'Classi in cui compare questa pagina')+'</legend><div class="chips">'+chk+'</div></fieldset>'+
+    '<div class="fld"><label for="'+p+'-w">Strumento interattivo in fondo alla pagina</label><select id="'+p+'-w" name="widget">'+opts+'</select></div>'+matsEditor(s,p)+
     '<div class="ed-grid"><div class="fld"><label for="'+p+'-b">Contenuto</label><textarea id="'+p+'-b" name="body" spellcheck="true">'+esc(s.body)+'</textarea></div><div class="fld"><span class="lbl">Anteprima</span><div class="prose preview">'+renderBody(s.body)+'</div></div></div>'+
     '<details class="syntax"><summary>Come si scrive il contenuto</summary><pre>'+esc(SYNTAX)+'</pre></details>'+
     '<p class="ed-err" role="alert" hidden></p>'+
     '<div class="ed-act"><button class="btn primary" type="submit">Salva</button><button class="btn" type="button" data-act="cancel">Annulla</button></div></form>';
 }
-function sectionNode(s,i,n){
+function sectionNode(s,i,n,single){
   const isEd=editing.has(s.id),cached=nodes[s.id];
   if(isEd&&cached&&cached.editing)return cached.el;
   const tools=editOn&&canWrite;
-  const sig=JSON.stringify([s.title,s.body,s.classes,s.widget,s.materials,isEd,tools,confirmState&&confirmState.id===s.id?confirmState.kind:'',!!s._over,!!s._custom,i===0,i===n-1]);
+  const csig=CLASSES.map(c=>c.id+c.color+c.shape+c.short).join(',');
+  const sig=JSON.stringify([s.title,s.body,s.classes,s.widget,s.materials,isEd,tools,confirmState&&confirmState.id===s.id?confirmState.kind:'',!!s._over,!!s._custom,i===0,i===n-1,!!single,csig]);
   if(cached&&cached.sig===sig)return cached.el;
   const el=document.createElement('article');el.className='sec';el.id='sec-'+s.id;
   const band='<div class="band" aria-hidden="true">'+s.classes.map(c=>'<span style="background:var('+CL[c].v+')"></span>').join('')+'</div>';
+  const tags=s.classes.map(c=>tag(CL[c])).join('');
   if(isEd&&tools){
-    el.innerHTML=band+'<div class="sec-in"><div class="sec-h"><div class="sec-t"><div class="tags">'+s.classes.map(c=>tag(CL[c])).join('')+'</div><h3>Modifica sezione</h3></div></div>'+editorHtml(s)+'</div>';
+    el.innerHTML=band+'<div class="sec-in"><div class="sec-h"><div class="sec-t"><div class="tags">'+tags+'</div><h3>'+(kindOf(s)==='topic'?'Modifica sezione':'Modifica pagina')+'</h3></div></div>'+editorHtml(s)+'</div>';
   }else{
-    el.innerHTML=band+'<div class="sec-in"><div class="sec-h"><div class="sec-t"><div class="tags">'+s.classes.map(c=>tag(CL[c])).join('')+'</div><h3>'+esc(s.title)+'</h3></div>'+toolsHtml(s,i,n)+'</div><div class="prose">'+renderBody(s.body)+'</div>'+(s.widget&&WIDGETS[s.widget]?'<section class="wg" aria-label="'+esc(WIDGETS[s.widget].label)+'"></section>':'')+matsHtml(s)+'</div>';
+    el.innerHTML=band+'<div class="sec-in"><div class="sec-h"><div class="sec-t"><div class="tags">'+tags+'</div>'+(single?'<h2 class="sec-h2">':'<h3>')+esc(s.title)+(single?'</h2>':'</h3>')+'</div>'+toolsHtml(s,i,n,single)+'</div><div class="prose">'+renderBody(s.body)+'</div>'+(s.widget&&WIDGETS[s.widget]?'<section class="wg" aria-label="'+esc(WIDGETS[s.widget].label)+'"></section>':'')+matsHtml(s)+'</div>';
     const slot=$('.wg',el);
     if(slot){try{WIDGETS[s.widget].fn(slot);}catch(e){slot.textContent='Lo strumento interattivo non si è caricato.';}}
   }
@@ -1001,56 +1160,292 @@ function sectionNode(s,i,n){
 function renderToc(vs){
   let h='';
   chapters.forEach(ch=>{
+    if(ch.virtual)return;
     const l=vs.filter(s=>s.chapter===ch.id);if(!l.length)return;
     h+='<div class="toc-ch"><a class="toc-cht" href="#chap-'+ch.id+'" data-go="chap-'+ch.id+'"><b>'+esc(ch.num)+'</b>'+esc(ch.title)+'</a><ul>'+l.map(s=>'<li><a href="#sec-'+s.id+'" data-go="sec-'+s.id+'"><span class="mini">'+s.classes.map(c=>sym(CL[c],10)).join('')+'</span><span>'+esc(s.title)+'</span></a></li>').join('')+'</ul></div>';
   });
-  $('#toc').innerHTML=h||'<p class="empty">Nessuna sezione per le classi scelte.</p>';
+  $('#toc').innerHTML=h||'<p class="empty">Nessun argomento per questa classe.</p>';
 }
-function render(){
-  const secs=all(),vs=secs.filter(visible);
-  syncChips();renderToc(vs);
-  $('#count').textContent=vs.length+(vs.length===1?' sezione':' sezioni');
-  const main=$('#main'),frag=document.createDocumentFragment(),used={};
+
+/* ---------- mappa mentale ---------- */
+function mindmap(label,center,nodes,start,rx,ry,cls){
+  const n=nodes.length;let lines='',items='';
+  nodes.forEach((nd,i)=>{
+    const a=(start+i*360/n)*Math.PI/180,x=50+rx*Math.cos(a),y=50+ry*Math.sin(a);
+    lines+='<line x1="50" y1="50" x2="'+x.toFixed(2)+'" y2="'+y.toFixed(2)+'" style="--cc:var('+nd.v+')"/>';
+    items+='<a class="mm-n" href="'+hrefOf(nd.path)+'" data-nav="'+esc(nd.path)+'" style="left:'+x.toFixed(2)+'%;top:'+y.toFixed(2)+'%;--cc:var('+nd.v+')">'+nd.html+'</a>';
+  });
+  return '<nav class="mm '+(cls||'')+'" aria-label="'+esc(label)+'"><svg class="mm-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+lines+'</svg><div class="mm-c">'+center+'</div>'+items+'</nav>';
+}
+function countsFor(secs,c){
+  const r={};TABS.forEach(t=>{r[t.slug]=secs.filter(s=>forClass(s,c)&&(t.kind==='topic'?kindOf(s)==='topic':s.chapter===t.kind)).length;});return r;
+}
+function renderHome(secs){
+  const act=activeClasses();
+  const nodes=act.map(c=>{
+    const k=countsFor(secs,c.id);
+    return {v:c.v,path:cPath(c.id),html:sym(c,34)+'<span class="mm-t"><b>'+esc(c.short)+'</b><small>'+plural(k.argomenti,'argomento','argomenti')+'</small></span>'};
+  });
+  const frag=document.createElement('div');
+  let h='';
+  h+=act.length?mindmap('Le classi',"<b>Informatica</b><span>in classe</span>",nodes,-90,37,36,'mm-home'):'<p class="empty">Non ci sono classi. Attiva «Modifica» per aggiungerne una.</p>';
+  frag.innerHTML=h;
+  if(editOn&&canWrite)frag.appendChild(classManager());
+  $('#main').replaceChildren(frag);
+}
+function renderLanding(secs){
+  const c=CL[route.c],k=countsFor(secs,c.id);
+  const nodes=TABS.map(t=>({v:c.v,path:cPath(c.id,t.slug),html:'<span class="mm-ic">'+tabIcon(t,26)+'</span><span class="mm-t"><b>'+esc(t.title)+'</b><small>'+(t.slug==='argomenti'?plural(k[t.slug],'argomento','argomenti'):plural(k[t.slug],'pagina','pagine'))+'</small></span>'}));
+  const frag=document.createElement('div');
+  frag.innerHTML='<p class="home-lead">'+esc(c.name)+'</p>'+mindmap('Le sezioni di '+c.short,sym(c,44)+'<b>'+esc(c.short)+'</b>',nodes,-135,36,34,'mm-class');
+  $('#main').replaceChildren(frag);
+}
+function tabsBar(secs){
+  const k=countsFor(secs,route.c);
+  return '<nav class="tabs" aria-label="Sezioni della classe">'+TABS.map(t=>'<a class="tab" href="'+hrefOf(cPath(route.c,t.slug))+'" data-nav="'+cPath(route.c,t.slug)+'"'+(route.tab===t.slug?' aria-current="page"':'')+'>'+tabIcon(t,18)+'<span>'+esc(t.title)+'</span><em>'+k[t.slug]+'</em></a>').join('')+'</nav>';
+}
+
+/* ---------- gestione delle classi (modalità modifica, pagina iniziale) ---------- */
+let classEdit=null;
+function classManager(){
+  const box=document.createElement('section');box.className='cm';
+  const rows=CLASSES.map((c,i)=>'<li'+(c.deleted?' class="off"':'')+'><span class="cm-n">'+sym(c,20)+'<span><b>'+esc(c.short)+'</b> <small>'+esc(c.name)+(c.deleted?' (nascosta)':'')+'</small></span></span><span class="cm-b"><button type="button" class="tb" data-cact="edit" data-id="'+esc(c.id)+'">Modifica</button><button type="button" class="tb" data-cact="up" data-id="'+esc(c.id)+'" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button type="button" class="tb" data-cact="down" data-id="'+esc(c.id)+'" aria-label="Sposta giù"'+(i===CLASSES.length-1?' disabled':'')+'>↓</button><button type="button" class="tb'+(c.deleted?'':' danger')+'" data-cact="'+(c.deleted?'show':'hide')+'" data-id="'+esc(c.id)+'">'+(c.deleted?'Mostra':'Nascondi')+'</button></span></li>').join('');
+  box.innerHTML='<h2>Gestisci le classi</h2><p class="hint">Aggiungi una classe, cambia nome, colore e simbolo, riordina la mappa. Nascondere una classe non cancella le sue pagine: tornano visibili se la mostri di nuovo.</p><ul class="cm-list">'+rows+'</ul>'+
+    (classEdit?classForm():'<button type="button" class="btn" data-cact="new">+ Aggiungi una classe</button>');
+  return box;
+}
+function classForm(){
+  const isNew=classEdit==='new',c=isNew?{short:'',name:'',color:'blue',shape:'circle'}:CL[classEdit];
+  const sw=Object.keys(PAL).map(k=>'<label class="sw" title="'+PAL[k]+'"><input type="radio" name="color" value="'+k+'"'+(c.color===k?' checked':'')+'><span style="background:var(--k-'+k+')"></span><i class="vh">'+PAL[k]+'</i></label>').join('');
+  const sh=Object.keys(SHAPES).map(k=>'<label class="shp" title="'+SHAPE_NAMES[k]+'"><input type="radio" name="shape" value="'+k+'"'+(c.shape===k?' checked':'')+'>'+symRaw(k,26,'currentColor')+'<i class="vh">'+SHAPE_NAMES[k]+'</i></label>').join('');
+  return '<form class="cm-form" novalidate><h3>'+(isNew?'Nuova classe':'Modifica classe')+'</h3>'+
+    '<div class="fld"><label for="cf-s">Nome breve (compare sulla mappa)</label><input id="cf-s" name="short" type="text" maxlength="24" value="'+esc(c.short)+'" placeholder="5ª Liceo SA"></div>'+
+    '<div class="fld"><label for="cf-n">Nome completo</label><input id="cf-n" name="name" type="text" maxlength="90" value="'+esc(c.name)+'" placeholder="Quinto anno · Liceo scienze applicate"></div>'+
+    '<fieldset class="fld"><legend>Colore</legend><div class="sws">'+sw+'</div></fieldset>'+
+    '<fieldset class="fld"><legend>Simbolo</legend><div class="shps">'+sh+'</div></fieldset>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button type="submit" class="btn primary">Salva</button><button type="button" class="btn" data-cact="cancel">Annulla</button></div></form>';
+}
+function makeClassId(short){
+  let b=String(short).normalize('NFD').replace(/[^A-Za-z0-9]/g,'').toUpperCase().slice(0,5)||'C',id=b,k=1;
+  while(CL[id]){k++;id=b.slice(0,4)+k;}
+  return id;
+}
+async function saveClassForm(form){
+  const err=$('.ed-err',form),short=form.elements.short.value.trim(),name=form.elements.name.value.trim()||short;
+  const colorEl=form.querySelector('[name=color]:checked'),shapeEl=form.querySelector('[name=shape]:checked');
+  if(!short){err.textContent='Scrivi il nome breve della classe.';err.hidden=false;return;}
+  if(!colorEl||!shapeEl){err.textContent='Scegli un colore e un simbolo.';err.hidden=false;return;}
+  const id=classEdit==='new'?makeClassId(short):classEdit;
+  if(CLASSES.some(c=>c.id!==id&&!c.deleted&&c.color===colorEl.value&&c.shape===shapeEl.value)){err.textContent='Un\'altra classe ha già questo colore con questo simbolo: cambia uno dei due.';err.hidden=false;return;}
+  const prev=CL[id];
+  const data={short:short,name:name,color:colorEl.value,shape:shapeEl.value,order:prev?prev.order:CLASSES.reduce((m,c)=>Math.max(m,c.order===9999?0:c.order),0)+10,deleted:prev?!!prev.deleted:false};
+  try{await putClass(id,data);classEdit=null;render();toast('Classe salvata.');}catch(e){writeError(e);}
+}
+async function classAct(a,id){
+  try{
+    if(a==='new'){classEdit='new';render();const f=$('#cf-s');if(f)f.focus();}
+    else if(a==='edit'){classEdit=id;render();const f=$('#cf-s');if(f)f.focus();}
+    else if(a==='cancel'){classEdit=null;render();}
+    else if(a==='hide'||a==='show'){const c=CL[id];await putClass(id,{short:c.short,name:c.name,color:c.color,shape:c.shape,order:c.order,deleted:a==='hide'});render();}
+    else if(a==='up'||a==='down'){
+      const i=CLASSES.findIndex(c=>c.id===id),j=i+(a==='up'?-1:1);if(j<0||j>=CLASSES.length)return;
+      const A=CLASSES[i],B=CLASSES[j];let oa=A.order,ob=B.order;if(oa===ob){ob=oa+(a==='up'?-1:1);}
+      const dat=c=>({short:c.short,name:c.name,color:c.color,shape:c.shape,deleted:c.deleted});
+      await putClass(A.id,Object.assign(dat(A),{order:ob}));await putClass(B.id,Object.assign(dat(B),{order:oa}));render();
+    }
+  }catch(e){writeError(e);}
+}
+
+/* ---------- modelli delle pagine ---------- */
+const TEMPLATES={
+  _project:{title:'Titolo del progetto',body:[
+    '> [Scheda del progetto] Compila le voci, sostituisci i testi tra parentesi e cancella le parti che non servono.',
+    '','| Voce | Dettaglio |','|---|---|','| Classe | {{classe}} |','| Anno scolastico | 2026/27 |','| Gruppo di lavoro | Cognome Nome, Cognome Nome |','| Docente | Nome Cognome |','| Durata | 8 ore |','| Discipline coinvolte | Informatica, (altre materie) |',
+    '','## Obiettivo','(Quale problema risolve il progetto? Scrivi due o tre righe.)',
+    '','## Competenze e conoscenze','- (che cosa hanno imparato i ragazzi)','- (che cosa hanno saputo fare)',
+    '','## Strumenti e materiali','- Python 3','- (sensori, dataset, altri programmi)',
+    '','## Fasi di lavoro','1. Analisi del problema','2. Progettazione (diagramma di flusso o schema)','3. Realizzazione del programma','4. Collaudo e correzione degli errori','5. Presentazione alla classe',
+    '','## Il programma','Descrivi come funziona e incolla le parti più importanti del codice.','','```python','# incolla qui il codice','```',
+    '','## Risultati','```output','(incolla qui un esempio di risultato)','```',
+    '','## Che cosa abbiamo imparato','(difficoltà incontrate, errori frequenti, idee per migliorare)',
+    '','## Valutazione','| Criterio | Peso |','|---|---|','| Il programma funziona | 40% |','| Qualità del codice e dei commenti | 20% |','| Documentazione | 20% |','| Presentazione | 20% |',
+    '','## Allegati','Slides, relazione, file di dati e codice si aggiungono con il blocco «Slides e allegati della lezione», in alto nella finestra di modifica.'
+  ].join('\n')},
+  _material:{title:'Titolo del materiale',body:[
+    '> [Materiale del docente] (A che cosa serve questo materiale e quando conviene usarlo.)',
+    '','## Di che cosa si tratta','(Descrivi il contenuto in poche righe.)',
+    '','## Come usarlo','1. (primo passo)','2. (secondo passo)',
+    '','## Per approfondire','- (libro, sito, video)',
+    '','## Allegati','Slides, dispense e link si aggiungono con il blocco «Slides e allegati della lezione», in alto nella finestra di modifica.'
+  ].join('\n')},
+  _peer:{title:'Titolo del lavoro',body:[
+    '> [Peer2Peer] Questa pagina è stata preparata dai ragazzi per spiegare un argomento ai compagni.',
+    '','| Voce | Dettaglio |','|---|---|','| Realizzato da | Cognome Nome, Cognome Nome |','| Classe | {{classe}} |','| Argomento trattato | (titolo dell\'argomento) |','| Docente referente | Nome Cognome |',
+    '','## Di che cosa parla','(Spiega l\'argomento con parole tue, in poche righe.)',
+    '','## Spiegazione','(Passaggi, schemi, esempi.)',
+    '','## Un esempio svolto','```python','# esempio di codice','```',
+    '','## Domande per i compagni','?? (Scrivi una domanda)','!! (Scrivi la risposta)',
+    '','## Fonti','- (da dove avete preso le informazioni)'
+  ].join('\n')}
+};
+const tplBody=(kind,c)=>TEMPLATES[kind].body.replace(/\{\{classe\}\}/g,c?c.short:'');
+
+/* ---------- pagine di Progetti / Materiale / Peer2Peer ---------- */
+function excerpt(body){
+  const L=String(body||'').split('\n');let i=0;
+  for(;i<L.length;i++){const l=L[i].trim();if(!l||/^(```|## |\||>|- |\d+\. |\?\? |!! )/.test(l))continue;
+    return l.replace(/\*\*|`/g,'').slice(0,150);}
+  return '';
+}
+function renderList(secs,t){
+  const kind=t.kind,c=CL[route.c],K=KINDS[kind];
+  const list=itemsOf(secs,kind,c.id);
+  const frag=document.createElement('div');
+  let h=tabsBar(secs)+'<header class="pg-h"><h2>'+esc(t.title)+'</h2><p>'+esc(t.desc)+' · '+esc(c.short)+'</p></header>';
+  frag.innerHTML=h;
+  if(editOn&&canWrite){const b=document.createElement('button');b.type='button';b.className='btn add0';b.dataset.act='additem';b.dataset.kind=kind;b.textContent=K.newLabel;frag.appendChild(b);}
+  if(list.length){
+    const ul=document.createElement('ul');ul.className='cards';
+    ul.innerHTML=list.map(s=>{
+      const path=cPath(c.id,t.slug,s.id),ex=excerpt(s.body);
+      return '<li><a class="card" href="'+hrefOf(path)+'" data-nav="'+esc(path)+'" style="--cc:var('+c.v+')"><span class="card-tags">'+s.classes.map(x=>sym(CL[x],12)).join('')+'</span><b>'+esc(s.title)+'</b>'+(ex?'<span class="card-ex">'+esc(ex)+'</span>':'')+(s.materials.length?'<small>'+plural(s.materials.length,'allegato','allegati')+'</small>':'')+'</a></li>';
+    }).join('');
+    frag.appendChild(ul);
+  }else{
+    const e=document.createElement('div');e.className='emptybox';
+    e.innerHTML='<p><b>Qui non c\'è ancora nessuna pagina.</b></p><p>'+(editOn&&canWrite?'Premi il pulsante qui sopra per crearne una a partire dal modello.':'Il docente può aggiungerne con il pulsante «Modifica» in alto.')+'</p><details class="tplprev"><summary>Come sarà una pagina nuova (modello)</summary><div class="prose">'+renderBody(tplBody(kind,c))+'</div></details>';
+    frag.appendChild(e);
+  }
+  const hidden=secs.filter(s=>s.deleted&&s.chapter===kind&&s.classes.indexOf(c.id)>=0);
+  if(editOn&&canWrite&&hidden.length)frag.appendChild(hiddenPanel(hidden));
+  $('#main').replaceChildren(frag);
+}
+function renderItem(secs,t){
+  const c=CL[route.c];
+  const s=secs.find(x=>x.id===route.item&&x.chapter===t.kind&&!x.deleted);
+  const frag=document.createElement('div');
+  frag.innerHTML=tabsBar(secs);
+  if(!s){
+    const p=document.createElement('div');p.className='emptybox';
+    p.innerHTML='<p><b>Questa pagina non esiste più.</b></p><p><a href="'+hrefOf(cPath(c.id,t.slug))+'" data-nav="'+cPath(c.id,t.slug)+'">Torna all\'elenco: '+esc(t.title)+'</a></p>';
+    frag.appendChild(p);
+  }else{
+    const back=document.createElement('p');back.className='backl';
+    back.innerHTML='<a href="'+hrefOf(cPath(c.id,t.slug))+'" data-nav="'+cPath(c.id,t.slug)+'">← '+esc(t.title)+' · '+esc(c.short)+'</a>';
+    frag.appendChild(back);frag.appendChild(sectionNode(s,0,1,true));
+  }
+  $('#main').replaceChildren(frag);
+  Object.keys(nodes).forEach(k=>{if(!s||k!==s.id)delete nodes[k];});
+}
+function hiddenPanel(hidden){
+  const d=document.createElement('details');d.className='hid';
+  d.innerHTML='<summary>Pagine eliminate ('+hidden.length+')</summary><ul>'+hidden.map(s=>'<li data-id="'+esc(s.id)+'"><span>'+esc(s.title)+'</span><button class="tb" type="button" data-act="undel" data-id="'+esc(s.id)+'">Ripristina</button></li>').join('')+'</ul>';
+  return d;
+}
+
+/* ---------- argomenti della classe ---------- */
+let linkOpen=false;
+function linkPanel(secs){
+  const c=CL[route.c],topics=secs.filter(s=>kindOf(s)==='topic'&&!s.deleted);
+  const others=activeClasses().filter(x=>x.id!==c.id);
+  const d=document.createElement('details');d.className='linkp';d.open=linkOpen;
+  let h='<summary>Collega gli argomenti a questa classe</summary><div class="linkp-in"><p class="hint">Spunta gli argomenti che svolge '+esc(c.short)+'. Lo stesso argomento può appartenere a più classi.</p>';
+  if(others.length)h+='<div class="wg-row"><label for="lk-from">Collega in blocco gli argomenti di</label><select id="lk-from">'+others.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.short)+'</option>').join('')+'</select><button type="button" class="tb" data-act="linkall">Collega tutti</button></div>';
   chapters.forEach(ch=>{
+    if(ch.virtual)return;
+    const l=topics.filter(s=>s.chapter===ch.id);if(!l.length)return;
+    h+='<h4>'+esc(ch.num+'. '+ch.title)+'</h4><ul class="lk-list">'+l.map(s=>'<li><label class="lk"><input type="checkbox" data-link="'+esc(s.id)+'"'+(s.classes.indexOf(c.id)>=0?' checked':'')+'><span>'+esc(s.title)+'</span><span class="mini">'+s.classes.filter(x=>x!==c.id).map(x=>sym(CL[x],10)).join('')+'</span></label></li>').join('')+'</ul>';
+  });
+  d.innerHTML=h+'</div>';
+  d.addEventListener('toggle',()=>{linkOpen=d.open;});
+  return d;
+}
+function renderTopics(secs){
+  const cid=route.c,vs=secs.filter(s=>forClass(s,cid)&&kindOf(s)==='topic');
+  renderToc(vs);
+  const frag=document.createDocumentFragment(),used={};
+  const top=document.createElement('div');top.innerHTML=tabsBar(secs);frag.appendChild(top);
+  if(editOn&&canWrite)frag.appendChild(linkPanel(secs));
+  chapters.forEach(ch=>{
+    if(ch.virtual)return;
     const list=vs.filter(s=>s.chapter===ch.id);
     if(!list.length&&!editOn)return;
     const sec=document.createElement('section');sec.className='chap';sec.id='chap-'+ch.id;
-    const cs=CLASSES.filter(c=>secs.some(s=>s.chapter===ch.id&&!s.deleted&&s.classes.indexOf(c.id)>=0));
+    const cs=activeClasses().filter(c=>secs.some(s=>s.chapter===ch.id&&!s.deleted&&s.classes.indexOf(c.id)>=0));
     sec.innerHTML='<header class="chap-h"><span class="num" aria-hidden="true">'+esc(ch.num)+'</span><div><h2>'+esc(ch.title)+'</h2><p>'+esc(ch.desc)+'</p><div class="tags">'+cs.map(tag).join('')+'</div></div></header><div class="secs"></div>';
     const holder=$('.secs',sec);
     list.forEach((s,i)=>{used[s.id]=1;holder.appendChild(sectionNode(s,i,list.length));});
-    if(!list.length)holder.innerHTML='<p class="empty">Nessuna sezione di questo capitolo per le classi scelte.</p>';
+    if(!list.length)holder.innerHTML='<p class="empty">Nessuna sezione di questo capitolo per questa classe.</p>';
     if(editOn&&canWrite){const b=document.createElement('button');b.type='button';b.className='btn add';b.dataset.act='add';b.dataset.chapter=ch.id;b.textContent='+ Aggiungi una sezione a questo capitolo';sec.appendChild(b);}
     frag.appendChild(sec);
   });
-  if(!frag.childNodes.length){const p=document.createElement('p');p.className='empty';p.textContent='Nessuna sezione corrisponde alle classi scelte.';frag.appendChild(p);}
-  const hidden=secs.filter(s=>s.deleted);
-  if(editOn&&canWrite&&hidden.length){
-    const d=document.createElement('details');d.className='hid';
-    d.innerHTML='<summary>Sezioni eliminate ('+hidden.length+')</summary><ul>'+hidden.map(s=>'<li data-id="'+esc(s.id)+'"><span>'+esc(s.title)+'</span><button class="tb" type="button" data-act="undel" data-id="'+esc(s.id)+'">Ripristina</button></li>').join('')+'</ul>';
-    frag.appendChild(d);
-  }
-  main.replaceChildren(frag);
+  if(!vs.length&&!editOn){const p=document.createElement('div');p.className='emptybox';p.innerHTML='<p><b>Per questa classe non ci sono ancora argomenti.</b></p><p>Il docente può collegarli con il pulsante «Modifica» in alto.</p>';frag.appendChild(p);}
+  const hidden=secs.filter(s=>s.deleted&&kindOf(s)==='topic'&&s.classes.indexOf(cid)>=0);
+  if(editOn&&canWrite&&hidden.length)frag.appendChild(hiddenPanel(hidden));
+  $('#main').replaceChildren(frag);
   Object.keys(nodes).forEach(k=>{if(!used[k])delete nodes[k];});
+}
+
+/* ---------- pagina ---------- */
+function syncCrumbs(){
+  const nav=$('#crumbs'),mast=$('.mast');
+  mast.classList.toggle('compact',route.v!=='home');
+  $('.lead').hidden=route.v!=='home';
+  if(route.v==='home'){nav.hidden=true;nav.innerHTML='';return;}
+  const c=CL[route.c],t=route.tab?tabBy(route.tab):null;
+  let h='<a href="#/" data-nav="">Tutte le classi</a>';
+  h+=' <span aria-hidden="true">›</span> '+(t?'<a href="'+hrefOf(cPath(c.id))+'" data-nav="'+cPath(c.id)+'">'+esc(c.short)+'</a>':'<span aria-current="page">'+esc(c.short)+'</span>');
+  if(t)h+=' <span aria-hidden="true">›</span> '+(route.item?'<a href="'+hrefOf(cPath(c.id,t.slug))+'" data-nav="'+cPath(c.id,t.slug)+'">'+esc(t.title)+'</a>':'<span aria-current="page">'+esc(t.title)+'</span>');
+  nav.innerHTML='<span class="cr-sym">'+sym(c,16)+'</span>'+h;nav.hidden=false;
+}
+function render(){
+  const secs=all();
+  syncCrumbs();
+  const topics=route.v==='class'&&route.tab==='argomenti';
+  $('#tocBox').hidden=!topics;
+  $('.layout').classList.toggle('solo',!topics);
+  document.title=route.v==='home'?'Informatica in Classe':CL[route.c].short+' · Informatica in Classe';
+  if(route.v==='home')renderHome(secs);
+  else if(!route.tab)renderLanding(secs);
+  else if(route.tab==='argomenti')renderTopics(secs);
+  else if(route.item)renderItem(secs,tabBy(route.tab));
+  else renderList(secs,tabBy(route.tab));
 }
 
 /* ---------- azioni ---------- */
 async function move(id,dir){
-  const vs=all().filter(visible),me=vs.find(s=>s.id===id);if(!me)return;
+  const vs=all().filter(s=>forClass(s,route.c)&&kindOf(s)==='topic'),me=vs.find(s=>s.id===id);if(!me)return;
   const same=vs.filter(s=>s.chapter===me.chapter),i=same.findIndex(s=>s.id===id),nb=same[i+dir];if(!nb)return;
   if(me.order===nb.order){await put(me.id,Object.assign(fields(me),{order:nb.order+(dir<0?-1:1)}));}
   else{const a=me.order,b=nb.order;await put(me.id,Object.assign(fields(me),{order:b}));await put(nb.id,Object.assign(fields(nb),{order:a}));}
   render();
 }
+const newId=()=>'x'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const nextOrder=chId=>all().filter(s=>s.chapter===chId).reduce((m,s)=>Math.max(m,s.order===9999?0:s.order),0)+10;
 async function addSection(chId){
-  const secs=all().filter(s=>s.chapter===chId);
-  const order=secs.reduce((m,s)=>Math.max(m,s.order===9999?0:s.order),0)+10;
-  const id='x'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-  const classes=filter.size?Array.from(filter):[CLASSES[0].id];
-  await put(id,{chapter:chId,order:order,title:'Nuova sezione',body:'## Sottotitolo\nScrivi qui il contenuto.',classes:classes,widget:'',deleted:false,custom:true});
+  const id=newId();
+  await put(id,{chapter:chId,order:nextOrder(chId),title:'Nuova sezione',body:'## Sottotitolo\nScrivi qui il contenuto.',classes:[route.c],widget:'',deleted:false,custom:true});
   newIds.add(id);editing.add(id);render();
   const f=$('#sec-'+id+' input[name=title]');if(f){f.focus();f.select();}
   const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({block:'start'});
+}
+async function addItem(kind){
+  const id=newId(),c=CL[route.c],T=TEMPLATES[kind];
+  await put(id,{chapter:kind,order:nextOrder(kind),title:T.title,body:tplBody(kind,c),classes:[c.id],widget:'',materials:[],deleted:false,custom:true});
+  newIds.add(id);editing.add(id);
+  navTo(cPath(c.id,KINDS[kind].slug,id));
+  const f=$('#sec-'+id+' input[name=title]');if(f){f.focus();f.select();}
+}
+async function toggleLink(id,on){
+  const s=all().find(x=>x.id===id);if(!s)return;
+  const cl=s.classes.filter(c=>c!==route.c);if(on)cl.push(route.c);
+  await put(id,Object.assign(fields(s),{classes:cl}));
+  render();const el=document.querySelector('[data-link="'+id+'"]');if(el)el.focus();
+}
+async function linkAll(from){
+  const secs=all().filter(s=>kindOf(s)==='topic'&&!s.deleted&&s.classes.indexOf(from)>=0&&s.classes.indexOf(route.c)<0);
+  for(const s of secs)await put(s.id,Object.assign(fields(s),{classes:s.classes.concat([route.c])}));
+  render();toast(secs.length?('Collegati '+plural(secs.length,'argomento','argomenti')+'.'):'Erano già tutti collegati.');
 }
 async function saveEditor(form){
   const id=form.dataset.id,s=all().find(x=>x.id===id);if(!s)return;
@@ -1066,12 +1461,16 @@ async function saveEditor(form){
   });
   if(badUrl){err.textContent='Un indirizzo non è valido: deve iniziare con https:// oppure con allegati/.';err.hidden=false;return;}
   const data=Object.assign(fields(s),{title:title,classes:classes,body:form.elements.body.value.replace(/\s+$/,''),widget:form.elements.widget.value,materials:mats,deleted:false});
-  try{await put(id,data);newIds.delete(id);editing.delete(id);render();toast('Sezione salvata.');}catch(e){writeError(e);}
+  try{await put(id,data);newIds.delete(id);editing.delete(id);
+    if(route.v==='class'&&route.item===id&&classes.indexOf(route.c)<0){navTo(cPath(route.c,route.tab));toast('Pagina salvata. Non è più collegata a questa classe.');}
+    else{render();toast('Pagina salvata.');}
+  }catch(e){writeError(e);}
 }
+function backToList(){if(route.v==='class'&&route.item)navTo(cPath(route.c,route.tab));else render();}
 async function act(a,id,btn){
   try{
     if(a==='edit'){editing.add(id);confirmState=null;render();const f=$('#sec-'+id+' input[name=title]');if(f)f.focus();}
-    else if(a==='cancel'){editing.delete(id);if(newIds.has(id)){newIds.delete(id);await del(id);}render();}
+    else if(a==='cancel'){editing.delete(id);if(newIds.has(id)){newIds.delete(id);await del(id);backToList();}else render();}
     else if(a==='up')await move(id,-1);
     else if(a==='down')await move(id,1);
     else if(a==='del'){confirmState={id:id,kind:'del'};render();}
@@ -1079,35 +1478,41 @@ async function act(a,id,btn){
     else if(a==='no'){confirmState=null;render();}
     else if(a==='delyes'){
       confirmState=null;const s=all().find(x=>x.id===id);
-      if(s){if(s._custom)await del(id);else await put(id,Object.assign(fields(s),{deleted:true}));}
-      render();toast('Sezione eliminata. In fondo alla pagina puoi ripristinarla.');
+      const gone=!!(s&&s._custom);
+      if(s){if(gone)await del(id);else await put(id,Object.assign(fields(s),{deleted:true}));}
+      backToList();toast(gone?'Pagina eliminata.':'Pagina eliminata. In fondo all\'elenco puoi ripristinarla.');
     }
     else if(a==='restyes'){confirmState=null;await del(id);render();toast('Testo originale ripristinato.');}
     else if(a==='undel'){const rid=btn.dataset.id,s=all().find(x=>x.id===rid);if(s){await put(rid,Object.assign(fields(s),{deleted:false}));render();}}
     else if(a==='add')await addSection(btn.dataset.chapter);
+    else if(a==='additem')await addItem(btn.dataset.kind);
+    else if(a==='linkall'){const f=$('#lk-from');if(f)await linkAll(f.value);}
   }catch(e){writeError(e);}
 }
 
 function exportMd(){
-  const vs=all().filter(visible);
+  const cid=route.v==='class'?route.c:null;
+  const vs=all().filter(s=>!s.deleted&&s.classes.length&&(!cid||s.classes.indexOf(cid)>=0));
   let out='# Informatica in Classe\n\n';
-  if(filter.size)out+='Classi: '+CLASSES.filter(c=>filter.has(c.id)).map(c=>c.name).join('; ')+'\n\n';
+  if(cid)out+='Classe: '+CL[cid].name+'\n\n';
   chapters.forEach(ch=>{
     const l=vs.filter(s=>s.chapter===ch.id);if(!l.length)return;
-    out+='## '+ch.num+'. '+ch.title+'\n\n';
+    out+='## '+(ch.virtual?ch.title:ch.num+'. '+ch.title)+'\n\n';
     l.forEach(s=>{
       const body=s.body.replace(/^## /gm,'#### ').replace(/^\?\? /gm,'**Domanda:** ').replace(/^!! /gm,'**Risposta:** ');
       out+='### '+s.title+'\n\n_Classi: '+s.classes.map(c=>CL[c].name).join('; ')+'_\n\n'+body+'\n\n'+(s.materials.length?'**Materiali della lezione**\n'+s.materials.map(m=>'- '+(m.title||MKINDS[m.kind].label)+': '+m.url).join('\n')+'\n\n':'');
     });
   });
-  saveFile('informatica-in-classe.md',out);
+  saveFile(cid?'informatica-'+cid.toLowerCase()+'.md':'informatica-in-classe.md',out);
 }
 function exportSrc(){
   const secs=all().filter(s=>!s.deleted&&s.classes.length);
-  let out='';
+  let out=CLASSES.map(c=>'@@class '+c.id+' | '+c.short.replace(/\|/g,'/')+' | '+c.name.replace(/\|/g,'/')+' | '+c.color+' | '+c.shape+(c.deleted?' | hidden':'')).join('\n')+'\n\n';
   chapters.forEach(ch=>{
+    const l=secs.filter(s=>s.chapter===ch.id);
+    if(ch.virtual&&!l.length)return;
     out+='@@chapter '+ch.id+' | '+ch.num+' | '+ch.title+' | '+ch.desc+'\n\n';
-    secs.filter(s=>s.chapter===ch.id).forEach(s=>{
+    l.forEach(s=>{
       out+='@@section '+s.id+' | '+s.classes.join(' ')+' | '+(s.widget||'-')+' | '+s.title.replace(/\|/g,'/')+'\n'+s.materials.map(m=>'@@material '+m.kind+' | '+m.title.replace(/\|/g,'/')+' | '+m.url+'\n').join('')+s.body+'\n\n';
     });
   });
@@ -1128,17 +1533,20 @@ function saveFile(name,text){
 
 /* ---------- eventi ---------- */
 function bind(){
-  $('#chips').addEventListener('click',e=>{
-    const b=e.target.closest('.chip');if(!b)return;const id=b.dataset.cls;
-    if(filter.has(id))filter.delete(id);else filter.add(id);
-    lsSet(LS_FILTER,Array.from(filter));render();
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('[data-nav]');
+    if(a&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&e.button===0){e.preventDefault();navTo(a.dataset.nav);}
   });
-  $('#clearF').addEventListener('click',()=>{filter.clear();lsSet(LS_FILTER,[]);render();});
+  window.addEventListener('hashchange',()=>{
+    const r=parsePath(hashPath());
+    if(routeKey(r)!==routeKey(route)){route=r;confirmState=null;render();try{window.scrollTo(0,0);}catch(e){}}
+  });
   $('#btnEdit').addEventListener('click',async()=>{
     editOn=!editOn;
     if(!editOn){
-      const drop=Array.from(newIds);editing.clear();newIds.clear();confirmState=null;
+      const drop=Array.from(newIds);editing.clear();newIds.clear();confirmState=null;classEdit=null;
       for(const id of drop){try{await del(id);}catch(e){}}
+      if(route.v==='class'&&route.item&&!all().some(s=>s.id===route.item&&!s.deleted)){navTo(cPath(route.c,route.tab));syncUi();return;}
     }
     syncUi();render();
   });
@@ -1146,6 +1554,8 @@ function bind(){
   $('#btnSrc').addEventListener('click',exportSrc);
   const main=$('#main');
   main.addEventListener('click',e=>{
+    const ca=e.target.closest('[data-cact]');
+    if(ca){classAct(ca.dataset.cact,ca.dataset.id);return;}
     const b=e.target.closest('[data-act]');if(!b)return;
     if(b.dataset.act==='addmat'){
       const box=$('.mats',b.closest('form'));
@@ -1156,7 +1566,13 @@ function bind(){
     if(b.dataset.act==='delmat'){b.closest('.matrow').remove();return;}
     const art=b.closest('article');act(b.dataset.act,art?art.id.slice(4):b.dataset.id,b);
   });
-  main.addEventListener('submit',e=>{const f=e.target.closest('form.editor');if(!f)return;e.preventDefault();saveEditor(f);});
+  main.addEventListener('submit',e=>{
+    const cf=e.target.closest('form.cm-form');if(cf){e.preventDefault();saveClassForm(cf);return;}
+    const f=e.target.closest('form.editor');if(!f)return;e.preventDefault();saveEditor(f);
+  });
+  main.addEventListener('change',e=>{
+    const l=e.target.closest('[data-link]');if(l)toggleLink(l.dataset.link,l.checked).catch(writeError);
+  });
   main.addEventListener('input',e=>{
     const f=e.target.closest('form.editor');
     if(f&&e.target.name==='body')$('.preview',f).innerHTML=renderBody(e.target.value);
@@ -1182,13 +1598,21 @@ async function initStore(){
   if(dbh){
     mode='db';
     dbh.collection('sections').onSnapshot(snap=>{
-      const o={};snap.docs.forEach(d=>{const x=d.data();if(x)o[d.id]=Object.assign({},x);});
-      overrides=o;render();
+      const o={},co={};
+      snap.docs.forEach(d=>{const x=d.data();if(!x)return;if(d.id.indexOf('cls-')===0){const y=Object.assign({},x);delete y._class;co[d.id.slice(4)]=y;}else o[d.id]=Object.assign({},x);});
+      overrides=o;classOv=co;rebuildClasses();
+      if(route.v==='home'){const r=parsePath(hashPath());if(r.v==='class')route=r;}
+      else if(!CL[route.c]||CL[route.c].deleted)route={v:'home'};
+      render();
     },err=>{if(err&&err.code==='revoked'){canWrite=false;editOn=false;syncUi();render();}else toast('Il collegamento con il salvataggio condiviso si è interrotto.');});
-  }else{mode='local';overrides=lsGet(LS_OV,{})||{};}
+  }else{
+    mode='local';overrides=lsGet(LS_OV,{})||{};classOv=lsGet(LS_CL,{})||{};rebuildClasses();
+    const r=parsePath(hashPath());if(routeKey(r)!==routeKey(route))route=r;
+  }
   syncUi();render();
 }
-buildChips();bind();syncChips();render();
+route=parsePath(hashPath());
+bind();render();
 initStore();
 })();
 </script>
