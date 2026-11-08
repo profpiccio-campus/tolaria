@@ -7,8 +7,9 @@ import shutil
 root = pathlib.Path(__file__).parent
 tpl = (root / "src" / "template.html").read_text(encoding="utf-8")
 content = (root / "src" / "content.txt").read_text(encoding="utf-8").strip()
+auth = (root / "src" / "auth.json").read_text(encoding="utf-8").strip()
 pyrun = (root / "src" / "pyrun.js").read_text(encoding="utf-8")
-body = tpl.replace("__CONTENT__", content).replace("__PYRUN__", pyrun)
+body = tpl.replace("__CONTENT__", content).replace("__AUTH__", auth).replace("__PYRUN__", pyrun)
 
 m = re.search(r"<title>(.*?)</title>", body)
 title = m.group(1) if m else "Informatica in Classe"

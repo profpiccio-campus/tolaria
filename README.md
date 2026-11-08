@@ -117,3 +117,11 @@ Dal file: nell'intestazione di ogni `@@section` il secondo campo contiene le sig
 Apri la classe, scegli la scheda, attiva «Modifica» e premi «+ Nuovo progetto»: la pagina nasce dal modello. Nell'editor si cambiano il titolo, le classi
 in cui compare, lo strumento Python (utile per far provare il programma) e si aggiungono slides o allegati.
 I modelli sono anche nella cartella `modelli/`, per chi preferisce lavorare sul file.
+
+## Area docente e pannello di controllo
+
+- Dalla pagina iniziale il pulsante «Area docente» porta all'accesso. Dopo l'accesso compaiono «Pannello di controllo» e «Modifica»; per gli altri visitatori non c'è nessun pulsante di modifica.
+- Il pannello permette di creare argomenti e capitoli, associare argomenti alle classi (tabella con spunte), creare indirizzi e classi, creare progetti, materiali e lavori Peer2Peer, esportare il testo e cambiare la password.
+- Utente e password sono in `src/auth.json` (solo un'impronta, non la password). Per cambiarle: `python3 strumenti/nuova_password.py`, poi `python3 build.py` e carica su GitHub.
+- Attenzione: il controllo è nel browser, non è una vera sicurezza. Sul sito Netlify le modifiche restano nel browser del docente: dal pannello, «Esporta sorgente per GitHub» scarica `content.txt` da sostituire in `src/` e poi caricare su GitHub.
+- Gli indirizzi di studio e il loro ordine si definiscono nelle righe `@@track` di `content.txt` (ogni `@@class` ha come sesto campo l'indirizzo).

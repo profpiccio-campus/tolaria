@@ -352,6 +352,68 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
 .gy-sw{display:inline-block;width:34px;height:22px;border:1.5px solid var(--ink-2);border-radius:3px;vertical-align:middle}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:50;max-width:calc(100vw - 32px);padding:10px 18px;background:var(--ink-btn);color:var(--on-ink);font-weight:600;border-radius:6px}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* albero: indirizzi di studio e classi */
+.tree{display:flex;align-items:center;margin:18px 0 6px}
+.tr-root{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:150px;aspect-ratio:1;border-radius:50%;background:var(--ink-btn);color:var(--on-ink);font:700 19px/1.15 var(--font-display);padding:12px}
+.tr-root span{font-weight:500;font-size:.8em}
+.tr-tracks,.tr-cls{list-style:none;margin:0;padding:0;position:relative}
+.tr-tracks{padding-left:34px}
+.tr-tracks::before{content:"";position:absolute;left:0;top:50%;width:34px;border-top:3px solid var(--rule)}
+.tr-track{position:relative;display:flex;align-items:center;padding:9px 0 9px 34px}
+.tr-track::before{content:"";position:absolute;left:0;top:0;bottom:0;border-left:3px solid var(--rule)}
+.tr-track:first-child::before{top:50%}.tr-track:last-child::before{bottom:50%}.tr-track:only-child::before{display:none}
+.tr-track::after{content:"";position:absolute;left:0;top:50%;width:34px;border-top:3px solid var(--rule)}
+.tr-t{flex:none;width:200px;padding:12px 14px;border:2.5px solid var(--ink);background:var(--surface);border-radius:10px;font:700 17px/1.2 var(--font-display)}
+.tr-t small{display:block;margin-top:3px;font:600 13px var(--font-body);color:var(--ink-2)}
+.tr-cls{padding-left:34px}
+.tr-cls::before{content:"";position:absolute;left:0;top:50%;width:34px;border-top:3px solid var(--rule)}
+.tr-cl{position:relative;padding:5px 0 5px 34px}
+.tr-cl::before{content:"";position:absolute;left:0;top:0;bottom:0;border-left:3px solid var(--rule)}
+.tr-cl:first-child::before{top:50%}.tr-cl:last-child::before{bottom:50%}.tr-cl:only-child::before{display:none}
+.tr-cl::after{content:"";position:absolute;left:0;top:50%;width:34px;border-top:3px solid var(--cc);opacity:.7}
+.tr-c{display:flex;gap:11px;align-items:center;min-width:210px;padding:10px 14px;background:var(--surface);color:var(--ink);text-decoration:none;border:2.5px solid var(--cc);border-radius:10px}
+.tr-c:hover{background:color-mix(in srgb,var(--cc) 12%,var(--surface))}
+.tr-c b{display:block;font:700 16px/1.2 var(--font-display)}
+.tr-c small{display:block;font:600 13px var(--font-body);color:var(--ink-2)}
+@media (max-width:719px){
+  .tree{display:block}
+  .tr-root{width:auto;aspect-ratio:auto;flex-direction:row;gap:8px;border-radius:16px;justify-content:flex-start;padding:12px 16px;font-size:18px}
+  .tr-tracks{padding-left:0;margin-top:12px}
+  .tr-tracks::before,.tr-track::before,.tr-track::after,.tr-cls::before,.tr-cl::before,.tr-cl::after{display:none}
+  .tr-track{display:block;padding:10px 0 10px 14px;margin-left:8px;border-left:3px solid var(--rule)}
+  .tr-t{width:auto}
+  .tr-cls{padding-left:0;margin-top:8px}
+  .tr-cl{padding:4px 0 4px 18px;margin-left:6px;border-left:3px solid var(--cc)}
+  .tr-c{min-width:0}
+}
+/* accesso e pannello di controllo */
+.login{max-width:420px;display:grid;gap:14px;padding:18px 20px;border:1.5px solid var(--ink-2);background:var(--surface)}
+.af{display:grid;gap:14px}
+.ad{margin:0 0 28px;padding:18px 20px;border:1.5px solid var(--rule);background:var(--surface)}
+.ad h3{margin:0 0 10px;font:700 20px var(--font-display)}
+.ad h4{margin:16px 0 6px;font:700 15px var(--font-display)}
+.ad-row{display:flex;flex-wrap:wrap;gap:14px}
+.ad-row .nar{flex:0 0 90px}.ad-row .grow{flex:1 1 240px}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.rad{display:inline-flex;gap:7px;align-items:center;padding:6px 12px;border:1.5px solid var(--ink-2);border-radius:6px;cursor:pointer;font:600 14px var(--font-body)}
+.rad:has(input:checked){background:var(--ink-btn);color:var(--on-ink)}
+.rad input{position:absolute;opacity:0;width:1px;height:1px}
+.rad:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+.mxwrap{overflow-x:auto;margin-top:12px;border:1px solid var(--rule)}
+.mx{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:center}
+.mx thead th{position:sticky;top:0;background:var(--surface-2);font:600 12px var(--font-body)}
+.mx th[scope=row]{text-align:left;font-weight:400}
+.mxc span{display:block}.mxc svg{margin:0 auto 2px}
+.mxh th{text-align:left!important;background:var(--surface-2);font:700 13px var(--font-display);letter-spacing:.02em}
+.mx input[type=checkbox]{width:20px;height:20px;accent-color:var(--ink-btn)}
+.pl{list-style:none;margin:0;padding:0}
+.pl li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.pl .mini{display:flex;gap:3px;align-items:center}
+.ad textarea{width:100%;padding:9px 11px;background:var(--surface);border:1.5px solid var(--ink-2);border-radius:5px;font:400 14px/1.5 var(--font-mono)}
+.fld input[type=password],.fld select{width:100%;padding:9px 11px;background:var(--surface);border:1.5px solid var(--ink-2);border-radius:5px}
+.empty{color:var(--ink-2);margin:6px 0}
 </style>
 
 <div id="app">
@@ -363,9 +425,8 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
     </div>
     <div class="tools">
       <span id="sync" class="sync" role="status">Connessione in corso…</span>
+      <a id="lnkAdmin" class="btn" href="#/accesso" data-nav="accesso">Area docente</a>
       <button id="btnEdit" class="btn" type="button" aria-pressed="false" hidden>Modifica</button>
-      <button id="btnExport" class="btn" type="button">Esporta in Markdown</button>
-      <button id="btnSrc" class="btn" type="button" hidden>Esporta sorgente per GitHub</button>
     </div>
   </header>
 
@@ -383,12 +444,17 @@ g.on>.fl-s{stroke:var(--c-l2);stroke-width:2.6;fill:color-mix(in srgb,var(--c-l2
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script type="text/plain" id="content">
-@@class P1 | 1ª Prof. | Primo anno · Istituto professionale | orange | circle
-@@class T1 | 1ª ITIS | Primo anno · ITIS | blue | square
-@@class Q1 | 1ª ITIS Q | Primo anno · ITIS quadriennale | teal | diamond
-@@class L2 | 2ª Liceo SA · IA | Secondo anno · Liceo scienze applicate, curvatura IA | violet | triangle
-@@class L3 | 3ª Liceo SA | Terzo anno · Liceo scienze applicate | green | hexagon
-@@class L4 | 4ª Liceo SA | Quarto anno · Liceo scienze applicate | magenta | star
+@@track tec | Liceo Tecnologico
+@@track prof | Liceo Professionale
+@@track sa | Liceo delle Scienze Applicate
+@@track ia | Liceo delle Scienze Applicate Curvatura IA
+
+@@class P1 | 1ª Prof. | Primo anno · Istituto professionale | orange | circle | prof
+@@class T1 | 1ª ITIS | Primo anno · ITIS | blue | square | tec
+@@class Q1 | 1ª ITIS Q | Primo anno · ITIS quadriennale | teal | diamond | tec
+@@class L2 | 2ª Liceo SA · IA | Secondo anno · Liceo scienze applicate, curvatura IA | violet | triangle | ia
+@@class L3 | 3ª Liceo SA | Terzo anno · Liceo scienze applicate | green | hexagon | sa
+@@class L4 | 4ª Liceo SA | Quarto anno · Liceo scienze applicate | magenta | star | sa
 
 @@chapter c1 | 1 | La codifica delle informazioni | Come un computer rappresenta numeri, testi, immagini e suoni usando solo 0 e 1.
 
@@ -2879,6 +2945,9 @@ Scegliere un tema legato a un'altra disciplina (laboratorio di fisica, catalogo 
 !! Spesso quello documentale, perché un ordine è un documento autonomo con campi che possono variare. Per la contabilità, invece, servono transazioni e quindi spesso un database relazionale.
 ?? Perché si scrive il modello E-R prima di creare le tabelle?
 !! Perché permette di capire quali entità e quali legami servono e di evitare ripetizioni, prima di fissare la struttura nel database.
+</script>
+<script type="text/plain" id="auth">
+{"user": "matteo", "salt": "gDy1SVAuUA/wb5bZ+zlaGA==", "hash": "43hOx6ofGbfro00FSrJuAoZglVen3s5KKdN3y4bVZnU=", "iter": 150000}
 </script>
 <script type="text/plain" id="pyrun">
 /* pyrun.js: piccolo interprete Python (sottoinsieme) per il libro "Informatica in Classe".
@@ -6012,6 +6081,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* ---------- classi: colore + simbolo (modificabili dal docente) ---------- */
 const PAL={orange:'Arancione',blue:'Blu',teal:'Verde acqua',violet:'Viola',green:'Verde',magenta:'Magenta',red:'Rosso',gold:'Oro',sky:'Azzurro',slate:'Grigio ardesia',brown:'Marrone',lime:'Lime'};
+const AUTH=(function(){try{return JSON.parse(document.getElementById('auth').textContent);}catch(e){return {user:'',salt:'',hash:'',iter:150000};}})();
 const DEFAULT_CLASSES=[
   {id:'P1',short:'1ª Prof.',name:'Primo anno · Istituto professionale',color:'orange',shape:'circle'},
   {id:'T1',short:'1ª ITIS',name:'Primo anno · ITIS',color:'blue',shape:'square'},
@@ -6020,7 +6090,8 @@ const DEFAULT_CLASSES=[
   {id:'L3',short:'3ª Liceo SA',name:'Terzo anno · Liceo scienze applicate',color:'green',shape:'hexagon'},
   {id:'L4',short:'4ª Liceo SA',name:'Quarto anno · Liceo scienze applicate',color:'magenta',shape:'star'}
 ];
-let baseClasses=[],classOv={};
+let baseClasses=[],classOv={},baseTracks=[],OV={trk:{},chp:{},cfg:{}};
+const TRACKS=[],TR={};
 const CLASSES=[],CL={};
 function polyPts(n,r,rot,ratio){const p=[];const m=ratio?n*2:n;for(let i=0;i<m;i++){const a=(rot+i*360/m)*Math.PI/180,rr=ratio&&i%2?r*ratio:r;p.push((8+rr*Math.cos(a)).toFixed(2)+','+(8+rr*Math.sin(a)).toFixed(2));}return p.join(' ');}
 const SHAPES={
@@ -6054,18 +6125,31 @@ function rebuildClasses(){
     const c=Object.assign({},map[k],{id:k});
     c.color=PAL[c.color]?c.color:'slate';c.shape=SHAPES[c.shape]?c.shape:'circle';
     c.v='--k-'+c.color;c.deleted=!!c.deleted;c.short=String(c.short||k);c.name=String(c.name||c.short);
-    c.order=typeof c.order==='number'?c.order:9999;
+    c.order=typeof c.order==='number'?c.order:9999;c.track=String(c.track||'');
     return c;
   }).sort((a,b)=>a.order-b.order||a.id.localeCompare(b.id)).forEach(c=>{CLASSES.push(c);CL[c.id]=c;});
 }
 
+function rebuildTracks(){
+  const map={};
+  baseTracks.forEach((t,i)=>{map[t.id]=Object.assign({order:(i+1)*10},t);});
+  Object.keys(OV.trk).forEach(id=>{const o=OV.trk[id]||{};if(map[id])map[id]=Object.assign(map[id],o);else if(o.name)map[id]=Object.assign({order:9999},o);});
+  TRACKS.length=0;Object.keys(TR).forEach(k=>{delete TR[k];});
+  Object.keys(map).map(k=>{const t=Object.assign({},map[k],{id:k});t.name=String(t.name||k);t.order=typeof t.order==='number'?t.order:9999;t.deleted=!!t.deleted;return t;})
+    .sort((a,b)=>a.order-b.order||a.id.localeCompare(b.id)).forEach(t=>{TRACKS.push(t);TR[t.id]=t;});
+}
+
 /* ---------- contenuti di partenza ---------- */
 function parseContent(txt){
-  const chapters=[],list=[],classes=[],cnt={};let cur=null;
+  const chapters=[],list=[],classes=[],tracks=[],cnt={};let cur=null;
   txt.replace(/\r/g,'').split('\n').forEach(line=>{
-    if(line.startsWith('@@class ')){
+    if(line.startsWith('@@track ')){
       const p=line.slice(8).split('|').map(s=>s.trim());
-      if(p[0])classes.push({id:p[0],short:p[1]||p[0],name:p[2]||p[1]||p[0],color:p[3]||'slate',shape:p[4]||'circle',deleted:p[5]==='hidden'});
+      if(p[0])tracks.push({id:p[0],name:p[1]||p[0],deleted:p[2]==='hidden'});
+      cur=null;
+    }else if(line.startsWith('@@class ')){
+      const p=line.slice(8).split('|').map(s=>s.trim());
+      if(p[0])classes.push({id:p[0],short:p[1]||p[0],name:p[2]||p[1]||p[0],color:p[3]||'slate',shape:p[4]||'circle',track:p[5]&&p[5]!=='hidden'?p[5]:'',deleted:p[5]==='hidden'||p[6]==='hidden'});
       cur=null;
     }else if(line.startsWith('@@chapter ')){
       const p=line.slice(10).split('|').map(s=>s.trim());
@@ -6081,10 +6165,11 @@ function parseContent(txt){
     }else if(cur){cur.lines.push(line);}
   });
   list.forEach(s=>{s.body=s.lines.join('\n').trim();delete s.lines;});
-  return {chapters,list,classes};
+  return {chapters,list,classes,tracks};
 }
 const parsed=parseContent($('#content').textContent);
-const chapters=parsed.chapters,baseList=parsed.list;
+const chapters=parsed.chapters.slice(),baseChapters=parsed.chapters.slice(),baseList=parsed.list;
+baseTracks=parsed.tracks;
 baseClasses=parsed.classes.length?parsed.classes:DEFAULT_CLASSES.map(c=>Object.assign({},c));
 /* le pagine di Progetti, Materiale e Peer2Peer vivono in capitoli "virtuali" (il loro id inizia con _) */
 const KINDS={
@@ -6093,7 +6178,16 @@ const KINDS={
   _peer:{slug:'peer',title:'Peer2Peer',desc:'Il materiale preparato dai ragazzi per i compagni.',one:'lavoro',newLabel:'+ Nuovo lavoro dei ragazzi'}
 };
 Object.keys(KINDS).forEach(id=>{if(!chapters.some(c=>c.id===id))chapters.push({id:id,num:'-',title:KINDS[id].title,desc:KINDS[id].desc});});
-chapters.forEach(c=>{c.virtual=c.id.charAt(0)==='_';});
+baseChapters.splice(0,baseChapters.length,...chapters);
+baseChapters.forEach(c=>{c.virtual=c.id.charAt(0)==='_';});
+function rebuildChapters(){
+  const topics=baseChapters.filter(c=>!c.virtual).map((c,i)=>Object.assign({order:(i+1)*10},c));
+  Object.keys(OV.chp).forEach(id=>{const o=OV.chp[id]||{};if(!o.title||topics.some(c=>c.id===id))return;topics.push({id:id,num:String(o.num||''),title:String(o.title),desc:String(o.desc||''),order:typeof o.order==='number'?o.order:9999,virtual:false,custom:true});});
+  topics.sort((a,b)=>a.order-b.order);
+  chapters.length=0;topics.forEach(c=>chapters.push(c));
+  baseChapters.filter(c=>c.virtual).forEach(c=>chapters.push(c));
+}
+rebuildChapters();rebuildTracks();
 rebuildClasses();
 const chIndex=id=>chapters.findIndex(c=>c.id===id);
 const kindOf=s=>s.chapter.charAt(0)==='_'?s.chapter:'topic';
@@ -6175,10 +6269,10 @@ function renderBody(src){
 }
 
 /* ---------- stato e salvataggio ---------- */
-const LS_OV='informatica-in-classe:modifiche:v1',LS_CL='informatica-in-classe:classi:v1';
+const LS_OV='informatica-in-classe:modifiche:v1',LS_CL='informatica-in-classe:classi:v1',LS_MT='informatica-in-classe:meta:v1';
 const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
-let overrides={},mode='local',dbh=null,dl=null,canWrite=true,editOn=false,confirmState=null;
+let overrides={},mode='local',dbh=null,dl=null,permWrite=true,isAdmin=false,canWrite=false,editOn=false,confirmState=null;
 const editing=new Set(),newIds=new Set(),nodes={};
 
 /* ---------- materiali di lezione: slides, allegati, link ---------- */
@@ -6251,11 +6345,17 @@ async function putClass(id,data){
   try{if(mode==='db')await dbh.doc('sections/cls-'+id).set(Object.assign({_class:true},data));else lsSet(LS_CL,classOv);}
   catch(e){if(prev===undefined)delete classOv[id];else classOv[id]=prev;rebuildClasses();throw e;}
 }
+const META={trk:1,chp:1,cfg:1};
+async function putMeta(kind,id,data){
+  const prev=OV[kind][id];OV[kind][id]=data;rebuildChapters();rebuildTracks();rebuildClasses();
+  try{if(mode==='db')await dbh.doc('sections/'+kind+'-'+id).set(Object.assign({_meta:kind},data));else lsSet(LS_MT,OV);}
+  catch(e){if(prev===undefined)delete OV[kind][id];else OV[kind][id]=prev;rebuildChapters();rebuildTracks();rebuildClasses();throw e;}
+}
 let tt;
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>{t.hidden=true;},4500);}
 function writeError(e){
   const code=e&&e.code;
-  if(code==='invalid_argument'||code==='revoked'){canWrite=false;editOn=false;editing.clear();toast('Non hai il permesso di modificare questo libro.');}
+  if(code==='invalid_argument'||code==='revoked'){permWrite=false;refreshCan();toast('Non hai il permesso di modificare questo libro.');}
   else if(code==='quota_exceeded')toast('Lo spazio per le modifiche è esaurito.');
   else toast('Salvataggio non riuscito. Riprova tra poco.');
   syncUi();render();
@@ -6712,9 +6812,11 @@ function parsePath(p){
     const t=tabBy(a[2]);
     return {v:'class',c:a[1],tab:t?t.slug:null,item:t&&t.slug!=='argomenti'&&a[3]?a[3]:null};
   }
+  if(a[0]==='accesso')return {v:'login'};
+  if(a[0]==='admin'){const ok=['argomenti','classi','pagine','account'];return {v:'admin',tab:ok.indexOf(a[1])>=0?a[1]:'argomenti'};}
   return {v:'home'};
 }
-const routeKey=r=>r.v==='home'?'':'c/'+r.c+(r.tab?'/'+r.tab+(r.item?'/'+r.item:''):'');
+const routeKey=r=>r.v==='home'?'':r.v==='login'?'accesso':r.v==='admin'?'admin/'+r.tab:'c/'+r.c+(r.tab?'/'+r.tab+(r.item?'/'+r.item:''):'');
 const hashPath=()=>String(location.hash||'').replace(/^#\/?/,'');
 function navTo(path){
   route=parsePath(path);
@@ -6731,10 +6833,11 @@ const plural=(n,one,many)=>n+' '+(n===1?one:many);
 
 function syncUi(){
   const be=$('#btnEdit');
-  be.hidden=!canWrite;be.setAttribute('aria-pressed',editOn?'true':'false');be.textContent=editOn?'Fine modifica':'Modifica';
-  $('#btnSrc').hidden=mode!=='local';
-  $('#sync').textContent=mode==='db'?(canWrite?'Modifiche condivise con i colleghi':'Sola lettura'):'Modifiche salvate solo in questo browser';
-  const n=$('#editNote');n.hidden=!(editOn&&canWrite);
+  be.hidden=!(canWrite&&route.v==='class');be.setAttribute('aria-pressed',editOn?'true':'false');be.textContent=editOn?'Fine modifica':'Modifica';
+  const la=$('#lnkAdmin');la.textContent=isAdmin?'Pannello di controllo':'Area docente';la.dataset.nav=isAdmin?'admin/argomenti':'accesso';la.setAttribute('href',hrefOf(la.dataset.nav));
+  $('#sync').textContent=isAdmin?(mode==='db'?'Docente · modifiche condivise':'Docente · modifiche salvate solo in questo browser'):'';
+  $('#sync').hidden=!isAdmin;
+  const n=$('#editNote');n.hidden=!(editOn&&canWrite&&route.v==='class');
   n.textContent=mode==='db'?'Modalità modifica attiva. Ogni salvataggio è subito visibile a tutti i colleghi che hanno accesso a questa pagina.':'Modalità modifica attiva. Le modifiche restano solo in questo browser. Per condividerle con i colleghi apri la pagina con il tuo account.';
 }
 function toolsHtml(s,i,n,single){
@@ -6805,15 +6908,17 @@ function countsFor(secs,c){
 }
 function renderHome(secs){
   const act=activeClasses();
-  const nodes=act.map(c=>{
-    const k=countsFor(secs,c.id);
-    return {v:c.v,path:cPath(c.id),html:sym(c,34)+'<span class="mm-t"><b>'+esc(c.short)+'</b><small>'+plural(k.argomenti,'argomento','argomenti')+'</small></span>'};
-  });
+  const groups=TRACKS.filter(tr=>!tr.deleted).map(tr=>({name:tr.name,cls:act.filter(c=>c.track===tr.id)}));
+  const orphan=act.filter(c=>!TR[c.track]||TR[c.track].deleted);
+  if(orphan.length)groups.push({name:'Altre classi',cls:orphan});
+  const used=groups.filter(g=>g.cls.length);
   const frag=document.createElement('div');
-  let h='';
-  h+=act.length?mindmap('Le classi',"<b>Informatica</b><span>in classe</span>",nodes,-90,37,36,'mm-home'):'<p class="empty">Non ci sono classi. Attiva «Modifica» per aggiungerne una.</p>';
-  frag.innerHTML=h;
-  if(editOn&&canWrite)frag.appendChild(classManager());
+  if(!used.length){frag.innerHTML='<p class="empty">Non ci sono ancora classi.'+(isAdmin?' Aggiungile dal pannello di controllo.':'')+'</p>';$('#main').replaceChildren(frag);return;}
+  const li=used.map(g=>'<li class="tr-track"><div class="tr-t">'+esc(g.name)+'<small>'+plural(g.cls.length,'classe','classi')+'</small></div><ul class="tr-cls">'+g.cls.map(c=>{
+    const k=countsFor(secs,c.id);
+    return '<li class="tr-cl" style="--cc:var('+c.v+')"><a class="tr-c" href="'+hrefOf(cPath(c.id))+'" data-nav="'+esc(cPath(c.id))+'">'+sym(c,32)+'<span><b>'+esc(c.short)+'</b><small>'+plural(k.argomenti,'argomento','argomenti')+'</small></span></a></li>';
+  }).join('')+'</ul></li>').join('');
+  frag.innerHTML='<nav class="tree" aria-label="Indirizzi di studio e classi"><div class="tr-root"><b>Informatica</b><span>in classe</span></div><ul class="tr-tracks">'+li+'</ul></nav>';
   $('#main').replaceChildren(frag);
 }
 function renderLanding(secs){
@@ -6828,20 +6933,265 @@ function tabsBar(secs){
   return '<nav class="tabs" aria-label="Sezioni della classe">'+TABS.map(t=>'<a class="tab" href="'+hrefOf(cPath(route.c,t.slug))+'" data-nav="'+cPath(route.c,t.slug)+'"'+(route.tab===t.slug?' aria-current="page"':'')+'>'+tabIcon(t,18)+'<span>'+esc(t.title)+'</span><em>'+k[t.slug]+'</em></a>').join('')+'</nav>';
 }
 
-/* ---------- gestione delle classi (modalità modifica, pagina iniziale) ---------- */
-let classEdit=null;
+/* ---------- accesso docente ---------- */
+const SESSION_KEY='informatica-in-classe:sessione:v1';
+let memSession=0,failCount=0,pendingPath='';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const b64=buf=>{let s='';new Uint8Array(buf).forEach(c=>{s+=String.fromCharCode(c);});return btoa(s);};
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function derive(pw,saltB64,iter){
+  const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);
+  return b64(await crypto.subtle.deriveBits({name:'PBKDF2',salt:unb64(saltB64),iterations:iter,hash:'SHA-256'},k,256));
+}
+const cred=()=>OV.cfg.admin&&OV.cfg.admin.hash?OV.cfg.admin:AUTH;
+function sameStr(a,b){if(a.length!==b.length)return false;let r=0;for(let i=0;i<a.length;i++)r|=a.charCodeAt(i)^b.charCodeAt(i);return r===0;}
+const hasCrypto=()=>!!(window.crypto&&crypto.subtle&&window.TextEncoder);
+async function checkPassword(user,pw){
+  const c=cred(),h=await derive(pw,c.salt,c.iter);
+  const okPw=sameStr(h,c.hash),okUser=String(user).trim().toLowerCase()===String(c.user).toLowerCase();
+  return okPw&&okUser;
+}
+function readSession(){
+  try{const v=Number(sessionStorage.getItem(SESSION_KEY)||0);if(v>Date.now())return true;}catch(e){}
+  return memSession>Date.now();
+}
+function writeSession(on){
+  const v=on?Date.now()+8*3600*1000:0;memSession=v;
+  try{if(on)sessionStorage.setItem(SESSION_KEY,String(v));else sessionStorage.removeItem(SESSION_KEY);}catch(e){}
+}
+function refreshCan(){
+  canWrite=!!(permWrite&&isAdmin);
+  if(!canWrite){editOn=false;editing.clear();newIds.clear();confirmState=null;}
+}
+function setAdmin(on){isAdmin=on;writeSession(on);refreshCan();}
+async function doLogin(form){
+  const err=$('.ed-err',form),btn=$('button[type=submit]',form);
+  const user=form.elements.user.value,pw=form.elements.pw.value;
+  err.hidden=true;
+  if(!hasCrypto()){err.textContent='Questo browser non permette di verificare la password. Prova con un browser aggiornato.';err.hidden=false;return;}
+  if(!user.trim()||!pw){err.textContent='Scrivi utente e password.';err.hidden=false;return;}
+  btn.disabled=true;
+  if(failCount)await sleep(Math.min(6000,700*Math.pow(2,failCount-1)));
+  let ok=false;
+  try{ok=await checkPassword(user,pw);}catch(e){ok=false;}
+  btn.disabled=false;
+  if(!ok){failCount++;err.textContent='Utente o password non corretti.';err.hidden=false;form.elements.pw.value='';form.elements.pw.focus();return;}
+  failCount=0;setAdmin(true);syncUi();
+  const target=pendingPath||'admin/argomenti';pendingPath='';
+  navTo(target);toast('Accesso eseguito.');
+}
+function logout(){
+  setAdmin(false);syncUi();navTo('');toast('Sei uscito dall\'area docente.');
+}
+function renderLogin(){
+  const f=document.createElement('div');
+  if(!permWrite){f.innerHTML='<div class="emptybox"><p><b>In questa versione del libro la modifica non è disponibile.</b></p><p><a href="#/" data-nav="">Torna alle classi</a></p></div>';$('#main').replaceChildren(f);return;}
+  f.innerHTML='<header class="pg-h"><h2>Area docente</h2><p>Accedi per usare il pannello di controllo e modificare il libro.</p></header>'+
+    '<form class="login af" novalidate><div class="fld"><label for="lg-u">Utente</label><input id="lg-u" name="user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false"></div>'+
+    '<div class="fld"><label for="lg-p">Password</label><input id="lg-p" name="pw" type="password" autocomplete="current-password"></div>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button type="submit" class="btn primary">Accedi</button></div></form>';
+  $('#main').replaceChildren(f);
+  const u=$('#lg-u');if(u)u.focus();
+}
+
+/* ---------- pannello di controllo ---------- */
+const ADMIN_TABS=[
+  {slug:'argomenti',title:'Argomenti'},
+  {slug:'classi',title:'Classi e indirizzi'},
+  {slug:'pagine',title:'Progetti e materiali'},
+  {slug:'account',title:'Account ed esportazione'}
+];
+function adminTabs(){
+  return '<nav class="tabs" aria-label="Pannello di controllo">'+ADMIN_TABS.map(t=>'<a class="tab" href="'+hrefOf('admin/'+t.slug)+'" data-nav="admin/'+t.slug+'"'+(route.tab===t.slug?' aria-current="page"':'')+'><span>'+esc(t.title)+'</span></a>').join('')+'</nav>';
+}
+const classChips=(prefix,checked)=>'<div class="chips">'+activeClasses().map(c=>'<label class="chip chk" style="--cc:var('+c.v+')"><input type="checkbox" name="cls" value="'+c.id+'"'+(checked&&checked.indexOf(c.id)>=0?' checked':'')+'>'+sym(c,16)+'<span>'+esc(c.short)+'</span></label>').join('')+'</div>';
+const topicChapters=()=>chapters.filter(c=>!c.virtual);
+function nextChapterNum(){const n=topicChapters().map(c=>parseInt(c.num,10)).filter(x=>!isNaN(x));return String((n.length?Math.max.apply(null,n):0)+1);}
+
+function matrixHtml(secs){
+  const act=activeClasses();
+  if(!act.length)return '<p class="empty">Non ci sono classi.</p>';
+  let h='<div class="mxwrap"><table class="mx"><thead><tr><th scope="col">Argomento o pagina</th>'+act.map(c=>'<th scope="col" class="mxc" title="'+esc(c.name)+'">'+sym(c,16)+'<span>'+esc(c.short)+'</span></th>').join('')+'</tr></thead><tbody>';
+  chapters.forEach(ch=>{
+    const l=secs.filter(s=>s.chapter===ch.id&&!s.deleted);if(!l.length)return;
+    h+='<tr class="mxh"><th scope="colgroup" colspan="'+(act.length+1)+'">'+esc(ch.virtual?ch.title:ch.num+'. '+ch.title)+'</th></tr>';
+    l.forEach(s=>{
+      h+='<tr><th scope="row">'+esc(s.title)+'</th>'+act.map(c=>'<td><input type="checkbox" data-mx="'+esc(s.id)+'" data-c="'+esc(c.id)+'" aria-label="'+esc(s.title+' · '+c.short)+'"'+(s.classes.indexOf(c.id)>=0?' checked':'')+'></td>').join('')+'</tr>';
+    });
+  });
+  return h+'</tbody></table></div>';
+}
+function adminArgomenti(secs){
+  const box=document.createElement('div');
+  const chOpts=topicChapters().map(c=>'<option value="'+esc(c.id)+'">'+esc(c.num+'. '+c.title)+'</option>').join('');
+  box.innerHTML=
+    '<section class="ad"><h3>Nuovo argomento</h3><form class="af af-topic" novalidate>'+
+    '<div class="fld"><label for="nt-ch">Capitolo</label><select id="nt-ch" name="chapter">'+chOpts+'</select></div>'+
+    '<div class="fld"><label for="nt-t">Titolo</label><input id="nt-t" name="title" type="text" maxlength="140"></div>'+
+    '<fieldset class="fld"><legend>Classi a cui è destinato</legend>'+classChips('nt',[])+'</fieldset>'+
+    '<div class="fld"><label for="nt-b">Testo iniziale (facoltativo, lo potrai modificare dopo)</label><textarea id="nt-b" name="body" rows="5" spellcheck="true">## Sottotitolo\nScrivi qui il contenuto.</textarea></div>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button class="btn primary" type="submit">Crea l\'argomento</button></div></form></section>'+
+    '<section class="ad"><h3>Nuovo capitolo</h3><form class="af af-chapter" novalidate><div class="ad-row">'+
+    '<div class="fld nar"><label for="nc-n">Numero</label><input id="nc-n" name="num" type="text" maxlength="4" value="'+esc(nextChapterNum())+'"></div>'+
+    '<div class="fld grow"><label for="nc-t">Titolo del capitolo</label><input id="nc-t" name="title" type="text" maxlength="100"></div></div>'+
+    '<div class="fld"><label for="nc-d">Descrizione breve</label><input id="nc-d" name="desc" type="text" maxlength="200"></div>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button class="btn primary" type="submit">Crea il capitolo</button></div></form></section>'+
+    '<section class="ad"><h3>Associa argomenti e pagine alle classi</h3><p class="hint">Spunta le classi in cui deve comparire ogni argomento o pagina. Ogni spunta viene salvata subito.</p>'+matrixHtml(secs)+'</section>';
+  return box;
+}
+function adminPagine(secs){
+  const box=document.createElement('div');
+  const kinds=Object.keys(KINDS);
+  const list=kinds.map(k=>{
+    const l=secs.filter(s=>s.chapter===k&&!s.deleted);
+    return '<h4>'+esc(KINDS[k].title)+' ('+l.length+')</h4>'+(l.length?'<ul class="pl">'+l.map(s=>{
+      const first=s.classes.find(c=>!CL[c].deleted)||s.classes[0];
+      return '<li><a href="'+hrefOf(cPath(first,KINDS[k].slug,s.id))+'" data-nav="'+esc(cPath(first,KINDS[k].slug,s.id))+'">'+esc(s.title)+'</a><span class="mini">'+s.classes.map(c=>sym(CL[c],12)).join('')+'</span></li>';
+    }).join('')+'</ul>':'<p class="empty">Nessuna pagina.</p>');
+  }).join('');
+  box.innerHTML='<section class="ad"><h3>Nuovo progetto, materiale o lavoro dei ragazzi</h3><form class="af af-page" novalidate>'+
+    '<fieldset class="fld"><legend>Che cosa vuoi aggiungere</legend><div class="radios">'+kinds.map((k,i)=>'<label class="rad"><input type="radio" name="kind" value="'+k+'"'+(i===0?' checked':'')+'><span>'+esc(KINDS[k].title)+'</span></label>').join('')+'</div></fieldset>'+
+    '<div class="fld"><label for="np-t">Titolo</label><input id="np-t" name="title" type="text" maxlength="140"></div>'+
+    '<fieldset class="fld"><legend>Classi in cui compare</legend>'+classChips('np',[])+'</fieldset>'+
+    '<p class="hint">La pagina nasce dal modello: potrai subito riempirla, aggiungere slides e allegati.</p>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button class="btn primary" type="submit">Crea e apri la pagina</button></div></form></section>'+
+    '<section class="ad"><h3>Pagine esistenti</h3>'+list+'</section>';
+  return box;
+}
+function adminAccount(){
+  const box=document.createElement('div');
+  const c=cred();
+  box.innerHTML='<section class="ad"><h3>Esportazione</h3><p class="hint">Il testo di tutto il libro, oppure il file da caricare su GitHub per aggiornare il sito.</p><div class="ed-act"><button type="button" class="btn" data-adm="md">Esporta in Markdown</button><button type="button" class="btn" data-adm="src">Esporta sorgente per GitHub</button></div></section>'+
+    '<section class="ad"><h3>Cambia la password</h3><form class="af af-pass" novalidate><p class="hint">Utente: <b>'+esc(c.user)+'</b>. '+(mode==='db'?'La nuova password vale per tutti i dispositivi.':'La nuova password vale solo in questo browser; per cambiarla sul sito pubblico usa lo strumento descritto nel README.')+'</p>'+
+    '<div class="fld"><label for="pw-0">Password attuale</label><input id="pw-0" name="old" type="password" autocomplete="current-password"></div>'+
+    '<div class="fld"><label for="pw-1">Nuova password (almeno 10 caratteri)</label><input id="pw-1" name="new1" type="password" autocomplete="new-password"></div>'+
+    '<div class="fld"><label for="pw-2">Ripeti la nuova password</label><input id="pw-2" name="new2" type="password" autocomplete="new-password"></div>'+
+    '<p class="ed-err" role="alert" hidden></p><div class="ed-act"><button class="btn primary" type="submit">Salva la password</button></div></form></section>'+
+    '<section class="ad"><h3>Uscita</h3><div class="ed-act"><button type="button" class="btn" data-adm="logout">Esci dall\'area docente</button></div></section>';
+  return box;
+}
+function adminClassi(){
+  const box=document.createElement('div');
+  box.appendChild(trackManager());box.appendChild(classManager());
+  return box;
+}
+function renderAdmin(secs){
+  const frag=document.createElement('div');
+  frag.innerHTML='<header class="pg-h"><h2>Pannello di controllo</h2><p>Qui aggiungi argomenti, classi, progetti e materiali e decidi dove compaiono.</p></header>'+adminTabs();
+  const t=route.tab;
+  frag.appendChild(t==='classi'?adminClassi():t==='pagine'?adminPagine(secs):t==='account'?adminAccount():adminArgomenti(secs));
+  $('#main').replaceChildren(frag);
+}
+
+/* ---------- forme del pannello ---------- */
+async function submitTopic(form){
+  const err=$('.ed-err',form);err.hidden=true;
+  const title=form.elements.title.value.trim(),classes=$$('input[name=cls]:checked',form).map(x=>x.value);
+  if(!title){err.textContent='Scrivi il titolo dell\'argomento.';err.hidden=false;return;}
+  if(!classes.length){err.textContent='Scegli almeno una classe.';err.hidden=false;return;}
+  const ch=form.elements.chapter.value,id=newId();
+  try{
+    await put(id,{chapter:ch,order:nextOrder(ch),title:title,body:form.elements.body.value.replace(/\s+$/,''),classes:classes,widget:'',materials:[],deleted:false,custom:true});
+    editOn=true;editing.add(id);navTo(cPath(classes[0],'argomenti'));syncUi();render();
+    const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({block:'start'});
+    toast('Argomento creato. Puoi rifinirlo qui.');
+  }catch(e){writeError(e);}
+}
+async function submitChapter(form){
+  const err=$('.ed-err',form);err.hidden=true;
+  const title=form.elements.title.value.trim(),num=form.elements.num.value.trim()||nextChapterNum();
+  if(!title){err.textContent='Scrivi il titolo del capitolo.';err.hidden=false;return;}
+  const id='k'+Date.now().toString(36);
+  const order=chapters.filter(c=>!c.virtual).reduce((m,c)=>Math.max(m,c.order||0),0)+10;
+  try{await putMeta('chp',id,{num:num,title:title,desc:form.elements.desc.value.trim(),order:order});render();toast('Capitolo creato. Ora puoi aggiungere argomenti.');}catch(e){writeError(e);}
+}
+async function submitPage(form){
+  const err=$('.ed-err',form);err.hidden=true;
+  const title=form.elements.title.value.trim(),classes=$$('input[name=cls]:checked',form).map(x=>x.value),kind=form.querySelector('[name=kind]:checked').value;
+  if(!title){err.textContent='Scrivi il titolo.';err.hidden=false;return;}
+  if(!classes.length){err.textContent='Scegli almeno una classe.';err.hidden=false;return;}
+  const id=newId();
+  try{
+    await put(id,{chapter:kind,order:nextOrder(kind),title:title,body:tplBody(kind,CL[classes[0]]),classes:classes,widget:'',materials:[],deleted:false,custom:true});
+    editOn=true;editing.add(id);navTo(cPath(classes[0],KINDS[kind].slug,id));syncUi();render();
+    toast('Pagina creata dal modello.');
+  }catch(e){writeError(e);}
+}
+async function submitPass(form){
+  const err=$('.ed-err',form);err.hidden=true;
+  const o=form.elements.old.value,n1=form.elements.new1.value,n2=form.elements.new2.value;
+  if(!hasCrypto()){err.textContent='Questo browser non permette di cambiare la password.';err.hidden=false;return;}
+  if(n1.length<10){err.textContent='La nuova password deve avere almeno 10 caratteri.';err.hidden=false;return;}
+  if(n1!==n2){err.textContent='Le due password nuove non coincidono.';err.hidden=false;return;}
+  const c=cred();let ok=false;
+  try{ok=await checkPassword(c.user,o);}catch(e){}
+  if(!ok){err.textContent='La password attuale non è corretta.';err.hidden=false;return;}
+  const salt=b64(crypto.getRandomValues(new Uint8Array(16))),iter=AUTH.iter||150000;
+  try{
+    const hash=await derive(n1,salt,iter);
+    await putMeta('cfg','admin',{user:c.user,salt:salt,hash:hash,iter:iter});
+    form.reset();toast('Password cambiata.');
+  }catch(e){writeError(e);}
+}
+async function toggleMatrix(cb){
+  const s=all().find(x=>x.id===cb.dataset.mx);if(!s)return;
+  const cl=s.classes.filter(c=>c!==cb.dataset.c);if(cb.checked)cl.push(cb.dataset.c);
+  try{await put(s.id,Object.assign(fields(s),{classes:cl}));}
+  catch(e){cb.checked=!cb.checked;writeError(e);}
+}
+
+/* ---------- gestione di indirizzi e classi ---------- */
+let classEdit=null,trackEdit=null;
+function trackManager(){
+  const box=document.createElement('section');box.className='cm';
+  const rows=TRACKS.map((t,i)=>{
+    const n=CLASSES.filter(c=>c.track===t.id&&!c.deleted).length;
+    return '<li'+(t.deleted?' class="off"':'')+'><span class="cm-n"><span><b>'+esc(t.name)+'</b> <small>'+plural(n,'classe','classi')+(t.deleted?' · nascosto':'')+'</small></span></span><span class="cm-b"><button type="button" class="tb" data-tact="edit" data-id="'+esc(t.id)+'">Rinomina</button><button type="button" class="tb" data-tact="up" data-id="'+esc(t.id)+'" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button type="button" class="tb" data-tact="down" data-id="'+esc(t.id)+'" aria-label="Sposta giù"'+(i===TRACKS.length-1?' disabled':'')+'>↓</button><button type="button" class="tb'+(t.deleted?'':' danger')+'" data-tact="'+(t.deleted?'show':'hide')+'" data-id="'+esc(t.id)+'">'+(t.deleted?'Mostra':'Nascondi')+'</button></span></li>';
+  }).join('');
+  let form='<button type="button" class="btn" data-tact="new">+ Aggiungi un indirizzo</button>';
+  if(trackEdit){
+    const isNew=trackEdit==='new',t=isNew?{name:''}:TR[trackEdit];
+    form='<form class="cm-form af-track" novalidate><h3>'+(isNew?'Nuovo indirizzo':'Rinomina indirizzo')+'</h3><div class="fld"><label for="tf-n">Nome dell\'indirizzo</label><input id="tf-n" name="name" type="text" maxlength="80" value="'+esc(t.name)+'" placeholder="Liceo Linguistico"></div><p class="ed-err" role="alert" hidden></p><div class="ed-act"><button type="submit" class="btn primary">Salva</button><button type="button" class="btn" data-tact="cancel">Annulla</button></div></form>';
+  }
+  box.innerHTML='<h3>Indirizzi di studio</h3><p class="hint">Gli indirizzi raggruppano le classi nella mappa della pagina iniziale.</p><ul class="cm-list">'+rows+'</ul>'+form;
+  return box;
+}
+async function saveTrackForm(form){
+  const err=$('.ed-err',form),name=form.elements.name.value.trim();
+  if(!name){err.textContent='Scrivi il nome dell\'indirizzo.';err.hidden=false;return;}
+  const isNew=trackEdit==='new',id=isNew?'t'+Date.now().toString(36):trackEdit,prev=TR[id];
+  try{
+    await putMeta('trk',id,{name:name,order:prev?prev.order:TRACKS.reduce((m,t)=>Math.max(m,t.order===9999?0:t.order),0)+10,deleted:prev?!!prev.deleted:false});
+    trackEdit=null;render();toast('Indirizzo salvato.');
+  }catch(e){writeError(e);}
+}
+async function trackAct(a,id){
+  try{
+    if(a==='new'){trackEdit='new';render();const f=$('#tf-n');if(f)f.focus();}
+    else if(a==='edit'){trackEdit=id;render();const f=$('#tf-n');if(f)f.focus();}
+    else if(a==='cancel'){trackEdit=null;render();}
+    else if(a==='hide'||a==='show'){const t=TR[id];await putMeta('trk',id,{name:t.name,order:t.order,deleted:a==='hide'});render();}
+    else if(a==='up'||a==='down'){
+      const i=TRACKS.findIndex(t=>t.id===id),j=i+(a==='up'?-1:1);if(j<0||j>=TRACKS.length)return;
+      const A=TRACKS[i],B=TRACKS[j];let oa=A.order,ob=B.order;if(oa===ob)ob=oa+(a==='up'?-1:1);
+      await putMeta('trk',A.id,{name:A.name,order:ob,deleted:A.deleted});await putMeta('trk',B.id,{name:B.name,order:oa,deleted:B.deleted});render();
+    }
+  }catch(e){writeError(e);}
+}
 function classManager(){
   const box=document.createElement('section');box.className='cm';
-  const rows=CLASSES.map((c,i)=>'<li'+(c.deleted?' class="off"':'')+'><span class="cm-n">'+sym(c,20)+'<span><b>'+esc(c.short)+'</b> <small>'+esc(c.name)+(c.deleted?' (nascosta)':'')+'</small></span></span><span class="cm-b"><button type="button" class="tb" data-cact="edit" data-id="'+esc(c.id)+'">Modifica</button><button type="button" class="tb" data-cact="up" data-id="'+esc(c.id)+'" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button type="button" class="tb" data-cact="down" data-id="'+esc(c.id)+'" aria-label="Sposta giù"'+(i===CLASSES.length-1?' disabled':'')+'>↓</button><button type="button" class="tb'+(c.deleted?'':' danger')+'" data-cact="'+(c.deleted?'show':'hide')+'" data-id="'+esc(c.id)+'">'+(c.deleted?'Mostra':'Nascondi')+'</button></span></li>').join('');
-  box.innerHTML='<h2>Gestisci le classi</h2><p class="hint">Aggiungi una classe, cambia nome, colore e simbolo, riordina la mappa. Nascondere una classe non cancella le sue pagine: tornano visibili se la mostri di nuovo.</p><ul class="cm-list">'+rows+'</ul>'+
+  const rows=CLASSES.map((c,i)=>'<li'+(c.deleted?' class="off"':'')+'><span class="cm-n">'+sym(c,20)+'<span><b>'+esc(c.short)+'</b> <small>'+esc((TR[c.track]?TR[c.track].name+' · ':'')+c.name)+(c.deleted?' (nascosta)':'')+'</small></span></span><span class="cm-b"><button type="button" class="tb" data-cact="edit" data-id="'+esc(c.id)+'">Modifica</button><button type="button" class="tb" data-cact="up" data-id="'+esc(c.id)+'" aria-label="Sposta su"'+(i===0?' disabled':'')+'>↑</button><button type="button" class="tb" data-cact="down" data-id="'+esc(c.id)+'" aria-label="Sposta giù"'+(i===CLASSES.length-1?' disabled':'')+'>↓</button><button type="button" class="tb'+(c.deleted?'':' danger')+'" data-cact="'+(c.deleted?'show':'hide')+'" data-id="'+esc(c.id)+'">'+(c.deleted?'Mostra':'Nascondi')+'</button></span></li>').join('');
+  box.innerHTML='<h3>Classi</h3><p class="hint">Aggiungi una classe, cambia nome, indirizzo, colore e simbolo. Nascondere una classe non cancella le sue pagine: tornano visibili se la mostri di nuovo.</p><ul class="cm-list">'+rows+'</ul>'+
     (classEdit?classForm():'<button type="button" class="btn" data-cact="new">+ Aggiungi una classe</button>');
   return box;
 }
 function classForm(){
-  const isNew=classEdit==='new',c=isNew?{short:'',name:'',color:'blue',shape:'circle'}:CL[classEdit];
+  const isNew=classEdit==='new',c=isNew?{short:'',name:'',color:'blue',shape:'circle',track:(TRACKS.find(t=>!t.deleted)||{}).id||''}:CL[classEdit];
   const sw=Object.keys(PAL).map(k=>'<label class="sw" title="'+PAL[k]+'"><input type="radio" name="color" value="'+k+'"'+(c.color===k?' checked':'')+'><span style="background:var(--k-'+k+')"></span><i class="vh">'+PAL[k]+'</i></label>').join('');
   const sh=Object.keys(SHAPES).map(k=>'<label class="shp" title="'+SHAPE_NAMES[k]+'"><input type="radio" name="shape" value="'+k+'"'+(c.shape===k?' checked':'')+'>'+symRaw(k,26,'currentColor')+'<i class="vh">'+SHAPE_NAMES[k]+'</i></label>').join('');
-  return '<form class="cm-form" novalidate><h3>'+(isNew?'Nuova classe':'Modifica classe')+'</h3>'+
+  const tr='<option value="">Nessun indirizzo</option>'+TRACKS.filter(t=>!t.deleted||t.id===c.track).map(t=>'<option value="'+esc(t.id)+'"'+(c.track===t.id?' selected':'')+'>'+esc(t.name)+'</option>').join('');
+  return '<form class="cm-form af-class" novalidate><h3>'+(isNew?'Nuova classe':'Modifica classe')+'</h3>'+
+    '<div class="fld"><label for="cf-t">Indirizzo di studio</label><select id="cf-t" name="track">'+tr+'</select></div>'+
     '<div class="fld"><label for="cf-s">Nome breve (compare sulla mappa)</label><input id="cf-s" name="short" type="text" maxlength="24" value="'+esc(c.short)+'" placeholder="5ª Liceo SA"></div>'+
     '<div class="fld"><label for="cf-n">Nome completo</label><input id="cf-n" name="name" type="text" maxlength="90" value="'+esc(c.name)+'" placeholder="Quinto anno · Liceo scienze applicate"></div>'+
     '<fieldset class="fld"><legend>Colore</legend><div class="sws">'+sw+'</div></fieldset>'+
@@ -6861,20 +7211,20 @@ async function saveClassForm(form){
   const id=classEdit==='new'?makeClassId(short):classEdit;
   if(CLASSES.some(c=>c.id!==id&&!c.deleted&&c.color===colorEl.value&&c.shape===shapeEl.value)){err.textContent='Un\'altra classe ha già questo colore con questo simbolo: cambia uno dei due.';err.hidden=false;return;}
   const prev=CL[id];
-  const data={short:short,name:name,color:colorEl.value,shape:shapeEl.value,order:prev?prev.order:CLASSES.reduce((m,c)=>Math.max(m,c.order===9999?0:c.order),0)+10,deleted:prev?!!prev.deleted:false};
+  const data={short:short,name:name,color:colorEl.value,shape:shapeEl.value,track:form.elements.track.value,order:prev?prev.order:CLASSES.reduce((m,c)=>Math.max(m,c.order===9999?0:c.order),0)+10,deleted:prev?!!prev.deleted:false};
   try{await putClass(id,data);classEdit=null;render();toast('Classe salvata.');}catch(e){writeError(e);}
 }
+const classData=c=>({short:c.short,name:c.name,color:c.color,shape:c.shape,track:c.track||'',deleted:c.deleted});
 async function classAct(a,id){
   try{
     if(a==='new'){classEdit='new';render();const f=$('#cf-s');if(f)f.focus();}
     else if(a==='edit'){classEdit=id;render();const f=$('#cf-s');if(f)f.focus();}
     else if(a==='cancel'){classEdit=null;render();}
-    else if(a==='hide'||a==='show'){const c=CL[id];await putClass(id,{short:c.short,name:c.name,color:c.color,shape:c.shape,order:c.order,deleted:a==='hide'});render();}
+    else if(a==='hide'||a==='show'){const c=CL[id];await putClass(id,Object.assign(classData(c),{order:c.order,deleted:a==='hide'}));render();}
     else if(a==='up'||a==='down'){
       const i=CLASSES.findIndex(c=>c.id===id),j=i+(a==='up'?-1:1);if(j<0||j>=CLASSES.length)return;
       const A=CLASSES[i],B=CLASSES[j];let oa=A.order,ob=B.order;if(oa===ob){ob=oa+(a==='up'?-1:1);}
-      const dat=c=>({short:c.short,name:c.name,color:c.color,shape:c.shape,deleted:c.deleted});
-      await putClass(A.id,Object.assign(dat(A),{order:ob}));await putClass(B.id,Object.assign(dat(B),{order:oa}));render();
+      await putClass(A.id,Object.assign(classData(A),{order:ob}));await putClass(B.id,Object.assign(classData(B),{order:oa}));render();
     }
   }catch(e){writeError(e);}
 }
@@ -7015,6 +7365,9 @@ function syncCrumbs(){
   mast.classList.toggle('compact',route.v!=='home');
   $('.lead').hidden=route.v!=='home';
   if(route.v==='home'){nav.hidden=true;nav.innerHTML='';return;}
+  if(route.v==='login'||route.v==='admin'){
+    nav.innerHTML='<a href="#/" data-nav="">Tutte le classi</a> <span aria-hidden="true">›</span> <span aria-current="page">'+(route.v==='login'?'Area docente':'Pannello di controllo')+'</span>';nav.hidden=false;return;
+  }
   const c=CL[route.c],t=route.tab?tabBy(route.tab):null;
   let h='<a href="#/" data-nav="">Tutte le classi</a>';
   h+=' <span aria-hidden="true">›</span> '+(t?'<a href="'+hrefOf(cPath(c.id))+'" data-nav="'+cPath(c.id)+'">'+esc(c.short)+'</a>':'<span aria-current="page">'+esc(c.short)+'</span>');
@@ -7022,13 +7375,22 @@ function syncCrumbs(){
   nav.innerHTML='<span class="cr-sym">'+sym(c,16)+'</span>'+h;nav.hidden=false;
 }
 function render(){
+  if(route.v==='admin'&&!isAdmin){pendingPath=routeKey(route);route={v:'login'};try{location.hash='#/accesso';}catch(e){}}
+  else if(route.v==='login'&&isAdmin){route={v:'admin',tab:'argomenti'};try{location.hash='#/admin/argomenti';}catch(e){}}
   const secs=all();
-  syncCrumbs();
+  syncCrumbs();syncUi();
   const topics=route.v==='class'&&route.tab==='argomenti';
   $('#tocBox').hidden=!topics;
   $('.layout').classList.toggle('solo',!topics);
-  document.title=route.v==='home'?'Informatica in Classe':CL[route.c].short+' · Informatica in Classe';
-  if(route.v==='home')renderHome(secs);
+  document.title=route.v==='home'?'Informatica in Classe':route.v==='login'?'Area docente · Informatica in Classe':route.v==='admin'?'Pannello di controllo · Informatica in Classe':CL[route.c].short+' · Informatica in Classe';
+  if(route.v==='login')renderLogin();
+  else if(route.v==='admin'){
+    const fa=document.activeElement,key=fa&&fa.dataset&&fa.dataset.mx?fa.dataset.mx+'|'+fa.dataset.c:null,y=window.scrollY;
+    renderAdmin(secs);
+    if(key){const p=key.split('|'),el=document.querySelector('[data-mx="'+p[0]+'"][data-c="'+p[1]+'"]');if(el)el.focus({preventScroll:true});}
+    try{window.scrollTo(0,y);}catch(e){}
+  }
+  else if(route.v==='home')renderHome(secs);
   else if(!route.tab)renderLanding(secs);
   else if(route.tab==='argomenti')renderTopics(secs);
   else if(route.item)renderItem(secs,tabBy(route.tab));
@@ -7130,7 +7492,8 @@ function exportMd(){
 }
 function exportSrc(){
   const secs=all().filter(s=>!s.deleted&&s.classes.length);
-  let out=CLASSES.map(c=>'@@class '+c.id+' | '+c.short.replace(/\|/g,'/')+' | '+c.name.replace(/\|/g,'/')+' | '+c.color+' | '+c.shape+(c.deleted?' | hidden':'')).join('\n')+'\n\n';
+  let out=TRACKS.map(x=>'@@track '+x.id+' | '+x.name.replace(/\|/g,'/')+(x.deleted?' | hidden':'')).join('\n')+'\n\n';
+  out+=CLASSES.map(c=>'@@class '+c.id+' | '+c.short.replace(/\|/g,'/')+' | '+c.name.replace(/\|/g,'/')+' | '+c.color+' | '+c.shape+' | '+(c.track||'')+(c.deleted?' | hidden':'')).join('\n')+'\n\n';
   chapters.forEach(ch=>{
     const l=secs.filter(s=>s.chapter===ch.id);
     if(ch.virtual&&!l.length)return;
@@ -7165,20 +7528,23 @@ function bind(){
     if(routeKey(r)!==routeKey(route)){route=r;confirmState=null;render();try{window.scrollTo(0,0);}catch(e){}}
   });
   $('#btnEdit').addEventListener('click',async()=>{
+    if(!canWrite)return;
     editOn=!editOn;
     if(!editOn){
-      const drop=Array.from(newIds);editing.clear();newIds.clear();confirmState=null;classEdit=null;
+      const drop=Array.from(newIds);editing.clear();newIds.clear();confirmState=null;
       for(const id of drop){try{await del(id);}catch(e){}}
       if(route.v==='class'&&route.item&&!all().some(s=>s.id===route.item&&!s.deleted)){navTo(cPath(route.c,route.tab));syncUi();return;}
     }
     syncUi();render();
   });
-  $('#btnExport').addEventListener('click',exportMd);
-  $('#btnSrc').addEventListener('click',exportSrc);
   const main=$('#main');
   main.addEventListener('click',e=>{
     const ca=e.target.closest('[data-cact]');
     if(ca){classAct(ca.dataset.cact,ca.dataset.id);return;}
+    const ta=e.target.closest('[data-tact]');
+    if(ta){trackAct(ta.dataset.tact,ta.dataset.id);return;}
+    const ad=e.target.closest('[data-adm]');
+    if(ad){const k=ad.dataset.adm;if(!isAdmin)return;if(k==='md')exportMd();else if(k==='src')exportSrc();else if(k==='logout')logout();return;}
     const b=e.target.closest('[data-act]');if(!b)return;
     if(b.dataset.act==='addmat'){
       const box=$('.mats',b.closest('form'));
@@ -7190,11 +7556,23 @@ function bind(){
     const art=b.closest('article');act(b.dataset.act,art?art.id.slice(4):b.dataset.id,b);
   });
   main.addEventListener('submit',e=>{
-    const cf=e.target.closest('form.cm-form');if(cf){e.preventDefault();saveClassForm(cf);return;}
+    const fm=e.target.closest('form');
+    if(fm){
+      const cl=fm.classList;
+      if(cl.contains('login')){e.preventDefault();doLogin(fm);return;}
+      if(!isAdmin){e.preventDefault();return;}
+      if(cl.contains('af-class')){e.preventDefault();saveClassForm(fm);return;}
+      if(cl.contains('af-track')){e.preventDefault();saveTrackForm(fm);return;}
+      if(cl.contains('af-topic')){e.preventDefault();submitTopic(fm);return;}
+      if(cl.contains('af-chapter')){e.preventDefault();submitChapter(fm);return;}
+      if(cl.contains('af-page')){e.preventDefault();submitPage(fm);return;}
+      if(cl.contains('af-pass')){e.preventDefault();submitPass(fm);return;}
+    }
     const f=e.target.closest('form.editor');if(!f)return;e.preventDefault();saveEditor(f);
   });
   main.addEventListener('change',e=>{
-    const l=e.target.closest('[data-link]');if(l)toggleLink(l.dataset.link,l.checked).catch(writeError);
+    const l=e.target.closest('[data-link]');if(l&&canWrite)toggleLink(l.dataset.link,l.checked).catch(writeError);
+    const mxc=e.target.closest('[data-mx]');if(mxc&&canWrite)toggleMatrix(mxc);
   });
   main.addEventListener('input',e=>{
     const f=e.target.closest('form.editor');
@@ -7216,24 +7594,31 @@ function bind(){
 async function initStore(){
   const c=window.claude;
   try{dbh=c&&c.use?await c.use('db'):null;}catch(e){dbh=null;}
-  try{const u=c&&c.use?await c.use('user'):null;if(u){const w=await u.can('data.write');if(w===false)canWrite=false;}}catch(e){}
+  try{const u=c&&c.use?await c.use('user'):null;if(u){const w=await u.can('data.write');if(w===false)permWrite=false;}}catch(e){}
   try{dl=c&&c.use?await c.use('downloads'):null;}catch(e){dl=null;}
   if(dbh){
     mode='db';
     dbh.collection('sections').onSnapshot(snap=>{
-      const o={},co={};
-      snap.docs.forEach(d=>{const x=d.data();if(!x)return;if(d.id.indexOf('cls-')===0){const y=Object.assign({},x);delete y._class;co[d.id.slice(4)]=y;}else o[d.id]=Object.assign({},x);});
-      overrides=o;classOv=co;rebuildClasses();
+      const o={},co={},mt={trk:{},chp:{},cfg:{}};
+      snap.docs.forEach(d=>{
+        const x=d.data();if(!x)return;
+        const m=/^(trk|chp|cfg)-(.+)$/.exec(d.id);
+        if(m){const y=Object.assign({},x);delete y._meta;mt[m[1]][m[2]]=y;}
+        else if(d.id.indexOf('cls-')===0){const y=Object.assign({},x);delete y._class;co[d.id.slice(4)]=y;}
+        else o[d.id]=Object.assign({},x);
+      });
+      overrides=o;classOv=co;OV=mt;rebuildChapters();rebuildTracks();rebuildClasses();
       if(route.v==='home'){const r=parsePath(hashPath());if(r.v==='class')route=r;}
       else if(!CL[route.c]||CL[route.c].deleted)route={v:'home'};
       render();
-    },err=>{if(err&&err.code==='revoked'){canWrite=false;editOn=false;syncUi();render();}else toast('Il collegamento con il salvataggio condiviso si è interrotto.');});
+    },err=>{if(err&&err.code==='revoked'){permWrite=false;refreshCan();syncUi();render();}else toast('Il collegamento con il salvataggio condiviso si è interrotto.');});
   }else{
-    mode='local';overrides=lsGet(LS_OV,{})||{};classOv=lsGet(LS_CL,{})||{};rebuildClasses();
+    mode='local';overrides=lsGet(LS_OV,{})||{};classOv=lsGet(LS_CL,{})||{};const mt=lsGet(LS_MT,{})||{};OV={trk:mt.trk||{},chp:mt.chp||{},cfg:mt.cfg||{}};rebuildChapters();rebuildTracks();rebuildClasses();
     const r=parsePath(hashPath());if(routeKey(r)!==routeKey(route))route=r;
   }
   syncUi();render();
 }
+isAdmin=readSession();refreshCan();
 route=parsePath(hashPath());
 bind();render();
 initStore();
