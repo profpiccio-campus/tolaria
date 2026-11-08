@@ -2499,3 +2499,238 @@ Scegliere un tema legato a un'altra disciplina (laboratorio di fisica, catalogo 
 !! Spesso quello documentale, perché un ordine è un documento autonomo con campi che possono variare. Per la contabilità, invece, servono transazioni e quindi spesso un database relazionale.
 ?? Perché si scrive il modello E-R prima di creare le tabelle?
 !! Perché permette di capire quali entità e quali legami servono e di evitare ripetizioni, prima di fissare la struttura nel database.
+
+
+@@chapter c7 | 8 | Introduzione ai modelli di Machine Learning | Come un computer impara a classificare i testi con i centroidi e come si misura se un modello funziona bene.
+
+@@section m8-1 | L2 | - | Classificare un testo
+Classificare un testo significa **assegnargli una categoria** in base al suo contenuto. È uno dei problemi più comuni del *machine learning*: il modello non riceve regole scritte da una persona, ma **impara dagli esempi**.
+
+| Tipo di classificazione | Testo di esempio | Categoria |
+|---|---|---|
+| Sentiment (opinione) | «Questo film è fantastico!» | Positivo |
+| Argomento | «La partita finì 3-1» | Sport |
+| Intento | «Vorrei ordinare una pizza» | Ordine |
+
+## Dal testo grezzo alla predizione
+Il percorso è lo stesso in tutti gli esempi di questo capitolo:
+1. **Testo**: la frase o il messaggio.
+2. **Parole**: si divide il testo in parole e lo si pulisce.
+3. **Bag of Words**: si contano le parole.
+4. **Vettore**: il testo diventa una riga di numeri.
+5. **Centroidi**: si calcola il «centro» di ogni categoria.
+6. **Predizione**: si sceglie la categoria del centro più vicino.
+
+> [Idea chiave] Il computer trasforma ogni testo in un vettore di numeri. Poi calcola il «centro» (centroide) di ogni categoria. Un testo nuovo viene classificato scegliendo il centroide più vicino.
+
+?? Perché un computer non può lavorare direttamente sulle parole?
+!! Perché sa fare calcoli solo sui numeri: ogni testo deve prima essere trasformato in un vettore di numeri.
+
+@@section m8-2 | L2 | - | Pulizia del testo (preprocessing)
+Prima di contare le parole il testo va **ripulito**, altrimenti il modello si distrae con dettagli che non servono. In Orange il blocco si chiama *Preprocess Text*. Permette di:
+
+- trasformare tutto in **minuscolo**;
+- rimuovere la **punteggiatura** e i numeri;
+- filtrare le **stop words**, cioè le parole molto comuni come «il», «di», «e» che non portano significato;
+- eseguire lo **stemming** o la **lemmatizzazione**, cioè ridurre le parole alla loro radice (per esempio «correndo» diventa «correre»).
+
+> [Attenzione] Ogni scelta cambia il vocabolario e quindi i risultati. Con la stessa frase, un modello che toglie le stop words e uno che le tiene possono dare predizioni diverse.
+
+?? Perché si tolgono le stop words?
+!! Perché compaiono in quasi tutti i testi e non aiutano a distinguere una categoria dall'altra.
+
+@@section m8-3 | L2 | - | Bag of Words: il sacchetto di parole
+Nel modello **Bag of Words** (sacchetto di parole) si **ignora l'ordine** delle parole e si conta solo quante volte compare ciascuna.
+
+| Testo originale | Sacchetto di parole |
+|---|---|
+| «Il gatto nero salta sul tetto» | il ×1, gatto ×1, nero ×1, salta ×1, sul ×1, tetto ×1 |
+| «gatto nero salta tetto» (dopo aver tolto «il» e «sul») | gatto ×1, nero ×1, salta ×1, tetto ×1 |
+
+Per noi l'ordine e la grammatica sono importanti, per il modello no: conta solo quali parole ci sono.
+
+## Dai testi alla matrice
+Se si mettono insieme tutti gli esempi di addestramento si ottiene una **matrice di numeri**: **ogni riga è un esempio**, **ogni colonna è una parola**, l'ultima colonna è l'**etichetta**.
+
+| Esempio | gatto | cane | bello | brutto | adoro | odio | Etichetta |
+|---|---|---|---|---|---|---|---|
+| «Il gatto è bello» | 1 | 0 | 1 | 0 | 0 | 0 | Positivo |
+| «Adoro il cane» | 0 | 1 | 0 | 0 | 1 | 0 | Positivo |
+| «Il film è brutto» | 0 | 0 | 0 | 1 | 0 | 0 | Negativo |
+| «Odio questo gatto» | 1 | 0 | 0 | 0 | 0 | 1 | Negativo |
+
+Questa matrice è ciò che il modello «vede» durante l'addestramento. Le parole «bello» e «adoro» compaiono solo con Positivo, «brutto» e «odio» solo con Negativo. La parola «gatto» compare in entrambe le classi e quindi non aiuta a distinguerle.
+
+?? Che cosa rappresenta una colonna della matrice?
+!! Una parola del vocabolario: in ogni riga c'è 1 se quella parola compare nell'esempio, 0 se non compare.
+
+@@section m8-4 | L2 | - | I centroidi: il centro di una classe
+Il **centroide** è il «centro» di una classe. Si calcola facendo la **media di tutti i vettori** degli esempi di quella classe, componente per componente.
+
+> [Formula] Centroide di una classe = (somma di tutti i vettori della classe) ÷ (numero di esempi)
+
+## Esempio: la classe Positivo (2 esempi)
+| Parola | Esempio 1 | Esempio 2 | Somma | Media |
+|---|---|---|---|---|
+| gatto | 1 | 0 | 1 | 0,5 |
+| cane | 0 | 1 | 1 | 0,5 |
+| bello | 1 | 0 | 1 | 0,5 |
+| brutto | 0 | 0 | 0 | 0 |
+| adoro | 0 | 1 | 1 | 0,5 |
+| odio | 0 | 0 | 0 | 0 |
+
+Con lo stesso metodo si ottengono i due centroidi:
+
+```output
+Centroide Positivo: [0.5, 0.5, 0.5, 0, 0.5, 0]   (tipiche: gatto, cane, bello, adoro)
+Centroide Negativo: [0.5, 0,   0,   0.5, 0, 0.5] (tipiche: gatto, brutto, odio)
+```
+
+?? Quanto vale il centroide della classe Negativo per la parola «brutto»?
+!! 0,5: la parola compare in uno solo dei due esempi negativi, quindi (1 + 0) ÷ 2 = 0,5.
+
+@@section m8-5 | L2 | pyrun | Classificare un testo nuovo con la distanza
+Un testo mai visto diventa un vettore **nello stesso spazio** dei centroidi, usando lo stesso vocabolario.
+
+Testo nuovo: «Adoro questo gatto bello». Le parole del vocabolario presenti sono gatto, bello e adoro, quindi il vettore è:
+
+```output
+vocabolario: gatto cane bello brutto adoro odio
+vettore:     [1, 0, 1, 0, 1, 0]
+```
+
+## La distanza euclidea
+Per confrontare due vettori si usa la **distanza euclidea**: d(x, y) = radice quadrata della somma dei quadrati delle differenze, componente per componente. Più la distanza è piccola, più i vettori sono vicini.
+
+| | Calcolo | Distanza |
+|---|---|---|
+| dal centroide Positivo | √(0,25 + 0,25 + 0,25 + 0 + 0,25 + 0) = √1 | **1** |
+| dal centroide Negativo | √(0,25 + 0 + 1 + 0,25 + 1 + 0,25) = √2,75 | **circa 1,66** |
+
+## La decisione
+Si sceglie la classe del centroide più vicino. Qui 1 < 1,66, quindi la predizione è **POSITIVO**.
+
+1. Trasforma il nuovo testo in vettore Bag of Words.
+2. Calcola (o recupera) i centroidi di ogni classe.
+3. Misura la distanza dal nuovo vettore a ogni centroide.
+4. Assegna la classe del centroide più vicino.
+
+## Provalo nell'editor
+Nell'editor qui sotto scegli l'esempio «Classificatore di testo a centroidi». Cambia la frase da classificare e le frasi di addestramento, poi premi Esegui.
+
+?? Un testo contiene solo la parola «odio». A quale classe viene assegnato?
+!! Il vettore è [0, 0, 0, 0, 0, 1]. Le distanze sono circa 1,41 dal Positivo e 0,87 dal Negativo: la predizione è Negativo.
+
+@@section m8-6 | L2 | - | Pro, contro e varianti
+| Pro | Contro |
+|---|---|
+| Metodo molto semplice e intuitivo | Ignora il contesto e l'ordine delle parole |
+| Ideale per alimentare algoritmi di machine learning (per esempio il filtro antispam) | Con testi lunghi genera vettori molto grandi e pieni di zeri (vettori sparsi) |
+
+Per esempio, «Il gatto insegue il cane» e «Il cane insegue il gatto» hanno quasi lo stesso identico vettore di conteggi, anche se il significato è diverso.
+
+## Varianti
+- **Variante della struttura dati**: invece di 0 e 1, ogni elemento del vettore rappresenta la **frequenza** con cui la parola compare nella frase.
+- **Variante del modello: TF-IDF** (Term Frequency, Inverse Document Frequency). Risolve il difetto principale del Bag of Words semplice: le parole comunissime («il», «di», «è») hanno i punteggi più alti solo perché compaiono ovunque, pur non dicendo nulla sull'argomento. TF-IDF pesa le parole combinando due idee: **premia** le parole che compaiono molte volte in un singolo documento, ma le **penalizza** se compaiono spesso in tutti i documenti della raccolta.
+
+@@section m8-7 | L2 | - | Il flusso di lavoro in Orange
+Lo stesso classificatore si costruisce in **Orange** (con il componente Text Mining) collegando dei blocchi. Il file del flusso è tra i materiali della classe.
+
+| Blocco | Che cosa fa |
+|---|---|
+| Corpus | Carica il dataset: una colonna di testo e una colonna `categoria`. I testi da classificare hanno la categoria `nuovo`. |
+| Corpus Viewer | Permette di leggere i testi caricati. |
+| Preprocess Text | Pulizia: minuscolo, token, punteggiatura, stop words in italiano. |
+| Bag of Words | Conta le parole; il peso locale è **Binary**: 1 se la parola c'è, 0 se non c'è. |
+| Matrix Converter (Python Script) | Trasforma la matrice in una tabella completa, con `out_data = in_data.to_dense()`. |
+| Select Rows (due volte) | Separa il **trainingset** (esempi già classificati) dal **testset** (testi `nuovo`). |
+| Group by | Calcola i **centroidi**: la media di ogni parola per ogni categoria. |
+| Python Script «classificatore» | Calcola le distanze e assegna la categoria. |
+| Data Table | Mostra il bag of words, il trainingset, il testset, i centroidi e la classificazione finale. |
+
+## Lo script del classificatore
+Lo script legge le righe etichettate, calcola il centroide di ogni categoria e per ogni testo `nuovo` sceglie la categoria con la distanza minore:
+
+```python
+categorie = []
+for e in etichette:
+    if e not in categorie and e not in (ETICHETTA_TEST, "?", "nan"):
+        categorie.append(e)
+
+is_test = etichette == ETICHETTA_TEST
+centroidi = np.array([X[etichette == c].mean(axis=0) for c in categorie])
+test = X[is_test]
+
+dist = np.array([[np.linalg.norm(t - c) for c in centroidi] for t in test])
+pred = [categorie[i] for i in dist.argmin(axis=1)]
+```
+
+La tabella finale contiene il testo, una colonna `dist_` per ogni categoria e la `categoria_assegnata`. Il file completo con tutti i blocchi si trova in **Materiale**.
+
+> [Da provare] Apri il file in Orange, sostituisci il dataset con un tuo file CSV (colonne `testo` e `categoria`) e osserva come cambia la classificazione al variare della pulizia del testo.
+
+@@section m8-8 | L2 | - | Valutare un modello: la matrice di confusione
+Un modello va **valutato** su esempi che non ha usato per imparare (il testset). Si confrontano le categorie vere con quelle predette e si contano i casi in una **matrice di confusione**.
+
+| | Predetto positivo | Predetto negativo |
+|---|---|---|
+| **Realmente positivo** | **TP** (veri positivi) | **FN** (falsi negativi) |
+| **Realmente negativo** | **FP** (falsi positivi) | **TN** (veri negativi) |
+
+- **True Positives (TP)**: classe positiva predetta correttamente. Esempio: una malattia identificata con successo.
+- **True Negatives (TN)**: classe negativa predetta correttamente. Esempio: un utente sano riconosciuto tale.
+- **False Positives (FP)**, *errore di tipo I*: falso allarme. Classe negativa predetta come positiva.
+- **False Negatives (FN)**, *errore di tipo II*: omissione critica. Classe positiva predetta come negativa.
+
+> [Attenzione] I due errori non costano lo stesso. In una diagnosi medica un falso negativo (malato non riconosciuto) è molto più grave di un falso positivo; in un filtro antispam è peggio un falso positivo (una mail importante finita nello spam).
+
+?? Un filtro antispam segna come spam una mail del preside. Di che errore si tratta?
+!! Di un falso positivo: la mail è realmente «non spam» (negativa) ma il modello l'ha predetta come spam (positiva).
+
+@@section m8-9 | L2 | pyrun | Gli indici per valutare i modelli
+Dai quattro numeri della matrice si ricavano gli indici di valutazione.
+
+| Indice | Formula | Che cosa misura | Note critiche |
+|---|---|---|---|
+| **Accuracy** (accuratezza) | (TP + TN) / Totale | La percentuale di previsioni corrette sul totale. | Fuorviante con classi sbilanciate (per esempio 95% di una sola classe). |
+| **Precision** (precisione) | TP / (TP + FP) | Quanto il modello è affidabile quando predice la classe positiva. Minimizza i falsi positivi. | Filtri antispam, concessione del credito (FP costoso). |
+| **Recall** (sensibilità) | TP / (TP + FN) | La capacità di trovare tutti i casi positivi. Minimizza i falsi negativi. | Diagnostica medica, rilevamento di frodi (FN critico). |
+| **F1-Score** | 2 · (Prec · Rec) / (Prec + Rec) | Media armonica tra Precision e Recall. | Penalizza i valori squilibrati; ideale per dati asimmetrici. |
+
+## Confronto tra un modello buono e uno cattivo
+| Metrica | Modello buono | Modello cattivo |
+|---|---|---|
+| TP / TN | 48 / 47 | 25 / 25 |
+| FP / FN | 3 / 2 | 25 / 25 |
+| Accuracy | 0,95 | 0,50 |
+| Precision | 0,94 | 0,50 |
+| Recall | 0,96 | 0,50 |
+| F1-Score | 0,95 | 0,50 |
+
+- **Modello buono**: ha pochi errori, alta capacità di identificare i positivi senza generare falsi allarmi.
+- **Modello cattivo**: prestazioni pari a un lancio di moneta (50%), non impara nulla dai dati.
+
+## Calcolali tu
+Nell'editor qui sotto scegli l'esempio «Matrice di confusione e indici», cambia i valori di TP, TN, FP, FN e osserva come si muovono gli indici.
+
+?? Un modello su 100 testi ne classifica bene 95 ma 95 testi erano già della stessa classe. L'accuracy di 0,95 è una buona notizia?
+!! No: un modello che risponde sempre con la classe più frequente otterrebbe lo stesso 0,95 senza imparare nulla. Con classi sbilanciate servono Precision, Recall ed F1.
+
+@@chapter _material | - | Materiale | Il materiale extra fornito dal docente.
+
+@@section mat-ml1 | L2 | - | Classificatore di testo: slide e flusso Orange
+@@material file | Slide: Classificazione del Testo (PDF, 20 slide) | allegati/Classificazione_del_Testo.pdf
+@@material file | Flusso Orange: classificatore di testo (.ows) | allegati/Classificatore_di_testo_Orange.ows
+> [Materiale del docente] Slide e flusso di lavoro usati per il capitolo «Introduzione ai modelli di Machine Learning».
+
+## Di che cosa si tratta
+- **Slide «Classificazione del Testo»**: la lezione di teoria in 20 slide, dal testo grezzo ai centroidi, fino a matrice di confusione e indici di valutazione.
+- **Flusso Orange**: il file `.ows` con tutti i blocchi del classificatore (Corpus, Preprocess Text, Bag of Words, centroidi, classificazione).
+
+## Come usarlo
+1. Scarica il file `.ows` e aprilo con Orange (con il componente aggiuntivo **Text**).
+2. Nel blocco Corpus carica il tuo file CSV con le colonne `testo` e `categoria`; chiama `nuovo` i testi da classificare.
+3. Premi sui blocchi Data Table per vedere i passaggi: bag of words, trainingset, centroidi, classificazione.
+
+## Per approfondire
+- Sezioni del capitolo 8 «Introduzione ai modelli di Machine Learning», nella scheda Argomenti.
